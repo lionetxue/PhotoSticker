@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+
+<link rel="stylesheet" type="text/css" href="css/picedit.min.css" />
+
+</head>
+<body>
+<div id="thebox" class="picedit_box">
+	<!-- Picedit navigation -->
+	<div class="picedit_nav_box picedit_gray_gradient">
+		<div class="picedit_pos_elements"></div>
+		<div class="picedit_nav_elements">
+			<!-- Picedit button element begin -->
+			<div class="picedit_element"> <span class="picedit_control ico-picedit-redo" title="Rotate"></span>
+				<div class="picedit_control_menu">
+					<div class="picedit_control_menu_container picedit_tooltip picedit_elm_1">
+						<label> <span>90&deg; CW</span> <span class="picedit_control ico-picedit-redo" data-action="rotate_cw"></span> </label>
+						<label> <span>90&deg; CCW</span> <span class="picedit_control ico-picedit-undo" data-action="rotate_ccw"></span> </label>
+					</div>
+				</div>
+			</div>
+			<!-- Picedit button element end -->
+			<!-- Picedit button element begin -->
+			<div class="picedit_element"> <span class="picedit_control ico-picedit-arrow-maximise" title="Resize"></span>
+				<div class="picedit_control_menu">
+					<div class="picedit_control_menu_container picedit_tooltip picedit_elm_2">
+						<label> <span>Width (px)</span>
+							<input type="text" class="picedit_input" data-variable="resize_width" value="0">
+						</label>
+						<label> <span>Height (px)</span>
+							<input type="text" class="picedit_input" data-variable="resize_height" value="0">
+						</label>
+					</div>
+				</div>
+			</div>
+			<!-- Picedit button element end -->
+		</div>
+	</div>
+	<!-- Picedit canvas element -->
+	<div class="picedit_canvas_box">
+		<div class="picedit_action_btns">
+			<div class="picedit_control ico-picedit-picture" data-action="load_image">
+				<input type="file" class="imageload" accept="image/*">
+			</div>
+			<div class="picedit_control ico-picedit-camera" data-action="take_photo"></div>
+		</div>
+		<div class="picedit_canvas">
+			<canvas></canvas>
+		</div>
+	</div>
+</div>
+<!--<div style="margin:10% auto 0 auto; display: table;">
+
+<form action="" method="post" enctype="multipart/form-data" id="xid">
+
+	<input type="file" name="thefile" id="thebox">
+
+	<div style="margin-top:30px; text-align: center;">
+		<button type="submit">Submit</button>
+    </div>
+
+</form>
+
+</div>-->
+
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/picedit.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#thebox').picEdit();
+	});
+</script>
+
+</body>
+</html>
