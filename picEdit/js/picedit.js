@@ -25,7 +25,7 @@
 			formSubmitted: function(res){},	// After form was submitted callback function
 			redirectUrl: false,				// Page url for redirect on form submit
 			maxWidth: 400,					// Max width parameter
-			maxHeight: 'auto',				// Max height parameter
+			maxHeight: 400,				// Max height parameter
 			aspectRatio: true,				// Preserve aspect ratio
             defaultImage: false             // Default image to be used with the plugin
         };
@@ -109,6 +109,11 @@
 					"width": 0,
 					"height": 0
 				 };
+				 //Lin: keep track of canvas dragging state
+/*			     this.dragging = false; // Keep track of when we are dragging
+				 this.dragoffx = 0; // See mousedown and mousemove events for explanation
+				 this.dragoffy = 0;*/
+			     //Lin end
 				 // All variables responsible for cropping functionality
 				 this._cropping = {
 					 is_dragging: false,
@@ -334,6 +339,12 @@
 				canvas.width = _this._variables.resize_width;
 				canvas.height = _this._variables.resize_height;
 				ctx.drawImage(_this._image, 0, 0, canvas.width, canvas.height);
+				//Lin
+				// var hRatio = canvas.width / this._image.width;
+				// var vRatio = canvas.height / this._image.height;
+				// var ratio = Math.min(hRatio, vRatio);
+				// ctx.drawImage(_this._image, 0,0, img.width, img.height, 0,0,img.width*ratio, img.height*ratio);
+				//Lin
 				_this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
 					_this.hide_messagebox();
 				});
@@ -482,7 +493,9 @@
 			var cropframe = this._cropping.cropframe[0];
 			var evtpos = (e.clientX) ? e : e.originalEvent.touches[0];
 			cropframe.style.width = (this._cropping.w + evtpos.clientX - this._cropping.x) + 'px';
-   			cropframe.style.height = (this._cropping.h + evtpos.clientY - this._cropping.y) + 'px';
+			//Lin:  keep the aspect ratio = 1
+			cropframe.style.height = (this._cropping.w + evtpos.clientX - this._cropping.x) + 'px';
+			// cropframe.style.height = (this._cropping.h + evtpos.clientY - this._cropping.y) + 'px';
 		},
 		_selection_drag_movement: function(e) {
 			var cropframe = this._cropping.cropframe[0];
@@ -618,21 +631,27 @@
 				var resizeWidth = img.width;
     			var resizeHeight = img.height;
 				var aspect = resizeWidth / resizeHeight;
-				if (resizeWidth > viewport.width) {
-				  viewport.width = parseInt(viewport.width, 10);
-				  viewport.height = parseInt(viewport.width / aspect, 10);
+				//Lin: check for landscape or portrait
+				if (resizeWidth > resizeHeight) {
+					if (resizeHeight > viewport.height) {
+						aspect = resizeWidth / resizeHeight;
+						viewport.height = parseInt(viewport.height, 10);
+						viewport.width = parseInt(viewport.height * aspect, 10);
+					}
 				}
-				if (resizeHeight > viewport.height) {
-				  aspect = resizeWidth / resizeHeight;
-				  viewport.height = parseInt(viewport.height, 10);
-				  viewport.width = parseInt(viewport.height * aspect, 10);
+				else {
+					if (resizeWidth > viewport.width) {
+						viewport.width = parseInt(viewport.width, 10);
+						viewport.height = parseInt(viewport.width / aspect, 10);
+					}
 				}
 			}
-			//set the viewport size (resize the canvas)
-			$(this.element).css({
-				"width": viewport.width,
-				"height": viewport.height
-			});
+			// Lin: don't resize the canvas
+			// //set the viewport size (resize the canvas)
+			// $(this.element).css({
+			// 	"width": viewport.width,
+			// 	"height": viewport.height
+			// });
 			//set the global viewport
 			this._viewport = viewport;
 			//update interface data (original image width and height)
