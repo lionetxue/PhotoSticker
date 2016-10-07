@@ -109,11 +109,6 @@
 					"width": 0,
 					"height": 0
 				 };
-				 //Lin: keep track of canvas dragging state
-/*			     this.dragging = false; // Keep track of when we are dragging
-				 this.dragoffx = 0; // See mousedown and mousemove events for explanation
-				 this.dragoffy = 0;*/
-			     //Lin end
 				 // All variables responsible for cropping functionality
 				 this._cropping = {
 					 is_dragging: false,
@@ -278,6 +273,9 @@
 		// Perform image load when user clicks on image button
 		load_image: function () {
 			this._fileinput.click();
+			//Lin: reset the top and left of draggable element to 0,0
+			$(".picedit_canvas").css("left", 0);
+			$(".picedit_canvas").css("top", 0);
 		},
 		// Open pen tool and start drawing
 		pen_tool_open: function () {
@@ -382,6 +380,9 @@
 					return _this.set_messagebox("No video source detected! Please allow camera access!");
 				}
 			);
+			//Lin: reset the top and left of draggable element to 0,0
+			$(".picedit_canvas").css("left", 0);
+			$(".picedit_canvas").css("top", 0);
 		},
 		camera_close: function() {
 			this._videobox.removeClass("active");

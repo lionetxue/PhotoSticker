@@ -48,7 +48,7 @@
 			<div class="picedit_control ico-picedit-camera" data-action="take_photo"></div>
 		</div>
 		<div class="picedit_canvas">
-			<canvas></canvas>
+			<canvas id="canvas"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
 		</div>
 	</div>
 </div>
@@ -67,10 +67,12 @@
 </div>-->
 
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="js/picedit.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$('#thebox').picEdit();
+		$('.picedit_canvas').draggable();
 	});
 </script>
 
