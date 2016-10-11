@@ -440,6 +440,9 @@
 				});
 			});
 			this.crop_close();
+			//Lin: reset the top and left of draggable element to 0,0
+			$(".picedit_canvas").css("left", 0);
+			$(".picedit_canvas").css("top", 0);
 		},
 		crop_open: function () {
 			if(!this._image) return this._hideAllNav(1);
@@ -491,13 +494,13 @@
 					_this._cropping.is_dragging = true;
 					if(!_this._cropping.is_resizing) _this._selection_drag_movement(event);
 				});
-				/*resizer.on("mousemove touchmove", function(event) {
+				resizer.on("mousemove touchmove", function(event) {
 					event.stopPropagation();
         			event.preventDefault();
 					_this._cropping.is_resizing = true;
 					_this._selection_resize_movement(event);
 				});
-				painter.on("mousemove touchmove", function(event) {
+				/*painter.on("mousemove touchmove", function(event) {
 					event.stopPropagation();
         			event.preventDefault();
 					_this._painter_painting = true;
@@ -512,8 +515,8 @@
 				_this._painter_painting = false;
 				_this._variables.prev_pos = false;
 				eventbox.off("mousemove touchmove");
-				/*resizer.off("mousemove touchmove");
-				painter.off("mousemove touchmove");*/
+				resizer.off("mousemove touchmove");
+				/*painter.off("mousemove touchmove");*/
 			});
 		},
 		_selection_resize_movement: function(e) {
@@ -776,7 +779,7 @@
 				ia[i] = byteString.charCodeAt(i);
 			}
 			return new Blob([ab], {type: mime[1]});
-		},
+		}/*,
 		// Prepare the template here
 		_template: function() {
 			var template = '<div class="picedit_box"> <div class="picedit_message"> <span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span> <div><\/div><\/div><div class="picedit_nav_box"> <div class="picedit_pos_elements"><\/div><div class="picedit_nav_elements"><div class="picedit_element"><span class="picedit_control picedit_action ico-picedit-insertpicture" title="Crop" data-action="crop_open"><b> Crop</b></span> <\/div><div class="picedit_element"> <span class="picedit_control picedit_action ico-picedit-redo" title="Rotate"><b> Rotate</b></span> <div class="picedit_control_menu"> <div class="picedit_control_menu_container picedit_tooltip picedit_elm_1"> <label> <span>90° CW</span> <span class="picedit_control picedit_action ico-picedit-redo" data-action="rotate_cw"></span> </label> <label> <span>90° CCW</span> <span class="picedit_control picedit_action ico-picedit-undo" data-action="rotate_ccw"></span> </label> <\/div><\/div><\/div> </div></div><div class="picedit_canvas_box"><div class="picedit_painter"><canvas></canvas></div><div class="picedit_canvas"><canvas></canvas></div><div class="picedit_action_btns active"> <div class="center">Take a selfie or upload a photo by dragging/browsing</div><div class="picedit_control ico-picedit-picture" data-action="load_image"><\/div><div class="picedit_control ico-picedit-camera" data-action="camera_open"><\/div></div></div><div class="picedit_video"> <video autoplay></video><div class="picedit_video_controls"><span class="picedit_control picedit_action ico-picedit-checkmark" data-action="take_photo"></span><span class="picedit_control picedit_action ico-picedit-close" data-action="camera_close"></span><\/div><\/div><div class="picedit_drag_resize"> <div class="picedit_drag_resize_canvas"></div><div class="picedit_drag_resize_box"><div class="picedit_drag_resize_box_corner_wrap"> <div class="picedit_drag_resize_box_corner"></div></div><div class="picedit_drag_resize_box_elements"><span class="picedit_control picedit_action ico-picedit-checkmark" data-action="crop_image"></span><span class="picedit_control picedit_action ico-picedit-close" data-action="crop_close"></span><\/div><\/div></div></div>';
@@ -785,7 +788,7 @@
 				_this.element = $(_this.inputelement).next(".picedit_box");
 				_this.init();
 			});
-		}
+		}*/
 	};
 
     // You don't need to change something below:

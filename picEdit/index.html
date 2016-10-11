@@ -19,23 +19,23 @@
 		<div class="picedit_canvas">
 			<canvas id="canvas"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
 		</div>
-	</div>
-	<div class="picedit_video">
-		<video autoplay></video>
-		<div class="picedit_video_controls">
-			<span class="picedit_control picedit_action ico-picedit-checkmark" data-action="take_photo"></span>
-			<span class="picedit_control picedit_action ico-picedit-close" data-action="camera_close"></span>
-		</div>
-	</div>
-	<div class="picedit_drag_resize">
-		<div class="picedit_drag_resize_canvas"></div>
-		<div class="picedit_drag_resize_box">
-			<div class="picedit_drag_resize_box_corner_wrap">
-				<div class="picedit_drag_resize_box_corner"></div>
+		<div class="picedit_video">
+			<video autoplay></video>
+			<div class="picedit_video_controls">
+				<span class="picedit_control picedit_action ico-picedit-checkmark" data-action="take_photo"></span>
+				<span class="picedit_control picedit_action ico-picedit-close" data-action="camera_close"></span>
 			</div>
-			<div class="picedit_drag_resize_box_elements">
-				<span class="picedit_control picedit_action ico-picedit-checkmark" data-action="crop_image"></span>
-				<span class="picedit_control picedit_action ico-picedit-close" data-action="crop_close"></span>
+		</div>
+		<div class="picedit_drag_resize">
+			<div class="picedit_drag_resize_canvas"></div>
+			<div class="picedit_drag_resize_box">
+				<div class="picedit_drag_resize_box_corner_wrap">
+					<div class="picedit_drag_resize_box_corner"></div>
+				</div>
+				<div class="picedit_drag_resize_box_elements">
+					<span class="picedit_control picedit_action ico-picedit-checkmark" data-action="crop_image"></span>
+					<span class="picedit_control picedit_action ico-picedit-close" data-action="crop_close"></span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -84,7 +84,7 @@
 <script type="text/javascript">
 	$(function() {
 		$('#thebox').picEdit();
-		$('.picedit_canvas').draggable();
+		$('img').draggable();
 	});
 </script>
 </body>
