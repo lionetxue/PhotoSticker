@@ -9,10 +9,48 @@
 </head>
 <body>
 <div id="thebox" class="picedit_box">
+	<!-- Picedit canvas element -->
+	<div class="picedit_canvas_box">
+		<div class="picedit_action_btns active">
+			<div class="center">Take a selfie or upload a photo by dragging/browsing</div>
+			<div class="picedit_control ico-picedit-picture" data-action="load_image"></div>
+			<div class="picedit_control ico-picedit-camera" data-action="camera_open"></div>
+		</div>
+		<div class="picedit_canvas">
+			<canvas id="canvas"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+		</div>
+	</div>
+	<div class="picedit_video">
+		<video autoplay></video>
+		<div class="picedit_video_controls">
+			<span class="picedit_control picedit_action ico-picedit-checkmark" data-action="take_photo"></span>
+			<span class="picedit_control picedit_action ico-picedit-close" data-action="camera_close"></span>
+		</div>
+	</div>
+	<div class="picedit_drag_resize">
+		<div class="picedit_drag_resize_canvas"></div>
+		<div class="picedit_drag_resize_box">
+			<div class="picedit_drag_resize_box_corner_wrap">
+				<div class="picedit_drag_resize_box_corner"></div>
+			</div>
+			<div class="picedit_drag_resize_box_elements">
+				<span class="picedit_control picedit_action ico-picedit-checkmark" data-action="crop_image"></span>
+				<span class="picedit_control picedit_action ico-picedit-close" data-action="crop_close"></span>
+			</div>
+		</div>
+	</div>
+	<!--Picedit message-->
+	<div class="picedit_message">
+		<span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span>
+		<div></div>
+	</div>
 	<!-- Picedit navigation -->
-	<div class="picedit_nav_box picedit_gray_gradient">
+	<div class="picedit_nav_box">
 		<div class="picedit_pos_elements"></div>
 		<div class="picedit_nav_elements">
+			<!-- Picedit button element begin -->
+			<div class="picedit_element"><span class="picedit_control picedit_action ico-picedit-insertpicture" title="Crop" data-action="crop_open"><b> Crop</b></span> </div>
+			<!-- Picedit button element end -->
 			<!-- Picedit button element begin -->
 			<div class="picedit_element"> <span class="picedit_control ico-picedit-redo" title="Rotate"></span>
 				<div class="picedit_control_menu">
@@ -24,7 +62,7 @@
 			</div>
 			<!-- Picedit button element end -->
 			<!-- Picedit button element begin -->
-			<div class="picedit_element"> <span class="picedit_control ico-picedit-arrow-maximise" title="Resize"></span>
+			<!--<div class="picedit_element"> <span class="picedit_control ico-picedit-arrow-maximise" title="Resize"></span>
 				<div class="picedit_control_menu">
 					<div class="picedit_control_menu_container picedit_tooltip picedit_elm_2">
 						<label> <span>Width (px)</span>
@@ -35,37 +73,11 @@
 						</label>
 					</div>
 				</div>
-			</div>
+			</div>-->
 			<!-- Picedit button element end -->
 		</div>
 	</div>
-	<!-- Picedit canvas element -->
-	<div class="picedit_canvas_box">
-		<div class="picedit_action_btns">
-			<div class="picedit_control ico-picedit-picture" data-action="load_image">
-				<input type="file" height="400px" class="imageload" accept="image/*">
-			</div>
-			<div class="picedit_control ico-picedit-camera" data-action="take_photo"></div>
-		</div>
-		<div class="picedit_canvas">
-			<canvas id="canvas"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
-		</div>
-	</div>
 </div>
-<!--<div style="margin:10% auto 0 auto; display: table;">
-
-<form action="" method="post" enctype="multipart/form-data" id="xid">
-
-	<input type="file" name="thefile" id="thebox">
-
-	<div style="margin-top:30px; text-align: center;">
-		<button type="submit">Submit</button>
-    </div>
-
-</form>
-
-</div>-->
-
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="js/picedit.js"></script>
@@ -75,6 +87,5 @@
 		$('.picedit_canvas').draggable();
 	});
 </script>
-
 </body>
 </html>

@@ -32,7 +32,7 @@
 
     // The actual plugin constructor
     function Plugin( element, options ) {
-        this.inputelement = element;
+        // this.inputelement = element;
         this.element = element;
 
         // jQuery has an extend method which merges the contents of two or
@@ -52,12 +52,12 @@
 
         /* Prepare the template */
         /*unhide_in_prod*/
-         this._template(); 
+		//this._template();
         /*unhide_in_prod*/
 
-        /*hide_in_prod*/ /* 
+        /*hide_in_prod*/
         this.init();
-         */ /*hide_in_prod*/
+		/*hide_in_prod*/
     }
 
 	Plugin.prototype = {
@@ -70,15 +70,15 @@
 				// Save instance of this for inline functions
 				var _this = this;
                 // Get type of element to be used (type="file" and type="picedit" are supported)
-                var type = $(this.inputelement).prop("type");
+                var type = $(this.element).prop("type");
                 if(type == "file")
-                    this._fileinput = $(this.inputelement);
+                    this._fileinput = $(this.element);
                 else {
                     // Create a reference to the file input box
-                    $(this.inputelement).after('<input type="file" style="display:none" accept="image/*">');
-				    this._fileinput = $(this.inputelement).next("input");
+                    $(this.element).after('<input type="file" style="display:none" accept="image/*">');
+				    this._fileinput = $(this.element).next("input");
                 }
-                // Show regular file upload on old browsers
+                /*// Show regular file upload on old browsers
                 if(!this.check_browser_capabilities()) {
                     if(type != "file") {
                         $(this.inputelement).prop("type", "file");
@@ -87,18 +87,20 @@
                     $(this.inputelement).show();
                     $(this.element).remove();
                     return;
-                }
+                }*/
 				// Get reference to the main canvas element
 				this._canvas = $(this.element).find(".picedit_canvas > canvas")[0];
 				// Create and set the 2d context for the canvas
 				this._ctx = this._canvas.getContext("2d");
 				// Reference to video elemment holder element
 				this._videobox = $(this.element).find(".picedit_video");
-				// Reference to the painter element
+			    //Lin: keep a global reference to the opened stream
+			    this._videostream;
+				/*// Reference to the painter element
 				this._painter = $(this.element).find(".picedit_painter");
 				this._painter_canvas = this._painter.children("canvas")[0];
 				this._painter_ctx = this._painter_canvas.getContext("2d");
-				this._painter_painting = false;
+				this._painter_painting = false;*/
 				// Save the reference to the messaging box
 		 		this._messagebox = $(this.element).find(".picedit_message");
 		 		this._messagetimeout = false;
@@ -207,8 +209,8 @@
 				this._bindInputVariables();
 				this._bindSelectionDrag();
 				// Set Default interface variable values
-				this._variables.pen_color = "black";
-				this._variables.pen_size = false;
+				// this._variables.pen_color = "black";
+				// this._variables.pen_size = false;
 				this._variables.prev_pos = false;
                 // Load default image if one is set
                 if(this.options.defaultImage) _this.set_default_image(this.options.defaultImage);
@@ -267,8 +269,8 @@
 				if(optional_value && value) value = optional_value;
 				this._setVariable(variable, value);
 			}
-			if(this._variables.pen_color && this._variables.pen_size) this.pen_tool_open();
-			else this.pen_tool_close();
+			// if(this._variables.pen_color && this._variables.pen_size) this.pen_tool_open();
+			// else this.pen_tool_close();
 		},
 		// Perform image load when user clicks on image button
 		load_image: function () {
@@ -277,27 +279,27 @@
 			$(".picedit_canvas").css("left", 0);
 			$(".picedit_canvas").css("top", 0);
 		},
-		// Open pen tool and start drawing
-		pen_tool_open: function () {
-			if(!this._image) return this._hideAllNav(1);
-			this.pen_tool_params_set();
-			this._painter.addClass("active");
-			this._hideAllNav();
-		},
-		// Set pen tool parameters
-		pen_tool_params_set: function () {
-			this._painter_canvas.width = 0;
-			this._painter_canvas.width = this._canvas.width;
-			this._painter_canvas.height = this._canvas.height;
-			this._painter_ctx.lineJoin = "round";
-			this._painter_ctx.lineCap = "round";
-			this._painter_ctx.strokeStyle = this._variables.pen_color;
-      		this._painter_ctx.lineWidth = this._variables.pen_size;
-		},
-		// Close pen tool
-		pen_tool_close: function () {
-			this._painter.removeClass("active");
-		},
+		// // Open pen tool and start drawing
+		// pen_tool_open: function () {
+		// 	if(!this._image) return this._hideAllNav(1);
+		// 	this.pen_tool_params_set();
+		// 	this._painter.addClass("active");
+		// 	this._hideAllNav();
+		// },
+		// // Set pen tool parameters
+		// pen_tool_params_set: function () {
+		// 	this._painter_canvas.width = 0;
+		// 	this._painter_canvas.width = this._canvas.width;
+		// 	this._painter_canvas.height = this._canvas.height;
+		// 	this._painter_ctx.lineJoin = "round";
+		// 	this._painter_ctx.lineCap = "round";
+		// 	this._painter_ctx.strokeStyle = this._variables.pen_color;
+      	// 	this._painter_ctx.lineWidth = this._variables.pen_size;
+		// },
+		// // Close pen tool
+		// pen_tool_close: function () {
+		// 	this._painter.removeClass("active");
+		// },
 		// Rotate the image 90 degrees counter-clockwise
 		rotate_ccw: function () {
 			if(!this._image) return this._hideAllNav(1);
@@ -326,7 +328,7 @@
 			//hide all opened navigation
 			this._hideAllNav();
 		},
-		// Resize the image
+		/*// Resize the image
 		resize_image: function () {
 			if(!this._image) return this._hideAllNav(1);
 			var _this = this;
@@ -348,7 +350,7 @@
 				});
 			});
 			this._hideAllNav();
-		},
+		},*/
 		// Open video element and start capturing live video from camera to later make a photo
 		camera_open: function() {
 			var getUserMedia;
@@ -375,6 +377,8 @@
 						}
 					};
 					_this._videobox.addClass("active");
+					//Lin
+					_this._videostream = stream;
 				},
 				function(err) {
 					return _this.set_messagebox("No video source detected! Please allow camera access!");
@@ -386,6 +390,28 @@
 		},
 		camera_close: function() {
 			this._videobox.removeClass("active");
+			//Lin: close the web camera
+			this._videostream.getVideoTracks()[0].stop();
+			/*var track = this._videostream.getVideoTracks()[0];  // if only one media track
+			track.stop();*/
+			/*			var MediaStream = window.MediaStream;
+
+                        if (typeof MediaStream === 'undefined' && typeof webkitMediaStream !== 'undefined') {
+                            MediaStream = webkitMediaStream;
+                        }
+
+                        /!*global MediaStream:true *!/
+                        if (typeof MediaStream !== 'undefined' && !('stop' in MediaStream.prototype)) {
+                            MediaStream.prototype.stop = function() {
+                                this.getAudioTracks().forEach(function(track) {
+                                    track.stop();
+                                });
+
+                                this.getVideoTracks().forEach(function(track) {
+                                    track.stop();
+                                });
+                            };
+                        }*/
 		},
 		take_photo: function() {
 			var _this = this;
@@ -465,7 +491,7 @@
 					_this._cropping.is_dragging = true;
 					if(!_this._cropping.is_resizing) _this._selection_drag_movement(event);
 				});
-				resizer.on("mousemove touchmove", function(event) {
+				/*resizer.on("mousemove touchmove", function(event) {
 					event.stopPropagation();
         			event.preventDefault();
 					_this._cropping.is_resizing = true;
@@ -476,7 +502,7 @@
         			event.preventDefault();
 					_this._painter_painting = true;
 					_this._painter_movement(event);
-				});
+				});*/
 			}).on("mouseup touchend", function() {
 				if (_this._painter_painting) {
 					_this._painter_merge_drawing();
@@ -486,8 +512,8 @@
 				_this._painter_painting = false;
 				_this._variables.prev_pos = false;
 				eventbox.off("mousemove touchmove");
-				resizer.off("mousemove touchmove");
-				painter.off("mousemove touchmove");
+				/*resizer.off("mousemove touchmove");
+				painter.off("mousemove touchmove");*/
 			});
 		},
 		_selection_resize_movement: function(e) {
@@ -753,7 +779,7 @@
 		},
 		// Prepare the template here
 		_template: function() {
-			var template = '<div class="picedit_box"> <div class="picedit_message"> <span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span> <div><\/div><\/div><div class="picedit_nav_box picedit_gray_gradient"> <div class="picedit_pos_elements"><\/div><div class="picedit_nav_elements"><div class="picedit_element"> <span class="picedit_control picedit_action ico-picedit-pencil" title="Pen Tool"></span> <div class="picedit_control_menu"> <div class="picedit_control_menu_container picedit_tooltip picedit_elm_3"> <label class="picedit_colors"> <span title="Black" class="picedit_control picedit_action picedit_black active" data-action="toggle_button" data-variable="pen_color" data-value="black"></span> <span title="Red" class="picedit_control picedit_action picedit_red" data-action="toggle_button" data-variable="pen_color" data-value="red"></span> <span title="Green" class="picedit_control picedit_action picedit_green" data-action="toggle_button" data-variable="pen_color" data-value="green"></span> </label> <label> <span class="picedit_separator"></span> </label> <label class="picedit_sizes"> <span title="Large" class="picedit_control picedit_action picedit_large" data-action="toggle_button" data-variable="pen_size" data-value="16"></span> <span title="Medium" class="picedit_control picedit_action picedit_medium" data-action="toggle_button" data-variable="pen_size" data-value="8"></span> <span title="Small" class="picedit_control picedit_action picedit_small" data-action="toggle_button" data-variable="pen_size" data-value="3"></span> </label> <\/div><\/div><\/div><div class="picedit_element"><span class="picedit_control picedit_action ico-picedit-insertpicture" title="Crop" data-action="crop_open"></span> <\/div><div class="picedit_element"> <span class="picedit_control picedit_action ico-picedit-redo" title="Rotate"></span> <div class="picedit_control_menu"> <div class="picedit_control_menu_container picedit_tooltip picedit_elm_1"> <label> <span>90° CW</span> <span class="picedit_control picedit_action ico-picedit-redo" data-action="rotate_cw"></span> </label> <label> <span>90° CCW</span> <span class="picedit_control picedit_action ico-picedit-undo" data-action="rotate_ccw"></span> </label> <\/div><\/div><\/div><div class="picedit_element"> <span class="picedit_control picedit_action ico-picedit-arrow-maximise" title="Resize"></span> <div class="picedit_control_menu"> <div class="picedit_control_menu_container picedit_tooltip picedit_elm_2"> <label><span class="picedit_control picedit_action ico-picedit-checkmark" data-action="resize_image"></span><span class="picedit_control picedit_action ico-picedit-close" data-action=""></span> </label> <label> <span>Width (px)</span> <input type="text" class="picedit_input" data-variable="resize_width" value="0"> </label> <label class="picedit_nomargin"> <span class="picedit_control ico-picedit-link" data-action="toggle_button" data-variable="resize_proportions"></span> </label> <label> <span>Height (px)</span> <input type="text" class="picedit_input" data-variable="resize_height" value="0"> </label> <\/div><\/div><\/div></div></div><div class="picedit_canvas_box"><div class="picedit_painter"><canvas></canvas></div><div class="picedit_canvas"><canvas></canvas></div><div class="picedit_action_btns active"> <div class="picedit_control ico-picedit-picture" data-action="load_image"><\/div><div class="picedit_control ico-picedit-camera" data-action="camera_open"><\/div><div class="center">or copy/paste image here</div></div></div><div class="picedit_video"> <video autoplay></video><div class="picedit_video_controls"><span class="picedit_control picedit_action ico-picedit-checkmark" data-action="take_photo"></span><span class="picedit_control picedit_action ico-picedit-close" data-action="camera_close"></span><\/div><\/div><div class="picedit_drag_resize"> <div class="picedit_drag_resize_canvas"></div><div class="picedit_drag_resize_box"><div class="picedit_drag_resize_box_corner_wrap"> <div class="picedit_drag_resize_box_corner"></div></div><div class="picedit_drag_resize_box_elements"><span class="picedit_control picedit_action ico-picedit-checkmark" data-action="crop_image"></span><span class="picedit_control picedit_action ico-picedit-close" data-action="crop_close"></span><\/div><\/div></div></div>';
+			var template = '<div class="picedit_box"> <div class="picedit_message"> <span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span> <div><\/div><\/div><div class="picedit_nav_box"> <div class="picedit_pos_elements"><\/div><div class="picedit_nav_elements"><div class="picedit_element"><span class="picedit_control picedit_action ico-picedit-insertpicture" title="Crop" data-action="crop_open"><b> Crop</b></span> <\/div><div class="picedit_element"> <span class="picedit_control picedit_action ico-picedit-redo" title="Rotate"><b> Rotate</b></span> <div class="picedit_control_menu"> <div class="picedit_control_menu_container picedit_tooltip picedit_elm_1"> <label> <span>90° CW</span> <span class="picedit_control picedit_action ico-picedit-redo" data-action="rotate_cw"></span> </label> <label> <span>90° CCW</span> <span class="picedit_control picedit_action ico-picedit-undo" data-action="rotate_ccw"></span> </label> <\/div><\/div><\/div> </div></div><div class="picedit_canvas_box"><div class="picedit_painter"><canvas></canvas></div><div class="picedit_canvas"><canvas></canvas></div><div class="picedit_action_btns active"> <div class="center">Take a selfie or upload a photo by dragging/browsing</div><div class="picedit_control ico-picedit-picture" data-action="load_image"><\/div><div class="picedit_control ico-picedit-camera" data-action="camera_open"><\/div></div></div><div class="picedit_video"> <video autoplay></video><div class="picedit_video_controls"><span class="picedit_control picedit_action ico-picedit-checkmark" data-action="take_photo"></span><span class="picedit_control picedit_action ico-picedit-close" data-action="camera_close"></span><\/div><\/div><div class="picedit_drag_resize"> <div class="picedit_drag_resize_canvas"></div><div class="picedit_drag_resize_box"><div class="picedit_drag_resize_box_corner_wrap"> <div class="picedit_drag_resize_box_corner"></div></div><div class="picedit_drag_resize_box_elements"><span class="picedit_control picedit_action ico-picedit-checkmark" data-action="crop_image"></span><span class="picedit_control picedit_action ico-picedit-close" data-action="crop_close"></span><\/div><\/div></div></div>';
 			var _this = this;
 			$(this.inputelement).hide().after(template).each(function() {
 				_this.element = $(_this.inputelement).next(".picedit_box");

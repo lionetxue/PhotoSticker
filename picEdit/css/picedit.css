@@ -96,14 +96,14 @@
 .picedit_box {
     display: inline-block;
     position: relative;
-    left: 30%;
-    border: 1px solid #ddd;
+    left: 0;
+    border: 5px solid #ddd;
 	font-family: "Myriad Pro", Arial, Helvetica, sans-serif;
 	font-size: 1rem;
     width: 400px;
     height: 400px;
-    color: #aaa;
-    overflow: hidden;
+    /*color: #aaa;*/
+    /*overflow: hidden;*/
 }
 .picedit_canvas_box:hover .picedit_action_btns, .picedit_action_btns.active {
 	z-index: 8;
@@ -116,11 +116,11 @@
 .picedit_nav_box {
     position: absolute;
     top: 0;
-    right: 0;
-    width: 98%;
+    left: 410px;
+    width: 100px;
     padding: 1% 1% 1.5% 1%;
     z-index: 15;
-    opacity: 0;
+    /*opacity: 0;*/
 	
 	-webkit-transition: opacity 200ms ease-out;
 	-moz-transition: opacity 200ms ease-out;
@@ -160,29 +160,39 @@
 .picedit_pos_elements {}
 .picedit_nav_elements {
     position: relative;
-    width: 100%;
-    text-align: right;
+    /*width: 100%;*/
+    text-align: left;
     padding: 0.3em 0;
     z-index: 20;
 }
 .picedit_element {
-    display: inline-block;
+    /*display: inline-block;*/
     cursor: pointer;
+    padding: 0.3em;
+    margin: 0.2em;
+    display: block;
+    background-color: lightgray;
 }
 .picedit_element > .picedit_control {
-	font-size: 1.6em;
+	font-size: 2.6em;
 	position:  relative;
 	z-index: 40;
+}
+/*Lin: make text smaller than icon*/
+.picedit_element > .picedit_control > b{
+    font-size: 0.6em;
+    /*display: block;*/
+    /*padding-top: 0.1em;*/
 }
 .picedit_element > .picedit_control.ico-picedit-arrow-maximise {
 }
 .picedit_control_menu {
     display: inline-block;
-    position: absolute;
-    top: 1.3em;
+    position: relative;
+    top: 0.3em;
     right: 1%;
     z-index: 30;
-    padding-top: 1.3em;
+    padding-top: 0.3em;
     width: auto;
     opacity: 0;
 	-moz-transform: scaleY(0);
@@ -197,7 +207,8 @@
 	transition: all 200ms ease-out;
 }
 .picedit_control_menu label {
-    display: inline-block;
+    /*display: inline-block;*/
+    display: block;
     margin: 0 0.5em;
 }
 .picedit_control_menu label > span {
@@ -260,9 +271,12 @@
 .picedit_canvas_box {
     width: 100%;
     height: 100%;
+    /*border: 5px solid #ddd;*/
     display: block;
 	text-align: center;
 	position: relative;
+    /*Lin: hide image outside of canvas area*/
+    overflow:hidden;
 }
 .picedit_canvas {
 	position: absolute;
@@ -276,9 +290,9 @@
 .picedit_action_btns .center {
     text-align: center;
     font-size: 0.3em;
-    color: #CACACA;
+    /*color: #CACACA;*/
     position: absolute;
-    bottom: -0.5em;
+    /*bottom: -0.5em;*/
     left: 0;
     width: 100%;
     height: auto;
@@ -291,7 +305,7 @@
 }
 .picedit_action_btns {
 	font-size: 3em;
-	color: #ddd;
+	/*color: #ddd;*/
 	width: 60%;
 	height: 50%;
 	display: inline-table;
@@ -343,7 +357,7 @@
 	transition: bottom 200ms ease-out;
 }
 .picedit_message.active {
-	bottom: 0;
+	bottom: 300px;
 }
 .picedit_message > span {
     position: absolute;
@@ -379,8 +393,8 @@
 }
 .picedit_drag_resize_box {
     position: absolute;
-    top: 20%;
-    left: 20%;
+    top: 10%;
+    left: 10%;
     width: 300px;
     height: 300px;
     /*width: 60%;*/
