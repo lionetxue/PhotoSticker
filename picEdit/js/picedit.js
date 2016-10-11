@@ -584,7 +584,18 @@
 		_paintCanvas: function () {
 			this._canvas.width = this._viewport.width;
     		this._canvas.height = this._viewport.height;
-			this._ctx.drawImage(this._image, 0, 0, this._viewport.width, this._viewport.height);
+			// this._ctx.drawImage(this._image, 0, 0, this._viewport.width, this._viewport.height);
+			////Lin: add image with datasrc
+			var fabriccanvas = new fabric.Canvas('canvas');
+			var scaleX = this._canvas.width / this._image.width ;
+			// var scaleY = this._canvas.height / this._image.height ;
+			//clear previous image first
+			fabriccanvas.clear().renderAll();
+			fabric.Image.fromURL(this._image.src , function(oImg) {
+				oImg.scale(scaleX);
+				fabriccanvas.add(oImg);
+			});
+			//
 			$(this.element).find(".picedit_canvas").css("display", "block");
 		},
 		// Helper function to translate crop window size to the actual crop size
