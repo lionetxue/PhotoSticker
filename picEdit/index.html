@@ -52,7 +52,7 @@
 			<div class="picedit_element"><span class="picedit_control picedit_action ico-picedit-insertpicture" title="Crop" data-action="crop_open"><b> Crop</b></span> </div>
 			<!-- Picedit button element end -->
 			<!-- Picedit button element begin -->
-			<div class="picedit_element"> <span class="picedit_control ico-picedit-redo" title="Rotate"></span>
+			<div class="picedit_element"> <span class="picedit_control picedit_action ico-picedit-redo" title="Rotate"><b> Rotate</b></span>
 				<div class="picedit_control_menu">
 					<div class="picedit_control_menu_container picedit_tooltip picedit_elm_1">
 						<label> <span>90&deg; CW</span> <span class="picedit_control ico-picedit-redo" data-action="rotate_cw"></span> </label>
@@ -79,12 +79,11 @@
 	</div>
 </div>
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
 <script type="text/javascript" src="js/picedit.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$('#thebox').picEdit();
-		$('img').draggable();
 	});
 </script>
 </body>

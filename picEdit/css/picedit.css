@@ -180,8 +180,8 @@
 }
 /*Lin: make text smaller than icon*/
 .picedit_element > .picedit_control > b{
-    font-size: 0.6em;
-    /*display: block;*/
+    font-size: 0.5em;
+    display: block;
     /*padding-top: 0.1em;*/
 }
 .picedit_element > .picedit_control.ico-picedit-arrow-maximise {

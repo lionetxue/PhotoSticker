@@ -275,9 +275,9 @@
 		// Perform image load when user clicks on image button
 		load_image: function () {
 			this._fileinput.click();
-			//Lin: reset the top and left of draggable element to 0,0
-			$(".picedit_canvas").css("left", 0);
-			$(".picedit_canvas").css("top", 0);
+			// //Lin: reset the top and left of draggable element to 0,0
+			// $(".picedit_canvas").css("left", 0);
+			// $(".picedit_canvas").css("top", 0);
 		},
 		// // Open pen tool and start drawing
 		// pen_tool_open: function () {
@@ -384,9 +384,9 @@
 					return _this.set_messagebox("No video source detected! Please allow camera access!");
 				}
 			);
-			//Lin: reset the top and left of draggable element to 0,0
-			$(".picedit_canvas").css("left", 0);
-			$(".picedit_canvas").css("top", 0);
+			// //Lin: reset the top and left of draggable element to 0,0
+			// $(".picedit_canvas").css("left", 0);
+			// $(".picedit_canvas").css("top", 0);
 		},
 		camera_close: function() {
 			this._videobox.removeClass("active");
@@ -440,9 +440,9 @@
 				});
 			});
 			this.crop_close();
-			//Lin: reset the top and left of draggable element to 0,0
-			$(".picedit_canvas").css("left", 0);
-			$(".picedit_canvas").css("top", 0);
+			// //Lin: reset the top and left of draggable element to 0,0
+			// $(".picedit_canvas").css("left", 0);
+			// $(".picedit_canvas").css("top", 0);
 		},
 		crop_open: function () {
 			if(!this._image) return this._hideAllNav(1);
