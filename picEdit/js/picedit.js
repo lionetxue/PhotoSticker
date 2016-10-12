@@ -34,7 +34,6 @@
     function Plugin( element, options ) {
         // this.inputelement = element;
         this.element = element;
-
         // jQuery has an extend method which merges the contents of two or
         // more objects, storing the result in the first object. The first object
         // is generally empty as we don't want to alter the default options for
@@ -66,7 +65,7 @@
 				// You already have access to the DOM element and
 				// the options via the instance, e.g. this.element
 				// and this.settings
-				
+
 				// Save instance of this for inline functions
 				var _this = this;
                 // Get type of element to be used (type="file" and type="picedit" are supported)
@@ -90,6 +89,8 @@
                 }*/
 				// Get reference to the main canvas element
 				this._canvas = $(this.element).find(".picedit_canvas > canvas")[0];
+				////Lin
+				// this._fabriccanvas = new fabric.Canvas('canvas');
 				// Create and set the 2d context for the canvas
 				this._ctx = this._canvas.getContext("2d");
 				// Reference to video elemment holder element
@@ -392,6 +393,9 @@
 			this._videobox.removeClass("active");
 			//Lin: close the web camera
 			this._videostream.getVideoTracks()[0].stop();
+			/*this._videostream.getVideoTracks().forEach(function(track) {
+				track.stop();
+			});*/
 			/*var track = this._videostream.getVideoTracks()[0];  // if only one media track
 			track.stop();*/
 			/*			var MediaStream = window.MediaStream;
@@ -423,6 +427,8 @@
 			ctx.drawImage(live, 0, 0, canvas.width, canvas.height);
 			this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
 				_this._videobox.removeClass("active");
+				//Lin: close the web camera
+				_this._videostream.getVideoTracks()[0].stop();
 			});
 		},
 		// Crop the image
@@ -582,20 +588,23 @@
 		},
 		// Paint image on canvas
 		_paintCanvas: function () {
-			this._canvas.width = this._viewport.width;
+/*          this._canvas.width = this._viewport.width;
     		this._canvas.height = this._viewport.height;
-			// this._ctx.drawImage(this._image, 0, 0, this._viewport.width, this._viewport.height);
-			////Lin: add image with datasrc
-			var fabriccanvas = new fabric.Canvas('canvas');
+			this._ctx.drawImage(this._image, 0, 0, this._viewport.width, this._viewport.height);*/
+			//Lin: crop and scale image down to canvas size
+			var image_side = Math.min(this._image.width, this._image.height);
+			this._ctx.drawImage(this._image, 0, 0, image_side, image_side, 0, 0, this._canvas.width, this._canvas.height);
+/*			////Lin: add image with datasrc
+			//var fabriccanvas = new fabric.Canvas('canvas');
 			var scaleX = this._canvas.width / this._image.width ;
 			// var scaleY = this._canvas.height / this._image.height ;
 			//clear previous image first
-			fabriccanvas.clear().renderAll();
+			//this._fabriccanvas.clear();
 			fabric.Image.fromURL(this._image.src , function(oImg) {
 				oImg.scale(scaleX);
-				fabriccanvas.add(oImg);
+				this._fabriccanvas.add(oImg).renderAll();
 			});
-			//
+			//*/
 			$(this.element).find(".picedit_canvas").css("display", "block");
 		},
 		// Helper function to translate crop window size to the actual crop size

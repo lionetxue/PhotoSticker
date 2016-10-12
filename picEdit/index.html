@@ -5,6 +5,7 @@
 <title>Photo Edit App</title>
 
 <link rel="stylesheet" type="text/css" href="css/picedit.css" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
 </head>
 <body>
@@ -49,17 +50,23 @@
 		<div class="picedit_pos_elements"></div>
 		<div class="picedit_nav_elements">
 			<!-- Picedit button element begin -->
-			<div class="picedit_element"><span class="picedit_control picedit_action ico-picedit-insertpicture" title="Crop" data-action="crop_open"><b> Crop</b></span> </div>
+			<div class="picedit_element"><span class="picedit_control picedit_action fa fa-crop" title="Crop" data-action="crop_open"><b> Crop</b></span> </div>
 			<!-- Picedit button element end -->
 			<!-- Picedit button element begin -->
-			<div class="picedit_element"> <span class="picedit_control picedit_action ico-picedit-redo" title="Rotate"><b> Rotate</b></span>
+			<div class="picedit_element"> <span class="picedit_control picedit_action fa fa-repeat" title="Rotate"><b> Rotate</b></span>
 				<div class="picedit_control_menu">
 					<div class="picedit_control_menu_container picedit_tooltip picedit_elm_1">
-						<label> <span>90&deg; CW</span> <span class="picedit_control ico-picedit-redo" data-action="rotate_cw"></span> </label>
-						<label> <span>90&deg; CCW</span> <span class="picedit_control ico-picedit-undo" data-action="rotate_ccw"></span> </label>
+						<label> <span>90&deg; CW</span> <span class="picedit_control fa fa-repeat" data-action="rotate_cw"></span> </label>
+						<label> <span>90&deg; CCW</span> <span class="picedit_control fa fa-undo" data-action="rotate_ccw"></span> </label>
 					</div>
 				</div>
 			</div>
+			<!-- Picedit button element end -->
+			<!-- Picedit button element begin -->
+			<div class="picedit_element"><a id="downloadImg" class="picedit_control fa fa-download" title="Download" onclick="$('#downloadImg').attr('href', canvas.toDataURL());" download="Cornell_Profile.png" href="#" target="_blank"><b> Download</b></a> </div>
+			<!-- Picedit button element end -->
+			<!-- Picedit button element begin -->
+			<div class="picedit_element"><span class="picedit_control picedit_action fa fa-share-square-o" title="Share" data-action="share_image"><b> Share</b></span> </div>
 			<!-- Picedit button element end -->
 			<!-- Picedit button element begin -->
 			<!--<div class="picedit_element"> <span class="picedit_control ico-picedit-arrow-maximise" title="Resize"></span>

@@ -173,14 +173,23 @@
     display: block;
 
 }
+/*Lin: in Nav, make a look like span*/
+a, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
 .picedit_element > .picedit_control {
     display: block;
     height: 100%;
-    padding: 0.3em;
-	font-size: 2.6em;
+    padding: 0.2em;
+	font-size: 2em;
 	position:  relative;
 	z-index: 40;
+    /*Lin*/
     background-color: lightgray;
+    border: 2px solid;
+    border-radius: 10px;
 }
 /*Lin: make text smaller than icon*/
 .picedit_element > .picedit_control > b{
