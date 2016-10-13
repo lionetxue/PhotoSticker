@@ -88,9 +88,11 @@
                     return;
                 }*/
 				// Get reference to the main canvas element
-				this._canvas = $(this.element).find(".picedit_canvas > canvas")[0];
+				// this._canvas = $(this.element).find(".picedit_canvas > canvas")[0];
 				////Lin
-				// this._fabriccanvas = new fabric.Canvas('canvas');
+			    this._canvas = new fabric.Canvas('canvas');
+			    //stop the bringtofront on selected objects
+			    this._canvas. preserveObjectStacking = true;
 				// Create and set the 2d context for the canvas
 				this._ctx = this._canvas.getContext("2d");
 				// Reference to video elemment holder element
@@ -458,16 +460,22 @@
 		crop_close: function () {
 			this._cropping.cropbox.removeClass("active");
 		},
-		/*		////Lin: Add sticker
+				////Lin: Add sticker
         add_sticker: function (){
-			alert("sticker");
-			var canvas = document.createElement('canvas');
-			var ctx = canvas.getContext("2d");
-			var sticker = document.getElementById('sticker_1');
-			// var _this = this;
-			console.log(this);
-			ctx.drawImage(sticker, 0, 0);
-		},*/
+			var _this = this;
+			var imgElement = document.getElementById('sticker_1');
+			var imgInstance = new fabric.Image(imgElement, {
+				left: 0,
+				top: 300,
+				lockUniScaling: true
+			});
+			//setOverlayImage makes sure sticker adds as overlay, no change or move the sticker
+			// _this._canvas.setOverlayImage(imgInstance);
+			//_this._canvas.controlsAboveOverlay = true;
+			_this._canvas.add(imgInstance);
+			_this._canvas.insertAt(imgInstance,1, false);
+			// _this._canvas.bringToFront(imgInstance);
+		},
 		//
 		// Create and update image from datasrc
 		_create_image_with_datasrc: function(datasrc, callback, file, dataurl) {
@@ -602,20 +610,24 @@
 /*          this._canvas.width = this._viewport.width;
     		this._canvas.height = this._viewport.height;
 			this._ctx.drawImage(this._image, 0, 0, this._viewport.width, this._viewport.height);*/
-			//Lin: crop and scale image down to canvas size
+/*			//Lin: crop and scale image down to canvas size
 			var image_side = Math.min(this._image.width, this._image.height);
-			this._ctx.drawImage(this._image, 0, 0, image_side, image_side, 0, 0, this._canvas.width, this._canvas.height);
-/*			////Lin: add image with datasrc
-			//var fabriccanvas = new fabric.Canvas('canvas');
-			var scaleX = this._canvas.width / this._image.width ;
-			// var scaleY = this._canvas.height / this._image.height ;
+			this._ctx.drawImage(this._image, 0, 0, image_side, image_side, 0, 0, this._canvas.width, this._canvas.height);*/
+			////Lin: add image with datasrc
+			var _this = this;
+			var scaleX = _this._canvas.width / this._image.width ;
+			var scaleY = this._canvas.height / this._image.height ;
+			var scale = Math.max(scaleX, scaleY);
 			//clear previous image first
-			//this._fabriccanvas.clear();
+			_this._canvas.clear();
 			fabric.Image.fromURL(this._image.src , function(oImg) {
-				oImg.scale(scaleX);
-				this._fabriccanvas.add(oImg).renderAll();
+				oImg.scale(scale);
+				// lock aspect ratio
+				oImg.lockUniScaling = true;
+				// _this._canvas.add(oImg).renderAll();
+				_this._canvas.insertAt(oImg, 0, true).renderAll();
 			});
-			//*/
+			//
 			$(this.element).find(".picedit_canvas").css("display", "block");
 		},
 		// Helper function to translate crop window size to the actual crop size
