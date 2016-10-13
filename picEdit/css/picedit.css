@@ -306,7 +306,7 @@ a, a:visited, a:hover, a:active {
     font-size: 0.3em;
     /*color: #CACACA;*/
     position: absolute;
-    /*bottom: -0.5em;*/
+    bottom: 5em;
     left: 0;
     width: 100%;
     height: auto;
@@ -321,9 +321,9 @@ a, a:visited, a:hover, a:active {
 	font-size: 3em;
 	/*color: #ddd;*/
 	width: 60%;
-	height: 50%;
+	height: 20%;
 	display: inline-table;
-	margin: 12% auto 0% auto;
+	margin: 30% auto 0 auto;
 	position: relative;
 	opacity: 0;
 	
