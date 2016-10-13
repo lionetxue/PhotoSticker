@@ -297,7 +297,8 @@ a, a:visited, a:hover, a:active {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	display: none;
+    /*Lin: prevent stickers to show*/
+	/*display: none;*/
 	z-index: 5;
 }
 .picedit_action_btns .center {
@@ -353,8 +354,8 @@ a, a:visited, a:hover, a:active {
     bottom: -100px;
     border: 1px solid #eee;
     margin-bottom: 3%;
-    margin-left: 3%;
-    margin-right: 3%;
+    margin-left: 2%;
+    margin-right: 2%;
     z-index: 180;
     background-color: #F7F5D4;
     opacity: 0.8;
@@ -370,7 +371,7 @@ a, a:visited, a:hover, a:active {
 	transition: bottom 200ms ease-out;
 }
 .picedit_message.active {
-	bottom: 300px;
+	bottom: 200px;
 }
 .picedit_message > span {
     position: absolute;
@@ -533,4 +534,23 @@ a, a:visited, a:hover, a:active {
 }
 .picedit_painter.active + .picedit_canvas {
     z-index: 10;
+}
+/*Lin: sticker image hover effects*/
+.picedit_sticker{
+    height: 100px;
+    width: 100px;
+    padding: 0.3em;
+    background-color: lightgray;
+    border: 2px solid;
+    border-radius: 10px;
+}
+.picedit_sticker img {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+.picedit_sticker:hover img {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
 }

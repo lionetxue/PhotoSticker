@@ -458,6 +458,17 @@
 		crop_close: function () {
 			this._cropping.cropbox.removeClass("active");
 		},
+		/*		////Lin: Add sticker
+        add_sticker: function (){
+			alert("sticker");
+			var canvas = document.createElement('canvas');
+			var ctx = canvas.getContext("2d");
+			var sticker = document.getElementById('sticker_1');
+			// var _this = this;
+			console.log(this);
+			ctx.drawImage(sticker, 0, 0);
+		},*/
+		//
 		// Create and update image from datasrc
 		_create_image_with_datasrc: function(datasrc, callback, file, dataurl) {
 			var _this = this;

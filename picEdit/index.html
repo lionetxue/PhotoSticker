@@ -6,7 +6,26 @@
 
 <link rel="stylesheet" type="text/css" href="css/picedit.css" />
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+<style>
+		#stickers img.img_dragging {
+			opacity: 0.4;
+		}
+		/*
+        Styles below based on  http://www.html5rocks.com/en/tutorials/dnd/basics/
+        */
 
+		/* Prevent the text contents of draggable elements from being selectable. */
+		[draggable] {
+			-moz-user-select: none;
+			-khtml-user-select: none;
+			-webkit-user-select: none;
+			user-select: none;
+			/* Required to make elements draggable in old WebKit */
+			-khtml-user-drag: element;
+			-webkit-user-drag: element;
+			cursor: move;
+		}
+	</style>
 </head>
 <body>
 <div id="thebox" class="picedit_box">
@@ -17,7 +36,7 @@
 			<div class="picedit_control ico-picedit-picture" data-action="load_image"></div>
 			<div class="picedit_control ico-picedit-camera" data-action="camera_open"></div>
 		</div>
-		<div class="picedit_canvas">
+		<div id="canvas-container" class="picedit_canvas">
 			<canvas id="canvas" width="400px" height="400px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
 		</div>
 		<div class="picedit_video">
@@ -39,6 +58,11 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<!--Stickers-->
+	<div id="stickers">
+		<span class="picedit_control picedit_action picedit_sticker" title="Sticker" ><img  id="sticker_1" src="img/sticker_1.png" width="100" height="100"/></span>
+		<span class="picedit_control picedit_action picedit_sticker" title="Sticker" ><img  id="sticker_2" src="img/sticker_2.png" width="100" height="100"/></span>
 	</div>
 	<!--Picedit message-->
 	<div class="picedit_message">
@@ -85,14 +109,34 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
 <script type="application/javascript" src="js/fabric.js"></script>
 <script type="text/javascript" src="js/picedit.js"></script>
 <script type="text/javascript">
 	$(function() {
+		// Document is ready
 		$('#thebox').picEdit();
+
+		//Functions rely on fabric.js
+		$('.picedit_sticker').click(function(e){
+			var canvas = new fabric.Canvas('canvas');
+			//clear previous image first
+			//canvas.clear();
+			var imgElement = document.getElementById(e.target.id);
+			var imgInstance = new fabric.Image(imgElement, {
+				left: 0,
+				top: 300
+			});
+			canvas.add(imgInstance);
+			/*		fabric.Image.fromURL('img/sticker_1.png' , function(oImg) {
+			 //oImg.scale(scaleX);
+			 canvas.add(oImg).renderAll();
+			 });*/
+		})
 	});
+
 </script>
 </body>
 </html>
