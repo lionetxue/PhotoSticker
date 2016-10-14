@@ -44,6 +44,8 @@
         this._name = pluginName;
         // Reference to the loaded image
         this._image = false;
+		// Lin: reference to the scale factor
+		this._scale = false;
 		// Lin: Reference to the sticker object
 		this._sticker = null;
         // Reference to the filename of the loaded image
@@ -460,12 +462,23 @@
 		crop_image: function() {
 			var crop = this._calculateCropWindow();
 			var _this = this;
+			//Lin: fix the shifting problem when base image is moved before cropping
+			var baseimage = _this._canvas.item(0);
+			console.log("baseimage left: "+ baseimage.left);
+			console.log("baseimage top: "+ baseimage.top);
+			console.log("crop left: "+ crop.left);
+			console.log("crop top: "+ crop.top);
+			console.log("scale: "+ _this._scale);
+			var sx =  crop.left - baseimage.left / _this._scale;
+			var sy = crop.top - baseimage.top / _this._scale;
+			console.log("sx: "+  sx);
+			console.log("sy: "+  sy);
 			this.set_loading(1).delay(200).promise().done(function() {
 				var canvas = document.createElement('canvas');
 				var ctx = canvas.getContext("2d");
 				canvas.width = crop.width;
 				canvas.height = crop.height;
-				ctx.drawImage(_this._image, crop.left, crop.top, crop.width, crop.height, 0, 0, crop.width, crop.height);
+				ctx.drawImage(_this._image, sx, sy, crop.width, crop.height, 0, 0, crop.width, crop.height);
 				_this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
 					_this.hide_messagebox();
 				});
@@ -484,6 +497,7 @@
 				 var x = rectangle.left - baseimage.getWidth() ;
 				 var y = rectangle.top - baseimage.getHeight() ;
 				 ctx.rect(x, y, rectangle.width, rectangle.height);
+				 _this.hide_messagebox();
 				 };
 				 baseimage.selectable = true;
 				 rectangle.visible = false;
@@ -640,6 +654,7 @@
 			var scaleX = this._canvas.width / this._image.width ;
 			var scaleY = this._canvas.height / this._image.height ;
 			var scale = Math.max(scaleX, scaleY);
+			_this._scale = scale;
 			//clear previous image first
 			//_this._canvas.clear();
 			fabric.Image.fromURL(this._image.src , function(oImg) {
