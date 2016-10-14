@@ -469,11 +469,27 @@
 				_this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
 					_this.hide_messagebox();
 				});
+/*                ////Lin:
+				 var baseimage = _this._canvas.item(0);
+				 var rectangle = new fabric.Rect({
+				 visible: false,
+				 width: crop.width,
+				 height: crop.height,
+				 top: crop.top,
+				 left: crop.left
+				 });
+				 _this._canvas.add(rectangle);
+				 baseimage.clipTo = function (ctx) {
+				 // origin is the center of the image
+				 var x = rectangle.left - baseimage.getWidth() ;
+				 var y = rectangle.top - baseimage.getHeight() ;
+				 ctx.rect(x, y, rectangle.width, rectangle.height);
+				 };
+				 baseimage.selectable = true;
+				 rectangle.visible = false;
+				 _this._canvas.renderAll();*/
 			});
 			this.crop_close();
-			// //Lin: reset the top and left of draggable element to 0,0
-			// $(".picedit_canvas").css("left", 0);
-			// $(".picedit_canvas").css("top", 0);
 		},
 		crop_open: function () {
 			if(!this._image) return this._hideAllNav(1);
@@ -630,7 +646,7 @@
 				oImg.scale(scale);
 				// lock aspect ratio
 				oImg.lockUniScaling = true;
-				oImg.centerRotation = true;
+				// oImg.centerRotation = true;
 /*				oImg.originX ='center';
 				oImg.originY = 'center';*/
 				// _this._canvas.add(oImg).renderAll();
