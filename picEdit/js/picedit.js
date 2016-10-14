@@ -44,6 +44,8 @@
         this._name = pluginName;
         // Reference to the loaded image
         this._image = false;
+		// Lin: Reference to the sticker object
+		this._sticker = null;
         // Reference to the filename of the loaded image
         this._filename = "";
         // Interface variables (data synced from the user interface)
@@ -217,6 +219,27 @@
 				this._variables.prev_pos = false;
                 // Load default image if one is set
                 if(this.options.defaultImage) _this.set_default_image(this.options.defaultImage);
+			    //Lin: bind onclick event to sticker buttons
+			    $(this.element).find('.picedit_sticker').on("click", function(e) {
+					var imgElement = document.getElementById(e.target.id);
+					//// Lin: check to see if a sticker exists.  Only allow one sticker at a time.
+					// If already has one sticker, replace the existing one
+					if (_this._sticker) {
+						_this._sticker.setElement(imgElement);
+					}
+					// If not, create a new sticker object
+					else{
+						_this._sticker = new fabric.Image(imgElement, {
+							left: 0,
+							top: 300,
+							lockUniScaling: true
+						});
+					}
+					//
+					//setOverlayImage makes sure sticker adds as overlay, no change or move the sticker
+					// _this._canvas.setOverlayImage(imgInstance);
+					_this._canvas.insertAt(_this._sticker,1, false);
+				});
 		},
         // Check Browser Capabilities (determine if the picedit should run, or leave the default file-input field)
         check_browser_capabilities: function () {
@@ -460,20 +483,30 @@
 		crop_close: function () {
 			this._cropping.cropbox.removeClass("active");
 		},
-				////Lin: Add sticker
-        add_sticker: function (){
+		////Lin: Add sticker
+        add_sticker: function (stickerID){
 			var _this = this;
-			var imgElement = document.getElementById('sticker_1');
-			var imgInstance = new fabric.Image(imgElement, {
-				left: 0,
-				top: 300,
-				lockUniScaling: true
-			});
+			var imgElement = document.getElementById(stickerID);
+			//// Lin: check to see if a sticker exists.  Only allow one sticker at a time.
+			// If already has one sticker, replace the existing one
+			if (_this._sticker) {
+				_this._sticker.setElement(imgElement);
+			}
+			// If not, create a new sticker object
+			else{
+				// var imgElement = document.getElementById('sticker_1');
+				_this._sticker = new fabric.Image(imgElement, {
+					left: 0,
+					top: 300,
+					lockUniScaling: true
+				});
+			}
+			//
 			//setOverlayImage makes sure sticker adds as overlay, no change or move the sticker
 			// _this._canvas.setOverlayImage(imgInstance);
 			//_this._canvas.controlsAboveOverlay = true;
-			_this._canvas.add(imgInstance);
-			_this._canvas.insertAt(imgInstance,1, false);
+			//_this._canvas.add(imgInstance);
+			_this._canvas.insertAt(_this._sticker,1, false);
 			// _this._canvas.bringToFront(imgInstance);
 		},
 		//
@@ -619,7 +652,7 @@
 			var scaleY = this._canvas.height / this._image.height ;
 			var scale = Math.max(scaleX, scaleY);
 			//clear previous image first
-			_this._canvas.clear();
+			//_this._canvas.clear();
 			fabric.Image.fromURL(this._image.src , function(oImg) {
 				oImg.scale(scale);
 				// lock aspect ratio
