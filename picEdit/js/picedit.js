@@ -483,33 +483,6 @@
 		crop_close: function () {
 			this._cropping.cropbox.removeClass("active");
 		},
-		////Lin: Add sticker
-        add_sticker: function (stickerID){
-			var _this = this;
-			var imgElement = document.getElementById(stickerID);
-			//// Lin: check to see if a sticker exists.  Only allow one sticker at a time.
-			// If already has one sticker, replace the existing one
-			if (_this._sticker) {
-				_this._sticker.setElement(imgElement);
-			}
-			// If not, create a new sticker object
-			else{
-				// var imgElement = document.getElementById('sticker_1');
-				_this._sticker = new fabric.Image(imgElement, {
-					left: 0,
-					top: 300,
-					lockUniScaling: true
-				});
-			}
-			//
-			//setOverlayImage makes sure sticker adds as overlay, no change or move the sticker
-			// _this._canvas.setOverlayImage(imgInstance);
-			//_this._canvas.controlsAboveOverlay = true;
-			//_this._canvas.add(imgInstance);
-			_this._canvas.insertAt(_this._sticker,1, false);
-			// _this._canvas.bringToFront(imgInstance);
-		},
-		//
 		// Create and update image from datasrc
 		_create_image_with_datasrc: function(datasrc, callback, file, dataurl) {
 			var _this = this;
@@ -648,7 +621,7 @@
 			this._ctx.drawImage(this._image, 0, 0, image_side, image_side, 0, 0, this._canvas.width, this._canvas.height);*/
 			////Lin: add image with datasrc
 			var _this = this;
-			var scaleX = _this._canvas.width / this._image.width ;
+			var scaleX = this._canvas.width / this._image.width ;
 			var scaleY = this._canvas.height / this._image.height ;
 			var scale = Math.max(scaleX, scaleY);
 			//clear previous image first
@@ -657,6 +630,9 @@
 				oImg.scale(scale);
 				// lock aspect ratio
 				oImg.lockUniScaling = true;
+				oImg.centerRotation = true;
+/*				oImg.originX ='center';
+				oImg.originY = 'center';*/
 				// _this._canvas.add(oImg).renderAll();
 				_this._canvas.insertAt(oImg, 0, true).renderAll();
 			});
@@ -695,7 +671,7 @@
 		},
 		// Helper function to perform canvas rotation
 		_doRotation: function (degrees){
-			var rads=degrees*Math.PI/180;
+/*			var rads=degrees*Math.PI/180;
 			//if rotation is 90 or 180 degrees try to adjust proportions
 			var newWidth, newHeight;
 			var c = Math.cos(rads);
@@ -719,7 +695,22 @@
 			ctx.drawImage(this._image, -this._image.width / 2, -this._image.height / 2);
 			this._image.src = canvas.toDataURL("image/png");
 			this._paintCanvas();
-			this.options.imageUpdated(this._image);
+ 			this.options.imageUpdated(this._image);*/
+            ////Lin: rotate around the center of canvas
+			var baseimage = this._canvas.item(0);
+			var curAngle = baseimage.getAngle();
+			var rotatethispoint = new fabric.Point(this._canvas.width / 2, this._canvas.height / 2); // center of canvas
+			//console.log("rotatepoint:" + rotatethispoint.x + ' ' + rotatethispoint.y);
+			// var rads= degrees*Math.PI/180;
+			var rads = fabric.util.degreesToRadians(degrees);
+			var objectOrigin = new fabric.Point(baseimage.left, baseimage.top);
+			//console.log("objectOrigin: " + baseimage.left + ' ' + baseimage.top);
+			var new_loc = fabric.util.rotatePoint(objectOrigin, rotatethispoint, rads);
+			//console.log("new loc: "+ new_loc.x + ' ' + new_loc.y);
+			baseimage.setAngle(curAngle + degrees);
+			baseimage.top = new_loc.y;
+			baseimage.left = new_loc.x;
+			this._canvas.renderAll();
 		},
 		// Resize the viewport (should be done on every image change)
 		_resizeViewport: function () {
