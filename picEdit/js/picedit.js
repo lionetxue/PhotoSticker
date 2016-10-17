@@ -377,13 +377,15 @@
 		rotate_cw: function () {
 			if(!this._image) return this._hideAllNav(1);
 			var _this = this;
-			//run task and show loading spinner, the task can take some time to run
+            // Lin:
+            _this._doRotation(90);
+/*			//run task and show loading spinner, the task can take some time to run
 			this.set_loading(1).delay(200).promise().done(function() {
 				_this._doRotation(90);
 				_this._resizeViewport();
 				//hide loading spinner
 				_this.hide_messagebox();
-			});
+			});*/
 			//hide all opened navigation
 			this._hideAllNav();
 		},
