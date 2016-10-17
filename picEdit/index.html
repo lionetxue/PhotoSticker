@@ -10,6 +10,16 @@
 </head>
 <body>
 <div id="thebox" class="picedit_box">
+	<!-- Picedit popup form -->
+	<div class="messagepop pop">
+		<form method="post" id="new_message" action="/messages">
+			<div class="close cross"><i class="fa fa-times" aria-hidden="true"></i></div>
+			<p>Enter your email to unlock the secrete sticker and download your profile photos with all stickers in one zipfile!</p>
+			<p>We are committed to keeping your e-mail address confidential. We collect user emails to improve user experience for Cornell alumni.</p>
+			<p><label for="email">Your email</label><input type="text" size="30" name="email" id="email" /></p>
+			<p><input class="submitBtn" type="submit" value="Get My ZipFile" id="message_submit"/> or <a class="close" href="/"> Cancel</a></p>
+		</form>
+	</div>
 	<!-- Picedit canvas element -->
 	<div class="picedit_canvas_box">
 		<div class="picedit_action_btns active">
@@ -115,9 +125,31 @@
 <script type="application/javascript" src="js/fabric.js"></script>
 <script type="text/javascript" src="js/picedit.js"></script>
 <script type="text/javascript">
+	//Lin: form
+	function deselect(e) {
+		$('.pop').slideFadeToggle(function() {
+			e.removeClass('selected');
+		});
+	}
 	$(function() {
 		// Document is ready
 		$('#thebox').picEdit();
+
+		//popup form to collect user email
+		$('#downloadZip').on('click', function() {
+			if($(this).hasClass('selected')) {
+				deselect($(this));
+			} else {
+				$(this).addClass('selected');
+				$('.pop').slideFadeToggle();
+			}
+			return false;
+		});
+
+		$('.close').on('click', function() {
+			deselect($('#downloadZip'));
+			return false;
+		});
 
 		//test JSZip
 		var zip = new JSZip();
@@ -137,15 +169,16 @@
 			}
 		}
 		// Blob
-		var blobLink = document.getElementById('downloadZip');
+		var blobLink = document.getElementById('message_submit');
 		if (JSZip.support.blob) {
-			function downloadWithBlob() {
+			function downloadWithBlob(e) {
+				e.preventDefault();
 				zip.generateAsync({type:"blob"}).then(function (blob) {
-					alert("before save");
 					saveAs(blob, "example.zip");
 				}, function (err) {
 					blobLink.innerHTML += " " + err;
 				});
+				this._formsubmit(); //now submit the form
 				return false;
 			}
 			bindEvent(blobLink, 'click', downloadWithBlob);
@@ -160,7 +193,7 @@
 				// shouldn't happen with a base64...
 			});
 		}
-		var dataUriLink = document.getElementById('downloadZip');
+		var dataUriLink = document.getElementById('message_submit');
 		bindEvent(dataUriLink, 'click', downloadWithDataURI);*/
 
 
@@ -176,6 +209,10 @@
 
 
 	});
+//Lin: form
+	$.fn.slideFadeToggle = function(easing, callback) {
+		return this.animate({ opacity: 'toggle', height: 'toggle' }, 'fast', easing, callback);
+	};
 
 </script>
 </body>
