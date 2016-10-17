@@ -464,15 +464,8 @@
 			var _this = this;
 			//Lin: fix the shifting problem when base image is moved before cropping
 			var baseimage = _this._canvas.item(0);
-			console.log("baseimage left: "+ baseimage.left);
-			console.log("baseimage top: "+ baseimage.top);
-			console.log("crop left: "+ crop.left);
-			console.log("crop top: "+ crop.top);
-			console.log("scale: "+ _this._scale);
 			var sx =  crop.left - baseimage.left / _this._scale;
 			var sy = crop.top - baseimage.top / _this._scale;
-			console.log("sx: "+  sx);
-			console.log("sy: "+  sy);
 			this.set_loading(1).delay(200).promise().done(function() {
 				var canvas = document.createElement('canvas');
 				var ctx = canvas.getContext("2d");

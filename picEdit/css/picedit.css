@@ -118,7 +118,7 @@
     top: 0;
     left: 410px;
     width: 100px;
-    padding: 0 1% 1.5% 1%;
+    /*padding: 0 1% 1.5% 1%;*/
     z-index: 15;
     /*opacity: 0;*/
 	
@@ -157,9 +157,10 @@
 	background: linear-gradient(to bottom,  rgba(0, 0, 0, 1) 0%,rgba(0, 0, 0, 0.4) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 );
 }
-.picedit_pos_elements {}
+/*.picedit_pos_elements {}*/
 .picedit_nav_elements {
     position: relative;
+    margin: 0;
     /*width: 100%;*/
     text-align: left;
     padding: 0.3em 0;
@@ -182,6 +183,7 @@ a, a:visited, a:hover, a:active {
 .picedit_element > .picedit_control {
     display: block;
     height: 100%;
+    /*width: 100%;*/
     padding: 0.2em;
 	font-size: 2em;
 	position:  relative;
@@ -199,8 +201,12 @@ a, a:visited, a:hover, a:active {
 }
 .picedit_element > .picedit_control.ico-picedit-arrow-maximise {
 }
+.picedit_element:hover .picedit_control_menu{
+    display: block;
+}
 .picedit_control_menu {
-    display: inline-block;
+    /*display: block;*/
+    display: none;
     position: relative;
     top: 0.3em;
     right: 1%;
@@ -219,12 +225,14 @@ a, a:visited, a:hover, a:active {
 	-o-transition: all 200ms ease-out;
 	transition: all 200ms ease-out;
 }
-.picedit_control_menu label {
+.picedit_control_menu li {
     /*display: inline-block;*/
     display: block;
-    margin: 0 0.5em;
+    position: relative;
+    top: 0;
+    /*margin: 0 0.5em;*/
 }
-.picedit_control_menu label > span {
+.picedit_control_menu li > span {
 }
 /*.picedit_element:hover .picedit_control_menu, */.picedit_element.active .picedit_control_menu {
     opacity: 1;
@@ -234,7 +242,7 @@ a, a:visited, a:hover, a:active {
 	-ms-transform: scaleY(1);
 	transform: scaleY(1);
 }
-.picedit_control_menu_container {
+/*.picedit_control_menu_container {
 }
 .picedit_tooltip {}
 .picedit_tooltip.picedit_elm_1:after, .picedit_tooltip.picedit_elm_1:before {
@@ -245,7 +253,7 @@ a, a:visited, a:hover, a:active {
 }
 .picedit_tooltip.picedit_elm_3:after, .picedit_tooltip.picedit_elm_3:before {
     left: 12%;
-}
+}*/
 .picedit_tooltip {
 	position: relative;
 	background: #ffffff;
