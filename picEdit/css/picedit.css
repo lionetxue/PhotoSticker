@@ -213,7 +213,7 @@ a, a:visited, a:hover, a:active {
     z-index: 30;
     padding-top: 0.3em;
     width: auto;
-    opacity: 0;
+    /*opacity: 0;*/
 	-moz-transform: scaleY(0);
 	-webkit-transform: scaleY(0);
 	-o-transform: scaleY(0);
@@ -561,4 +561,51 @@ a, a:visited, a:hover, a:active {
 .picedit_sticker:hover img {
     -webkit-transform: scale(1.3);
     transform: scale(1.3);
+}
+/*Lin: Social Media share buttons*/
+.btnz {
+    display: block;
+    float: left;
+    padding: 10px 15px;
+    border:none;
+    background-color: #ececec;
+    text-decoration: none;
+    font-size: 18px;
+    color: #FFF;
+}
+.btnz:hover {
+    color: #efefef;
+}
+.facebook {
+    background-color: #3b5998;
+}
+.gplus {
+    background-color: #dd4b39;
+}
+.twitter {
+    background-color: #55acee;
+}
+.linkedin {
+    background-color: #0077b5;
+}
+.email {
+    background-color: #cc2127;
+}
+/*.socialfloat {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 200px;
+    z-index: 9999;
+}*/
+.socialfloat .fbtn {
+    width: 50px;
+    height: 50px;
+    display: block;
+    color: #fff;
+    text-align: center;
+}
+.socialfloat .fbtn i {
+    font-size: 30px;
+    line-height: 50px;
 }

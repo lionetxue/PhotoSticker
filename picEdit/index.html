@@ -53,25 +53,39 @@
 	<!-- Picedit navigation -->
 	<div class="picedit_nav_box">
 		<!--<div class="picedit_pos_elements"></div>-->
-		<ul class="picedit_nav_elements">
+		<div class="picedit_nav_elements">
 			<!-- Picedit button element begin -->
 			<li class="picedit_element"><span class="picedit_control picedit_action fa fa-crop" title="Crop" data-action="crop_open"><b> Crop</b></span> </li>
 			<!-- Picedit button element end -->
 			<!-- Picedit button element begin -->
-			<li class="picedit_element"> <span class="picedit_control picedit_action fa fa-repeat" title="Rotate"><b> Rotate</b></span>
-					<ul class="picedit_control_menu picedit_tooltip">
-					<!--<div class="picedit_control_menu_container picedit_tooltip picedit_elm_1">-->
-						<li> <span>90&deg; CW</span> <span class="picedit_control fa fa-repeat" data-action="rotate_cw"></span> </li>
-						<li> <span>90&deg; CCW</span> <span class="picedit_control fa fa-undo" data-action="rotate_ccw"></span> </li>
-					<!--</div>-->
-					</ul>
+			<li class="picedit_element"> <span class="picedit_control picedit_action fa fa-repeat" title="Rotate" data-action="rotate_cw"><b> Rotate</b></span>
+<!--					<ul class="picedit_control_menu picedit_tooltip">
+					&lt;!&ndash;<div class="picedit_control_menu_container picedit_tooltip picedit_elm_1">&ndash;&gt;
+						<li> <span>90&deg; CW</span> <span class="picedit_control picedit_action fa fa-repeat" data-action="rotate_cw"></span> </li>
+						<li> <span>90&deg; CCW</span> <span class="picedit_control picedit_action fa fa-undo" data-action="rotate_ccw"></span> </li>
+					&lt;!&ndash;</div>&ndash;&gt;
+					</ul>-->
 			</li>
 			<!-- Picedit button element end -->
 			<!-- Picedit button element begin -->
-			<li class="picedit_element"><a id="downloadImg" class="picedit_control fa fa-download" title="Download" onclick="$('#downloadImg').attr('href', canvas.toDataURL());" download="Cornell_Profile.png" href="#" target="_blank"><b> Download</b></a> </li>
+			<li class="picedit_element"><a id="downloadImg" class="picedit_control picedit_action fa fa-download" title="Download" onclick="$('#downloadImg').attr('href', canvas.toDataURL());" download="Cornell_Profile.png" href="#" target="_blank"><b> Download</b></a> </li>
 			<!-- Picedit button element end -->
 			<!-- Picedit button element begin -->
-			<li class="picedit_element"><span class="picedit_control picedit_action fa fa-share-square-o" title="Share" data-action="share_image"><b> Share</b></span> </li>
+			<li class="picedit_element"><span class="picedit_control fa fa-share-square-o" title="Share"><b> Share</b></span>
+				<!-- Floating Share Buttons Container -->
+				<div class="picedit_control_menu socialfloat">
+					<!-- Facebook Share Button -->
+					<a class="fbtn share facebook" href="http://www.facebook.com/sharer/sharer.php?u=http://alumni.cornell.edu/"><i class="fa fa-facebook"></i></a>
+					<!-- Google Plus Share Button -->
+					<a class="fbtn share gplus" href="#"><i class="fa fa-google-plus"></i></a>
+					<!-- Twitter Share Button -->
+					<a class="fbtn share twitter" href="#"><i class="fa fa-twitter"></i></a>
+					<!-- LinkedIn Share Button -->
+					<a class="fbtn share linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+					<!-- Email Share Button -->
+					<a class="fbtn share email" href="#"><i class="fa fa-envelope"></i></a>
+				</div>
+		    </li>
 			<!-- Picedit button element end -->
 			<!-- Picedit button element begin -->
 			<!--<div class="picedit_element"> <span class="picedit_control ico-picedit-arrow-maximise" title="Resize"></span>
@@ -100,22 +114,17 @@
 		// Document is ready
 		$('#thebox').picEdit();
 
-/*		//Functions rely on fabric.js
-		$('.picedit_sticker').click(function(e){
-			var canvas = new fabric.Canvas('canvas');
+		//Social Media share popup window
+		$('.share').click(function() {
+			var NWin = window.open($(this).prop('href'), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+			if (window.focus)
+			{
+				NWin.focus();
+			}
+			return false;
+		});
 
-			var imgElement = document.getElementById(e.target.id);
-			var imgInstance = new fabric.Image(imgElement, {
-				left: 0,
-				top: 300,
-				lockUniScaling: true
-			});
-			canvas.add(imgInstance);
-			/!*		fabric.Image.fromURL('img/sticker_1.png' , function(oImg) {
-			 //oImg.scale(scaleX);
-			 canvas.add(oImg).renderAll();
-			 });*!/
-		})*/
+
 	});
 
 </script>

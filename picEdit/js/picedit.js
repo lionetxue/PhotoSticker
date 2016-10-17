@@ -255,6 +255,24 @@
 					// _this._canvas.setOverlayImage(imgInstance);
 					_this._canvas.insertAt(_this._sticker,1, false);
 				});
+                //Limit the movement of object within canvas
+                this._canvas.on('object:moving', function (e) {
+                     var obj = e.target;
+                    // Ignore if object is sticker
+                     if (_this._canvas.getObjects().indexOf(obj) === 0) {
+                         obj.setCoords();
+                         // top-left  corner
+                         if(obj.getBoundingRect().top > 0 || obj.getBoundingRect().left > 0){
+                             obj.top = Math.min(obj.top, obj.top-obj.getBoundingRect().top);
+                             obj.left = Math.min(obj.left, obj.left-obj.getBoundingRect().left);
+                         }
+                         // bot-right corner
+                         if(obj.getBoundingRect().top+obj.getBoundingRect().height  < obj.canvas.height || obj.getBoundingRect().left+obj.getBoundingRect().width  < obj.canvas.width){
+                             obj.top = Math.max(obj.top, obj.canvas.height-obj.getBoundingRect().height+obj.top-obj.getBoundingRect().top);
+                             obj.left = Math.max(obj.left, obj.canvas.width-obj.getBoundingRect().width+obj.left-obj.getBoundingRect().left);
+                         }
+                     }
+                });
 		},
         // Check Browser Capabilities (determine if the picedit should run, or leave the default file-input field)
         check_browser_capabilities: function () {
