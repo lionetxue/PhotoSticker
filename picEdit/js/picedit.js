@@ -234,9 +234,22 @@
 						_this._sticker = new fabric.Image(imgElement, {
 							left: 0,
 							top: 300,
-							lockUniScaling: true
+							lockUniScaling: true,
+							hasControls: false,
+							hasBorders: false
 						});
 					}
+/*					_this._sticker.setControlsVisibility({
+						mt: false,
+						mb: false,
+						ml: false,
+						mr: false,
+						bl: false,
+						br: false,
+						tl: false,
+						tr: false,
+						mtr: false
+					});*/
 					//
 					//setOverlayImage makes sure sticker adds as overlay, no change or move the sticker
 					// _this._canvas.setOverlayImage(imgInstance);
@@ -480,6 +493,7 @@
 				 var rectangle = new fabric.Rect({
 				 visible: false,
 				 width: crop.width,
+				 width: crop.width,
 				 height: crop.height,
 				 top: crop.top,
 				 left: crop.left
@@ -654,11 +668,14 @@
 				oImg.scale(scale);
 				// lock aspect ratio
 				oImg.lockUniScaling = true;
+				oImg.hasControls = false;
+				oImg.hasBorders = false;
+				if (scaleX < scaleY) {oImg.lockMovementY = true;}
+				else {oImg.lockMovementX = true;}
 				// oImg.centerRotation = true;
 /*				oImg.originX ='center';
 				oImg.originY = 'center';*/
-				// _this._canvas.add(oImg).renderAll();
-				_this._canvas.insertAt(oImg, 0, true).renderAll();
+				_this._canvas.insertAt(oImg, 0, true).deactivateAll().renderAll();
 			});
 			//
 			$(this.element).find(".picedit_canvas").css("display", "block");
