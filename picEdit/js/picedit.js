@@ -95,6 +95,9 @@
 				// this._canvas = $(this.element).find(".picedit_canvas > canvas")[0];
 				////Lin
 			    this._canvas = new fabric.Canvas('canvas');
+			    //// Lin: store the reference to the fabric object on the Canvas element itself
+			    // so that we can call it outside of the plugin
+			     document.getElementById("canvas").fabric = this._canvas;
 			    //stop the bringtofront on selected objects
 			    this._canvas. preserveObjectStacking = true;
 				// Create and set the 2d context for the canvas
