@@ -379,7 +379,7 @@ a, a:visited, a:hover, a:active {
 	transition: bottom 200ms ease-out;
 }
 .picedit_message.active {
-	bottom: 200px;
+	bottom: 300px;
 }
 .picedit_message > span {
     position: absolute;

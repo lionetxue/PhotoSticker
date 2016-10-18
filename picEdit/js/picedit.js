@@ -493,6 +493,7 @@
 		},
 		// Crop the image
 		crop_image: function() {
+			//prevent mousedown events to shift the drag_resize_box
 			var crop = this._calculateCropWindow();
 			var _this = this;
 			//Lin: fix the shifting problem when base image is moved before cropping
