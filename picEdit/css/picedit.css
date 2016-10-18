@@ -101,7 +101,7 @@
 	font-family: "Myriad Pro", Arial, Helvetica, sans-serif;
 	font-size: 1rem;
     width: 600px;
-    height: 600px;
+    height: 700px;
     /*color: #aaa;*/
     overflow: hidden;
 }
@@ -442,6 +442,7 @@ a, a:visited, a:hover, a:active {
     position: absolute;
     bottom: 0;
     left: 0;
+    z-index: 40;
 }
 .picedit_colors span {
     width: 1.2em;
