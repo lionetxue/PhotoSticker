@@ -194,13 +194,13 @@
 					if (exSticker) {
 						canvas1.remove(exSticker);
 					}
-					// change the total number of sticker here
-					var stickercount = 2;
-					for (var i=1; i<=stickercount; i++) {
+					// Get all img elements
+					var stickers = document.getElementsByTagName('img');
+					for (var i=0; i<stickers.length; i++) {
+						var stickerID = stickers[i].id;
 						if (sticker) {
 							canvas1.remove(sticker);
 						}
-						var stickerID = "sticker_" + i;
 						var imgElement = document.getElementById(stickerID);
 						var sticker = new fabric.Image(imgElement, {
 							left: 0,
