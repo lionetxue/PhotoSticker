@@ -175,16 +175,35 @@
 				//Don't submit form yet
 				e.preventDefault();
 				var zip = new JSZip();
-//				var canvas1 = document.getElementById('canvas');
 				var canvas1 = document.getElementById('canvas').fabric;
-				var sticker = canvas1.item(1);
-				if (sticker) {
-					canvas1.remove(sticker);
+				//Remove existing sticker if any
+				var exSticker = canvas1.item(1);
+				if (exSticker) {
+					canvas1.remove(exSticker);
 				}
-				var savable = new Image();
-				savable.src = canvas1.toDataURL();
-				var imageData = savable.src.substr(savable.src.indexOf(',')+1);
-				zip.file("profile.png", imageData, {base64: true});
+				// change the total number of sticker here
+				var stickercount = 2;
+				for (var i=1; i<=stickercount; i++) {
+					if (sticker) {
+						canvas1.remove(sticker);
+					}
+					var stickerID = "sticker_" + i;
+					var imgElement = document.getElementById(stickerID);
+					var sticker = new fabric.Image(imgElement, {
+						left: 0,
+						top: 300,
+						lockUniScaling: true,
+						hasControls: false,
+						hasBorders: false
+					});
+					//Add new sticker to canvas
+					canvas1.insertAt(sticker,1, false);
+					var savable = new Image();
+					savable.src = canvas1.toDataURL();
+					var imageData = savable.src.substr(savable.src.indexOf(',')+1);
+					zip.file("profile_"+ i +".png", imageData, {base64: true});
+				}
+
 				zip.generateAsync({type:"blob"}).then(function (blob) {
 					saveAs(blob, "example.zip");
 				}, function (err) {
