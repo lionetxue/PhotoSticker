@@ -16,9 +16,10 @@
 			<div class="close cross"><i class="fa fa-times" aria-hidden="true"></i></div>
 			<p>Enter your email to unlock the secrete sticker and download your profile photos with all stickers in one zipfile!</p>
 			<p>We are committed to keeping your e-mail address confidential. We collect user emails to improve user experience for Cornell alumni site.</p>
-			<p><label for="email">Your email</label><input type="text" size="30" name="email" id="email" /></p>
+			<p><label for="email">Your email</label><input type="text" size="30" name="email" id="email" placeholder="me@example.com"/></p>
 			<p><input class="submitBtn" type="submit" value="Get My ZipFile" id="message_submit"/> or <a class="close" href="/"> Cancel</a></p>
 		</form>
+		<h4 id="result"></h4>
 	</div>
 	<!-- Picedit canvas element -->
 	<div class="picedit_canvas_box">
@@ -128,8 +129,14 @@
 	function deselect(e) {
 		$('.pop').slideFadeToggle(function() {
 			e.removeClass('selected');
+			$("#result").text('');
 		});
 	}
+	function validateEmail(email) {
+		var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		return re.test(email);
+	}
+
 	$(function() {
 		// Document is ready
 		$('#thebox').picEdit();
@@ -147,6 +154,7 @@
 
 		$('.close').on('click', function() {
 			deselect($('#downloadZip'));
+			$("#result").text('');
 			return false;
 		});
 
@@ -168,47 +176,56 @@
 				el.attachEvent('on'+eventName, eventHandler);
 			}
 		}
+
 		// Blob
 		var blobLink = document.getElementById('message_submit');
 		if (JSZip.support.blob) {
 			function downloadWithBlob(e) {
 				//Don't submit form yet
 				e.preventDefault();
-				var zip = new JSZip();
-				var canvas1 = document.getElementById('canvas').fabric;
-				//Remove existing sticker if any
-				var exSticker = canvas1.item(1);
-				if (exSticker) {
-					canvas1.remove(exSticker);
-				}
-				// change the total number of sticker here
-				var stickercount = 2;
-				for (var i=1; i<=stickercount; i++) {
-					if (sticker) {
-						canvas1.remove(sticker);
+				//validate email first
+				var email = $("#email").val();
+				if (validateEmail(email)) {
+					//prepare zipfile
+					var zip = new JSZip();
+					var canvas1 = document.getElementById('canvas').fabric;
+					//Remove existing sticker if any
+					var exSticker = canvas1.item(1);
+					if (exSticker) {
+						canvas1.remove(exSticker);
 					}
-					var stickerID = "sticker_" + i;
-					var imgElement = document.getElementById(stickerID);
-					var sticker = new fabric.Image(imgElement, {
-						left: 0,
-						top: 300,
-						lockUniScaling: true,
-						hasControls: false,
-						hasBorders: false
-					});
-					//Add new sticker to canvas
-					canvas1.insertAt(sticker,1, false);
-					var savable = new Image();
-					savable.src = canvas1.toDataURL();
-					var imageData = savable.src.substr(savable.src.indexOf(',')+1);
-					zip.file("profile_"+ i +".png", imageData, {base64: true});
-				}
+					// change the total number of sticker here
+					var stickercount = 2;
+					for (var i=1; i<=stickercount; i++) {
+						if (sticker) {
+							canvas1.remove(sticker);
+						}
+						var stickerID = "sticker_" + i;
+						var imgElement = document.getElementById(stickerID);
+						var sticker = new fabric.Image(imgElement, {
+							left: 0,
+							top: 300,
+							lockUniScaling: true,
+							hasControls: false,
+							hasBorders: false
+						});
+						//Add new sticker to canvas
+						canvas1.insertAt(sticker,1, false);
+						var savable = new Image();
+						savable.src = canvas1.toDataURL();
+						var imageData = savable.src.substr(savable.src.indexOf(',')+1);
+						zip.file("profile_"+ i +".png", imageData, {base64: true});
+					}
 
-				zip.generateAsync({type:"blob"}).then(function (blob) {
-					saveAs(blob, "example.zip");
-				}, function (err) {
-					blobLink.innerHTML += " " + err;
-				});
+					zip.generateAsync({type:"blob"}).then(function (blob) {
+						saveAs(blob, "example.zip");
+					}, function (err) {
+						blobLink.innerHTML += " " + err;
+					});
+				}
+				else {
+					$("#result").text("You must enter a valid email address!").css("color", "red");
+				}
 				this._formsubmit(); //now submit the form
 				return false;
 			}
