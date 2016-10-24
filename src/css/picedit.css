@@ -546,8 +546,8 @@ a, a:visited, a:hover, a:active {
 }
 /*Lin: sticker image hover effects*/
 .picedit_sticker{
-    height: 100px;
-    width: 100px;
+    height: 80px;
+    width: 80px;
     padding: 0.3em;
     background-color: lightgray;
     border: 2px solid;

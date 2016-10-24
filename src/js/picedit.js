@@ -235,7 +235,7 @@
 					// If not, create a new sticker object
 					else{
 						_this._sticker = new fabric.Image(imgElement, {
-							left: 0,
+							left: 20,
 							top: 300,
 							lockUniScaling: true,
 							hasControls: false,
