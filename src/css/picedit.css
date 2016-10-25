@@ -97,11 +97,13 @@
     display: inline-block;
     position: relative;
     left: 0;
-    /*border: 5px solid #ddd;*/
+    border: 5px solid #ddd;
+    background: #d8d2c9;
 	font-family: "Myriad Pro", Arial, Helvetica, sans-serif;
 	font-size: 1rem;
-    width: 600px;
-    height: 700px;
+    width: 510px;
+    height: 580px;
+    padding:10px;
     /*color: #aaa;*/
     overflow: hidden;
 }
@@ -116,7 +118,7 @@
 .picedit_nav_box {
     position: absolute;
     top: 0;
-    left: 410px;
+    left: 420px;
     width: 100px;
     /*padding: 0 1% 1.5% 1%;*/
     z-index: 15;
@@ -189,9 +191,9 @@ a, a:visited, a:hover, a:active {
 	position:  relative;
 	z-index: 40;
     /*Lin*/
-    background-color: lightgray;
-    border: 2px solid;
-    border-radius: 10px;
+    background-color: white;
+    /*border: 2px solid;*/
+    /*border-radius: 10px;*/
 }
 /*Lin: make text smaller than icon*/
 .picedit_element > .picedit_control > b{
@@ -292,8 +294,9 @@ a, a:visited, a:hover, a:active {
 .picedit_canvas_box {
     width: 400px;
     height: 400px;
-    border: 5px solid #ddd;
     display: block;
+    border: 5px solid #b31b1b;
+    box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,1);
 	text-align: center;
 	position: relative;
     /*Lin: hide image outside of canvas area*/
@@ -379,7 +382,7 @@ a, a:visited, a:hover, a:active {
 	transition: bottom 200ms ease-out;
 }
 .picedit_message.active {
-	bottom: 300px;
+	bottom: 200px;
 }
 .picedit_message > span {
     position: absolute;
@@ -549,9 +552,20 @@ a, a:visited, a:hover, a:active {
     height: 80px;
     width: 80px;
     padding: 0.3em;
-    background-color: lightgray;
-    border: 2px solid;
+    margin-right:5px;
+    background-color: white;
+    /*border: 2px solid;*/
     border-radius: 10px;
+}
+.hidden_sticker{
+    height: 80px;
+    width: 80px;
+    padding: 0.3em;
+    margin-right:5px;
+    background-color: white;
+    /*border: 2px solid;*/
+    border-radius: 10px;
+    cursor: default;
 }
 .picedit_sticker img {
     -webkit-transform: scale(1);
@@ -592,13 +606,13 @@ a, a:visited, a:hover, a:active {
 .email {
     background-color: #cc2127;
 }
-/*.socialfloat {
+.socialfloat {
     display: block;
     position: absolute;
-    left: 0;
+    right: 0;
     top: 200px;
     z-index: 9999;
-}*/
+}
 .socialfloat .fbtn {
     width: 50px;
     height: 50px;
@@ -623,7 +637,7 @@ a, a:visited, a:hover, a:active {
     width:300px;
     z-index:50;
     padding: 25px 25px 20px;
-    box-shadow: 10px 10px 5px #888888;
+    box-shadow: 5px 5px 5px #888888;
 }
 
 label {

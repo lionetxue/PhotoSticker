@@ -53,13 +53,15 @@
 	</div>
 	<!--Stickers-->
 	<div id="stickers">
-		<h2>My Cornell Profile Stickers</h2>
+		<div style="width:410px; text-align: center; background-color:#b31b1b;">
+			<h2 style="margin:0; color:white;">My Cornell Profile</h2>
+		</div>
 		<p>Click on a sticker to place it on your profile picture.</p>
 		<span class="picedit_control picedit_sticker" title="Sticker" ><img  id="sticker_1" src="img/sticker_1.png" width="80" height="80"/></span>
 		<span class="picedit_control picedit_sticker" title="Sticker" ><img  id="sticker_2" src="img/sticker_2.png" width="80" height="80"/></span>
 		<span class="picedit_control picedit_sticker" title="Sticker" ><img  id="sticker_3" src="img/sticker_3.png" width="80" height="80"/></span>
 		<span class="picedit_control picedit_sticker" title="Sticker" ><img  id="sticker_4" src="img/sticker_4.png" width="80" height="80"/></span>
-		<span class="picedit_control picedit_sticker" title="Sticker" ><img  id="sticker_5" src="img/sticker_5.png" width="80" height="80"/></span>
+		<span class="picedit_control hidden_sticker" title="Hidden Sticker" ><img  id="sticker_5" src="img/sticker_5.png" width="80" height="80"/></span>
 	</div>
 	<!--Picedit message-->
 	<div class="picedit_message">
@@ -188,12 +190,18 @@
 			function downloadWithBlob(e) {
 				//Don't submit form yet
 				e.preventDefault();
-				//validate email first
 				var email = $("#email").val();
-				if (validateEmail(email)) {
+				var canvas1 = document.getElementById('canvas').fabric;
+				var baseImg = canvas1.item(0);
+				//check if base image exist
+				if(!baseImg) {
+					$("#result").text('Please take a selfie or upload a photo first!').css("color", "red");
+				}
+				//validate email first
+				else if (validateEmail(email)) {
+					$("#result").text('');
 					//prepare zipfile
 					var zip = new JSZip();
-					var canvas1 = document.getElementById('canvas').fabric;
 					//Remove existing sticker if any
 					var exSticker = canvas1.item(1);
 					if (exSticker) {
@@ -231,7 +239,7 @@
 				else {
 					$("#result").text("You must enter a valid email address!").css("color", "red");
 				}
-				this._formsubmit(); //now submit the form
+//				this.submit(); //now submit the form
 				return false;
 			}
 			bindEvent(blobLink, 'click', downloadWithBlob);
