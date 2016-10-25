@@ -53,15 +53,7 @@
         this._filename = "";
         // Interface variables (data synced from the user interface)
         this._variables = {};
-
-        /* Prepare the template */
-        /*unhide_in_prod*/
-		//this._template();
-        /*unhide_in_prod*/
-
-        /*hide_in_prod*/
         this.init();
-		/*hide_in_prod*/
     }
 
 	Plugin.prototype = {
@@ -82,19 +74,7 @@
                     $(this.element).after('<input type="file" style="display:none" accept="image/*">');
 				    this._fileinput = $(this.element).next("input");
                 }
-                /*// Show regular file upload on old browsers
-                if(!this.check_browser_capabilities()) {
-                    if(type != "file") {
-                        $(this.inputelement).prop("type", "file");
-                        $(this._fileinput).remove();
-                    }
-                    $(this.inputelement).show();
-                    $(this.element).remove();
-                    return;
-                }*/
 				// Get reference to the main canvas element
-				// this._canvas = $(this.element).find(".picedit_canvas > canvas")[0];
-				////Lin
 			    this._canvas = new fabric.Canvas('canvas');
 			    //// Lin: store the reference to the fabric object on the Canvas element itself
 			    // so that we can call it outside of the plugin
@@ -107,11 +87,6 @@
 				this._videobox = $(this.element).find(".picedit_video");
 			    //Lin: keep a global reference to the opened stream
 			    this._videostream;
-				/*// Reference to the painter element
-				this._painter = $(this.element).find(".picedit_painter");
-				this._painter_canvas = this._painter.children("canvas")[0];
-				this._painter_ctx = this._painter_canvas.getContext("2d");
-				this._painter_painting = false;*/
 				// Save the reference to the messaging box
 		 		this._messagebox = $(this.element).find(".picedit_message");
 		 		this._messagetimeout = false;
@@ -219,9 +194,6 @@
 				this._bindControlButtons();
 				this._bindInputVariables();
 				this._bindSelectionDrag();
-				// Set Default interface variable values
-				// this._variables.pen_color = "black";
-				// this._variables.pen_size = false;
 				this._variables.prev_pos = false;
                 // Load default image if one is set
                 if(this.options.defaultImage) _this.set_default_image(this.options.defaultImage);
@@ -244,18 +216,6 @@
 							hasBorders: false
 						});
 					}
-/*					_this._sticker.setControlsVisibility({
-						mt: false,
-						mb: false,
-						ml: false,
-						mr: false,
-						bl: false,
-						br: false,
-						tl: false,
-						tr: false,
-						mtr: false
-					});*/
-					//
 					//setOverlayImage makes sure sticker adds as overlay, no change or move the sticker
 					// _this._canvas.setOverlayImage(imgInstance);
 					_this._canvas.insertAt(_this._sticker,1, false);
@@ -333,37 +293,11 @@
 				if(optional_value && value) value = optional_value;
 				this._setVariable(variable, value);
 			}
-			// if(this._variables.pen_color && this._variables.pen_size) this.pen_tool_open();
-			// else this.pen_tool_close();
 		},
 		// Perform image load when user clicks on image button
 		load_image: function () {
 			this._fileinput.click();
-			// //Lin: reset the top and left of draggable element to 0,0
-			// $(".picedit_canvas").css("left", 0);
-			// $(".picedit_canvas").css("top", 0);
 		},
-		// // Open pen tool and start drawing
-		// pen_tool_open: function () {
-		// 	if(!this._image) return this._hideAllNav(1);
-		// 	this.pen_tool_params_set();
-		// 	this._painter.addClass("active");
-		// 	this._hideAllNav();
-		// },
-		// // Set pen tool parameters
-		// pen_tool_params_set: function () {
-		// 	this._painter_canvas.width = 0;
-		// 	this._painter_canvas.width = this._canvas.width;
-		// 	this._painter_canvas.height = this._canvas.height;
-		// 	this._painter_ctx.lineJoin = "round";
-		// 	this._painter_ctx.lineCap = "round";
-		// 	this._painter_ctx.strokeStyle = this._variables.pen_color;
-      	// 	this._painter_ctx.lineWidth = this._variables.pen_size;
-		// },
-		// // Close pen tool
-		// pen_tool_close: function () {
-		// 	this._painter.removeClass("active");
-		// },
 		// Rotate the image 90 degrees counter-clockwise
 		rotate_ccw: function () {
 			if(!this._image) return this._hideAllNav(1);
@@ -384,39 +318,9 @@
 			var _this = this;
             // Lin:
             _this._doRotation(90);
-/*			//run task and show loading spinner, the task can take some time to run
-			this.set_loading(1).delay(200).promise().done(function() {
-				_this._doRotation(90);
-				_this._resizeViewport();
-				//hide loading spinner
-				_this.hide_messagebox();
-			});*/
 			//hide all opened navigation
 			this._hideAllNav();
 		},
-		/*// Resize the image
-		resize_image: function () {
-			if(!this._image) return this._hideAllNav(1);
-			var _this = this;
-			this.set_loading(1).delay(200).promise().done(function() {
-				//perform resize begin
-				var canvas = document.createElement('canvas');
-				var ctx = canvas.getContext("2d");
-				canvas.width = _this._variables.resize_width;
-				canvas.height = _this._variables.resize_height;
-				ctx.drawImage(_this._image, 0, 0, canvas.width, canvas.height);
-				//Lin
-				// var hRatio = canvas.width / this._image.width;
-				// var vRatio = canvas.height / this._image.height;
-				// var ratio = Math.min(hRatio, vRatio);
-				// ctx.drawImage(_this._image, 0,0, img.width, img.height, 0,0,img.width*ratio, img.height*ratio);
-				//Lin
-				_this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
-					_this.hide_messagebox();
-				});
-			});
-			this._hideAllNav();
-		},*/
 		// Open video element and start capturing live video from camera to later make a photo
 		camera_open: function() {
 			var getUserMedia;
@@ -450,37 +354,11 @@
 					return _this.set_messagebox("No video source detected! Please allow camera access!");
 				}
 			);
-			// //Lin: reset the top and left of draggable element to 0,0
-			// $(".picedit_canvas").css("left", 0);
-			// $(".picedit_canvas").css("top", 0);
 		},
 		camera_close: function() {
 			this._videobox.removeClass("active");
 			//Lin: close the web camera
 			this._videostream.getVideoTracks()[0].stop();
-			/*this._videostream.getVideoTracks().forEach(function(track) {
-				track.stop();
-			});*/
-			/*var track = this._videostream.getVideoTracks()[0];  // if only one media track
-			track.stop();*/
-			/*			var MediaStream = window.MediaStream;
-
-                        if (typeof MediaStream === 'undefined' && typeof webkitMediaStream !== 'undefined') {
-                            MediaStream = webkitMediaStream;
-                        }
-
-                        /!*global MediaStream:true *!/
-                        if (typeof MediaStream !== 'undefined' && !('stop' in MediaStream.prototype)) {
-                            MediaStream.prototype.stop = function() {
-                                this.getAudioTracks().forEach(function(track) {
-                                    track.stop();
-                                });
-
-                                this.getVideoTracks().forEach(function(track) {
-                                    track.stop();
-                                });
-                            };
-                        }*/
 		},
 		take_photo: function() {
 			var _this = this;
@@ -514,27 +392,6 @@
 				_this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
 					_this.hide_messagebox();
 				});
-/*                ////Lin:
-				 var baseimage = _this._canvas.item(0);
-				 var rectangle = new fabric.Rect({
-				 visible: false,
-				 width: crop.width,
-				 width: crop.width,
-				 height: crop.height,
-				 top: crop.top,
-				 left: crop.left
-				 });
-				 _this._canvas.add(rectangle);
-				 baseimage.clipTo = function (ctx) {
-				 // origin is the center of the image
-				 var x = rectangle.left - baseimage.getWidth() ;
-				 var y = rectangle.top - baseimage.getHeight() ;
-				 ctx.rect(x, y, rectangle.width, rectangle.height);
-				 _this.hide_messagebox();
-				 };
-				 baseimage.selectable = true;
-				 rectangle.visible = false;
-				 _this._canvas.renderAll();*/
 			});
 			this.crop_close();
 		},
@@ -574,7 +431,6 @@
 		_bindSelectionDrag: function() {
 			var _this = this;
 			var eventbox = this._cropping.cropframe;
-			var painter = this._painter;
 			var resizer = this._cropping.cropbox.find(".picedit_drag_resize_box_corner_wrap");
 			$(window).on("mousedown touchstart", function(e) {
 				var evtpos = (e.clientX) ? e : e.originalEvent.touches[0];
@@ -594,23 +450,16 @@
 					_this._cropping.is_resizing = true;
 					_this._selection_resize_movement(event);
 				});
-				/*painter.on("mousemove touchmove", function(event) {
-					event.stopPropagation();
-        			event.preventDefault();
-					_this._painter_painting = true;
-					_this._painter_movement(event);
-				});*/
 			}).on("mouseup touchend", function() {
 				if (_this._painter_painting) {
 					_this._painter_merge_drawing();
 				}
 				_this._cropping.is_dragging = false;
 				_this._cropping.is_resizing = false;
-				_this._painter_painting = false;
+				// _this._painter_painting = false;
 				_this._variables.prev_pos = false;
 				eventbox.off("mousemove touchmove");
 				resizer.off("mousemove touchmove");
-				/*painter.off("mousemove touchmove");*/
 			});
 		},
 		_selection_resize_movement: function(e) {
@@ -629,44 +478,6 @@
 				left: evtpos.pageX - parseInt(cropframe.clientWidth / 2, 10)
 			});
 		},
-		_painter_movement: function(e) {
-			var pos = {};
-			var target = e.target || e.srcElement,
-			rect = target.getBoundingClientRect(),
-			evtpos = (e.clientX) ? e : e.originalEvent.touches[0];
-			pos.x = evtpos.clientX - rect.left;
-			pos.y = evtpos.clientY - rect.top;
-			if(!this._variables.prev_pos) {
-				return this._variables.prev_pos = pos;
-			}
-			this._painter_ctx.beginPath();
-    		this._painter_ctx.moveTo(this._variables.prev_pos.x, this._variables.prev_pos.y);
-    		this._painter_ctx.lineTo(pos.x, pos.y);
-    		this._painter_ctx.stroke();
-			this._variables.prev_pos = pos;
-		},
-		_painter_merge_drawing: function() {
-			var canvas = document.createElement('canvas');
-			var ctx = canvas.getContext("2d");
-			var _this = this;
-			canvas.width = this._image.width;
-			canvas.height = this._image.height;
-			ctx.drawImage(this._image, 0, 0, canvas.width, canvas.height);
-			ctx.drawImage(this._painter_canvas, 0, 0, canvas.width, canvas.height);
-			if(canvas.width > 1280 && canvas.height > 800) {
-				this.set_loading().delay(200).promise().done(function() {
-					_this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
-						_this.pen_tool_params_set();
-						_this.hide_messagebox();
-					});
-				});
-			}
-			else {
-				this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
-					_this.pen_tool_params_set();
-				});
-			}
-		},
 		// Hide all opened navigation and active buttons (clear plugin's box elements)
 		_hideAllNav: function (message) {
 			if(message && message == 1) {
@@ -676,12 +487,6 @@
 		},
 		// Paint image on canvas
 		_paintCanvas: function () {
-/*          this._canvas.width = this._viewport.width;
-    		this._canvas.height = this._viewport.height;
-			this._ctx.drawImage(this._image, 0, 0, this._viewport.width, this._viewport.height);*/
-/*			//Lin: crop and scale image down to canvas size
-			var image_side = Math.min(this._image.width, this._image.height);
-			this._ctx.drawImage(this._image, 0, 0, image_side, image_side, 0, 0, this._canvas.width, this._canvas.height);*/
 			////Lin: add image with datasrc
 			var _this = this;
 			var scaleX = this._canvas.width / this._image.width ;
@@ -698,9 +503,6 @@
 				oImg.hasBorders = false;
 				if (scaleX < scaleY) {oImg.lockMovementY = true;}
 				else {oImg.lockMovementX = true;}
-				// oImg.centerRotation = true;
-/*				oImg.originX ='center';
-				oImg.originY = 'center';*/
 				_this._canvas.insertAt(oImg, 0, true).deactivateAll().renderAll();
 			});
 			//
@@ -738,42 +540,14 @@
 		},
 		// Helper function to perform canvas rotation
 		_doRotation: function (degrees){
-/*			var rads=degrees*Math.PI/180;
-			//if rotation is 90 or 180 degrees try to adjust proportions
-			var newWidth, newHeight;
-			var c = Math.cos(rads);
-			var s = Math.sin(rads);
-			if (s < 0) { s = -s; }
-			if (c < 0) { c = -c; }
-			newWidth = this._image.height * s + this._image.width * c;
-			newHeight = this._image.height * c + this._image.width * s;
-			//create temporary canvas and context
-			var canvas = document.createElement('canvas');
-			var ctx = canvas.getContext("2d");
-			canvas.width = parseInt(newWidth, 10);
-			canvas.height = parseInt(newHeight, 10);
-			// calculate the centerpoint of the canvas
-			var cx=canvas.width/2;
-			var cy=canvas.height/2;
-			// draw the rect in the center of the newly sized canvas
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			ctx.translate(cx, cy);
-			ctx.rotate(rads);
-			ctx.drawImage(this._image, -this._image.width / 2, -this._image.height / 2);
-			this._image.src = canvas.toDataURL("image/png");
-			this._paintCanvas();
- 			this.options.imageUpdated(this._image);*/
             ////Lin: rotate around the center of canvas
 			var baseimage = this._canvas.item(0);
 			var curAngle = baseimage.getAngle();
 			var rotatethispoint = new fabric.Point(this._canvas.width / 2, this._canvas.height / 2); // center of canvas
-			//console.log("rotatepoint:" + rotatethispoint.x + ' ' + rotatethispoint.y);
 			// var rads= degrees*Math.PI/180;
 			var rads = fabric.util.degreesToRadians(degrees);
 			var objectOrigin = new fabric.Point(baseimage.left, baseimage.top);
-			//console.log("objectOrigin: " + baseimage.left + ' ' + baseimage.top);
 			var new_loc = fabric.util.rotatePoint(objectOrigin, rotatethispoint, rads);
-			//console.log("new loc: "+ new_loc.x + ' ' + new_loc.y);
 			baseimage.setAngle(curAngle + degrees);
 			baseimage.top = new_loc.y;
 			baseimage.left = new_loc.x;
@@ -810,12 +584,6 @@
 					}
 				}
 			}
-			// Lin: don't resize the canvas
-			// //set the viewport size (resize the canvas)
-			// $(this.element).css({
-			// 	"width": viewport.width,
-			// 	"height": viewport.height
-			// });
 			//set the global viewport
 			this._viewport = viewport;
 			//update interface data (original image width and height)
@@ -862,67 +630,7 @@
 		_setVariable: function(variable, value) {
 			this._variables[variable] = value;
 			$(this.element).find('[data-variable="' + variable + '"]').val(value);
-		}/*,
-		// form submitted
-		_formsubmit: function() {
-			if(!window.FormData) this.set_messagebox("Sorry, the FormData API is not supported!");
-			else {
-				var _this = this;
-				this.set_loading().delay(200).promise().done(function() {
-					_this._theformdata = new FormData(_this._theform[0]);
-					if(_this._image) {
-						var inputname = $(_this.inputelement).prop("name") || "file";
-						var inputblob = _this._dataURItoBlob(_this._image.src);
-						if(!_this._filename) _this._filename = inputblob.type.replace("/", ".");
-						else _this._filename = _this._filename.match(/^[^\.]*!/) + "." + inputblob.type.match(/[^\/]*$/);
-						_this._theformdata.append(inputname, inputblob, _this._filename);
-					}
-					//send request
-					var request = new XMLHttpRequest();
-                    request.onprogress = function(e) {
-                        if(e.lengthComputable) var total = e.total;
-                        else var total = Math.ceil(inputblob.size * 1.3);
-                        var progress = Math.ceil(((e.loaded)/total)*100);
-                        if (progress > 100) progress = 100;
-                        _this.set_messagebox("Please Wait... Uploading... " + progress + "% Uploaded.", false, false);
-                    };
-					request.open(_this._theform.prop("method"), _this._theform.prop("action"), true);
-					request.onload = function(e) {
-						if(this.status != 200) {
-                            _this.set_messagebox("Server did not accept data!");
-                        }
-                        else {
-                            if(_this.options.redirectUrl === true) window.location.reload();
-						    else if(_this.options.redirectUrl) window.location = _this.options.redirectUrl;
-						    else _this.set_messagebox("Data successfully submitted!");
-                        }
-						_this.options.formSubmitted(this);
-					};
-					request.send(_this._theformdata);
-				});
-			}
-			return false;
-		},
-		_dataURItoBlob: function(dataURI) {
-			if(!dataURI) return null;
-			else var mime = dataURI.match(/^data\:(.+?)\;/);
-			var byteString = atob(dataURI.split(',')[1]);
-			var ab = new ArrayBuffer(byteString.length);
-			var ia = new Uint8Array(ab);
-			for (var i = 0; i < byteString.length; i++) {
-				ia[i] = byteString.charCodeAt(i);
-			}
-			return new Blob([ab], {type: mime[1]});
-		}*//*,
-		// Prepare the template here
-		_template: function() {
-			var template = '<div class="picedit_box"> <div class="picedit_message"> <span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span> <div><\/div><\/div><div class="picedit_nav_box"> <div class="picedit_pos_elements"><\/div><div class="picedit_nav_elements"><div class="picedit_element"><span class="picedit_control picedit_action ico-picedit-insertpicture" title="Crop" data-action="crop_open"><b> Crop</b></span> <\/div><div class="picedit_element"> <span class="picedit_control picedit_action ico-picedit-redo" title="Rotate"><b> Rotate</b></span> <div class="picedit_control_menu"> <div class="picedit_control_menu_container picedit_tooltip picedit_elm_1"> <label> <span>90° CW</span> <span class="picedit_control picedit_action ico-picedit-redo" data-action="rotate_cw"></span> </label> <label> <span>90° CCW</span> <span class="picedit_control picedit_action ico-picedit-undo" data-action="rotate_ccw"></span> </label> <\/div><\/div><\/div> </div></div><div class="picedit_canvas_box"><div class="picedit_painter"><canvas></canvas></div><div class="picedit_canvas"><canvas></canvas></div><div class="picedit_action_btns active"> <div class="center">Take a selfie or upload a photo by dragging/browsing</div><div class="picedit_control ico-picedit-picture" data-action="load_image"><\/div><div class="picedit_control ico-picedit-camera" data-action="camera_open"><\/div></div></div><div class="picedit_video"> <video autoplay></video><div class="picedit_video_controls"><span class="picedit_control picedit_action ico-picedit-checkmark" data-action="take_photo"></span><span class="picedit_control picedit_action ico-picedit-close" data-action="camera_close"></span><\/div><\/div><div class="picedit_drag_resize"> <div class="picedit_drag_resize_canvas"></div><div class="picedit_drag_resize_box"><div class="picedit_drag_resize_box_corner_wrap"> <div class="picedit_drag_resize_box_corner"></div></div><div class="picedit_drag_resize_box_elements"><span class="picedit_control picedit_action ico-picedit-checkmark" data-action="crop_image"></span><span class="picedit_control picedit_action ico-picedit-close" data-action="crop_close"></span><\/div><\/div></div></div>';
-			var _this = this;
-			$(this.inputelement).hide().after(template).each(function() {
-				_this.element = $(_this.inputelement).next(".picedit_box");
-				_this.init();
-			});
-		}*/
+		}
 	};
 
     // You don't need to change something below:
