@@ -19,7 +19,18 @@ function validateEmail(email) {
     var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return re.test(email);
 }
+function bindEvent(el, eventName, eventHandler) {
+	if (el.addEventListener){
+		// standard way
+		el.addEventListener(eventName, eventHandler, false);
+	} else if (el.attachEvent){
+		// old IE
+		el.attachEvent('on'+eventName, eventHandler);
+	}
+}
 
+
+// main()
 $(function() {
     // Document is ready
     $('#thebox').picEdit();
@@ -40,25 +51,6 @@ $(function() {
         $("#result").text('');
         return false;
     });
-
-    /* 		//test JSZip
-     var zip = new JSZip();
-     // create a file
-     zip.file("Hello.txt", "Hello World\n");
-     // create a folder
-     var img = zip.folder("images");
-     var imgData = "R0lGODdhBQAFAIACAAAAAP/eACwAAAAABQAFAAACCIwPkWerClIBADs=";
-     img.file("smile.gif", imgData, {base64: true});*/
-
-    function bindEvent(el, eventName, eventHandler) {
-        if (el.addEventListener){
-            // standard way
-            el.addEventListener(eventName, eventHandler, false);
-        } else if (el.attachEvent){
-            // old IE
-            el.attachEvent('on'+eventName, eventHandler);
-        }
-    }
 
     // Blob
     var blobLink = document.getElementById('message_submit');
@@ -107,31 +99,22 @@ $(function() {
                 }
 
                 zip.generateAsync({type:"blob"}).then(function (blob) {
-                    saveAs(blob, "example.zip");
+                    saveAs(blob, "CUprofile.zip");
                 }, function (err) {
                     blobLink.innerHTML += " " + err;
                 });
+				//now submit the form
+				$("#email_form").submit(); 
             }
             else {
                 $("#result").text("You must enter a valid email address!").css("color", "red");
             }
-//				this.submit(); //now submit the form
             return false;
         }
         bindEvent(blobLink, 'click', downloadWithBlob);
     } else {
         blobLink.innerHTML += " (not supported on this browser)";
     }
-    /*		// data URI
-     function downloadWithDataURI() {
-     zip.generateAsync({type:"base64"}).then(function (base64) {
-     window.location = "data:application/zip;base64," + base64;
-     }, function (err) {
-     // shouldn't happen with a base64...
-     });
-     }
-     var dataUriLink = document.getElementById('message_submit');
-     bindEvent(dataUriLink, 'click', downloadWithDataURI);*/
 
     //Social Media share popup window
     $('.share').click(function() {
