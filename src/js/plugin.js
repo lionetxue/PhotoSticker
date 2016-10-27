@@ -210,7 +210,9 @@
 					else{
 						_this._sticker = new fabric.Image(imgElement, {
 							left: 20,
-							top: 300,
+							top: 270,
+                            scaleX: 1.5,
+                            scaleY: 1.5,
 							lockUniScaling: true,
 							hasControls: false,
 							hasBorders: false

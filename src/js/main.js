@@ -33,6 +33,7 @@ function bindEvent(el, eventName, eventHandler) {
 // main()
 $(function() {
     // Document is ready
+    // Start the plugin
     $('#thebox').picEdit();
 
     //popup form to collect user email
