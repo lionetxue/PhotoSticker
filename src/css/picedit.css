@@ -607,10 +607,10 @@ a, a:visited, a:hover, a:active {
     background-color: #cc2127;
 }
 .socialfloat {
-    display: block;
+    display: none;
     position: absolute;
     right: 0;
-    top: 200px;
+    bottom: 0;
     z-index: 9999;
 }
 .socialfloat .fbtn {

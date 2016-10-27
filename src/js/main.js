@@ -116,6 +116,14 @@ $(function() {
         blobLink.innerHTML += " (not supported on this browser)";
     }
 
+    //Display socialfloat menu when hover over Share button
+    $('#socialshare').click(function(){
+        $('.socialfloat').css('display', 'block');
+        setTimeout(function(){
+            $('.socialfloat').css('display', 'none');
+        }, 7000);
+    });
+
     //Social Media share popup window
     $('.share').click(function() {
         var NWin = window.open($(this).prop('href'), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');

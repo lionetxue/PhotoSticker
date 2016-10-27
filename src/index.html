@@ -2,7 +2,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Photo Edit App</title>
+<!--meta tags for facebook share	-->
+<meta property="og:image" content="http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/img/Photo_App_share.png" />
+<meta property="og:description" content = "Want to create a unique profile picture with Cornell University icon stickers? Click on the link below to try our web application." />
+<meta property="og:url" content="http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/" />
+<meta property="og:title" content="Create your Cornell Profile" />
+<title>Cornell Profile Generator</title>
 
 <link rel="stylesheet" type="text/css" href="css/picedit.css" />
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
@@ -49,6 +54,19 @@
 				</div>
 			</div>
 		</div>
+        <!-- Floating Share Buttons Container -->
+        <div class="socialfloat">
+            <!-- Facebook Share Button -->
+            <a class="fbtn share facebook" target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/"><i class="fa fa-facebook"></i></a>
+            <!-- Google Plus Share Button -->
+            <a class="fbtn share gplus" target="_blank" href="https://plus.google.com/share?url=http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/"><i class="fa fa-google-plus"></i></a>
+            <!-- Twitter Share Button -->
+            <a class="fbtn share twitter" target="_blank" href="https://twitter.com/intent/tweet?text=Cornell%20Profile%20Generator&url=http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/&via=CornellAlumni"><i class="fa fa-twitter"></i></a>
+            <!-- LinkedIn Share Button -->
+            <a class="fbtn share linkedin" target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&url=http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/&title=Cornell%20Profile%20Generator&source=http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/"><i class="fa fa-linkedin"></i></a>
+            <!-- Email Share Button -->
+            <a class="fbtn share email" target="_blank" href="mailto:?subject=Cornell%20Profile%20Generator&amp;body=Use%20this%20site%20to%20create%20your%20Cornell%20profile%20pictures%20 http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/"><i class="fa fa-envelope"></i></a>
+        </div>
 	</div>
 	<!--Stickers-->
 	<div id="stickers">
@@ -91,20 +109,7 @@
 			<li class="picedit_element"><span id="downloadZip" class="picedit_control picedit_action fa fa-file-archive-o" title="Download ZipFile"><b> ZipFile</b></span> </li>
 			<!-- Picedit button element end -->
 			<!-- Picedit button element begin -->
-			<li class="picedit_element"><span class="picedit_control fa fa-share-square-o" title="Share"><b> Share</b></span>
-				<!-- Floating Share Buttons Container -->
-				<div class="picedit_control_menu socialfloat">
-					<!-- Facebook Share Button -->
-					<a class="fbtn share facebook" href="http://www.facebook.com/sharer/sharer.php?u=http://alumni.cornell.edu/"><i class="fa fa-facebook"></i></a>
-					<!-- Google Plus Share Button -->
-					<a class="fbtn share gplus" href="#"><i class="fa fa-google-plus"></i></a>
-					<!-- Twitter Share Button -->
-					<a class="fbtn share twitter" href="#"><i class="fa fa-twitter"></i></a>
-					<!-- LinkedIn Share Button -->
-					<a class="fbtn share linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-					<!-- Email Share Button -->
-					<a class="fbtn share email" href="#"><i class="fa fa-envelope"></i></a>
-				</div>
+			<li class="picedit_element" id="socialshare"><span class="picedit_control fa fa-share-square-o" title="Share"><b> Share</b></span>
 		    </li>
 			<!-- Picedit button element end -->
 		</ul>
