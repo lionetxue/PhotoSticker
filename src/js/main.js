@@ -36,6 +36,9 @@ $(function() {
     // Start the plugin
     $('#thebox').picEdit();
 
+    // prevent click event on hidden_sticker at first
+    document.getElementById('hidden_sticker').style.pointerEvents = 'none';
+
     //popup form to collect user email
     $('#downloadZip').on('click', function() {
         if($(this).hasClass('selected')) {
@@ -70,9 +73,11 @@ $(function() {
             else if (validateEmail(email)) {
                 //Clear error msg
                 $("#result").text('');
-                //change the hidden sticker's css class to regular sticker
+                //change the hidden sticker's css class to regular sticker  //re-bind click event to hidden sticker
                 $("#hidden_sticker").removeClass("hidden_sticker").addClass("picedit_sticker");
                 $("#sticker_lock").hide();
+                // To re-enable click event
+                document.getElementById('hidden_sticker').style.pointerEvents = 'auto';
                 //prepare zipfile
                 var zip = new JSZip();
                 //Remove existing sticker if any
@@ -84,13 +89,15 @@ $(function() {
                 var stickers = document.getElementsByTagName('img');
                 for (var i=0; i<stickers.length; i++) {
                     var stickerID = stickers[i].id;
-                    if (sticker) {
+                    /*if (sticker) {
                         canvas1.remove(sticker);
-                    }
+                    }*/
                     var imgElement = document.getElementById(stickerID);
                     var sticker = new fabric.Image(imgElement, {
                         left: 20,
-                        top: 300,
+                        top: 270,
+                        scaleX: 1.5,
+                        scaleY: 1.5,
                         lockUniScaling: true,
                         hasControls: false,
                         hasBorders: false
@@ -101,6 +108,7 @@ $(function() {
                     savable.src = canvas1.toDataURL();
                     var imageData = savable.src.substr(savable.src.indexOf(',')+1);
                     zip.file("profile_"+ i +".png", imageData, {base64: true});
+                    canvas1.remove(sticker);
                 }
 
                 zip.generateAsync({type:"blob"}).then(function (blob) {
@@ -108,6 +116,7 @@ $(function() {
                 }, function (err) {
                     blobLink.innerHTML += " " + err;
                 });
+
 				//now submit the form
 				$("#email_form").submit(); 
             }

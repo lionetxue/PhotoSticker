@@ -198,7 +198,7 @@
                 // Load default image if one is set
                 if(this.options.defaultImage) _this.set_default_image(this.options.defaultImage);
 			    //Lin: bind onclick event to sticker buttons
-			    $(this.element).find('.picedit_sticker').on("click", function(e) {
+			    $(this.element).find('.sticker').click(function(e) {
 					if(!_this._image) return _this._hideAllNav(1);
 					var imgElement = document.getElementById(e.target.id);
 					//// Lin: check to see if a sticker exists.  Only allow one sticker at a time.
