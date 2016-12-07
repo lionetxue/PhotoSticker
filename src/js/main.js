@@ -68,7 +68,13 @@ $(function() {
             }
             //validate email first
             else if (validateEmail(email)) {
+                //Clear error msg
                 $("#result").text('');
+                //change opacity of the hidden sticker
+                $(".hidden_sticker").css({opacity: 1, cursor: 'pointer'});
+                $("#sticker_lock").hide();
+                //Unhide downloadZip button
+                // $(".downloadZip").show();
                 //prepare zipfile
                 var zip = new JSZip();
                 //Remove existing sticker if any

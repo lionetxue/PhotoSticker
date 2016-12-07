@@ -102,7 +102,7 @@
 	font-family: "Myriad Pro", Arial, Helvetica, sans-serif;
 	font-size: 1rem;
     width: 510px;
-    height: 580px;
+    height: 680px;
     padding:10px;
     /*color: #aaa;*/
     overflow: hidden;
@@ -146,7 +146,7 @@
 	transition: all 200ms ease-in-out;
 }
 .picedit_control:hover, .picedit_element.active > .picedit_control, .picedit_control.active {
-	opacity: 1;
+	/*opacity: 1;*/
 	text-shadow: 0px 0.3px 0px rgba(255, 255, 255, 0.8), 0 0 0 rgba(107, 107, 107, 0.62), 0px 0.3px 0px #FFF;
 	color: transparent;
 }
@@ -174,7 +174,6 @@
     padding: 0.3em;
     /*margin: 0.2em;*/
     display: block;
-
 }
 /*Lin: in Nav, make a look like span*/
 a, a:visited, a:hover, a:active {
@@ -186,12 +185,13 @@ a, a:visited, a:hover, a:active {
     display: block;
     height: 100%;
     /*width: 100%;*/
-    padding: 0.2em;
-	font-size: 2em;
+    padding: 0.4em;
+	font-size: 1.8em;
+    text-align: center;
 	position:  relative;
 	z-index: 40;
     /*Lin*/
-    background-color: white;
+    /*background-color: white;*/
     /*border: 2px solid;*/
     /*border-radius: 10px;*/
 }
@@ -295,7 +295,7 @@ a, a:visited, a:hover, a:active {
     width: 400px;
     height: 400px;
     display: block;
-    border: 5px solid #b31b1b;
+    /*border: 5px solid #b31b1b;*/
     box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,1);
 	text-align: center;
 	position: relative;
@@ -560,8 +560,12 @@ a, a:visited, a:hover, a:active {
 }
 .hidden_sticker{
     cursor: default;
+    opacity: 0.3;
 }
-.picedit_sticker img {
+/*.picedit_sticker:hover {
+    box-shadow: 5px 5px 2px #757575;
+}*/
+/*.picedit_sticker img {
     -webkit-transform: scale(1);
     transform: scale(1);
     -webkit-transition: .3s ease-in-out;
@@ -570,7 +574,7 @@ a, a:visited, a:hover, a:active {
 .picedit_sticker:hover img {
     -webkit-transform: scale(1.3);
     transform: scale(1.3);
-}
+}*/
 /*Lin: Social Media share buttons*/
 .btnz {
     display: block;
@@ -653,8 +657,23 @@ label {
     cursor: pointer;
 }
 .submitBtn{
-    background-color: #0074d9;
+    background-color: #b31b1b;
     color: #FFFFFF;
-    padding: 10px;
+    padding: 5px 10px;
     cursor: pointer;
+    font-family: FontAwesome;
+    border-radius: 5px;
+    border-bottom: 3px solid #721212;
+    transition(all 100ms ease-in-out);
+}
+.submitBtn:hover {
+    background-color: #8F1616;
+}
+.submitBtn:active{
+    transform: translate(0px,2px);
+    -webkit-transform: translate(0px,2px);
+    border-bottom: 1px solid #721212;
+}
+.downloadZip{
+    display: none;
 }
