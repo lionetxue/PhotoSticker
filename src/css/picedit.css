@@ -382,7 +382,7 @@ a, a:visited, a:hover, a:active {
 	transition: bottom 200ms ease-out;
 }
 .picedit_message.active {
-	bottom: 200px;
+	bottom: 300px;
 }
 .picedit_message > span {
     position: absolute;
@@ -562,9 +562,9 @@ a, a:visited, a:hover, a:active {
     cursor: default;
     opacity: 0.3;
 }
-/*.picedit_sticker:hover {
+.picedit_sticker:hover {
     box-shadow: 5px 5px 2px #757575;
-}*/
+}
 /*.picedit_sticker img {
     -webkit-transform: scale(1);
     transform: scale(1);

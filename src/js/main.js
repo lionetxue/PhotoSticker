@@ -70,11 +70,9 @@ $(function() {
             else if (validateEmail(email)) {
                 //Clear error msg
                 $("#result").text('');
-                //change opacity of the hidden sticker
-                $(".hidden_sticker").css({opacity: 1, cursor: 'pointer'});
+                //change the hidden sticker's css class to regular sticker
+                $("#hidden_sticker").removeClass("hidden_sticker").addClass("picedit_sticker");
                 $("#sticker_lock").hide();
-                //Unhide downloadZip button
-                // $(".downloadZip").show();
                 //prepare zipfile
                 var zip = new JSZip();
                 //Remove existing sticker if any

@@ -377,7 +377,7 @@
 			});
 		},
 		// Crop the image
-		crop_image: function() {
+		crop_image: function(e) {
 			//prevent mousedown events to shift the drag_resize_box
 			var crop = this._calculateCropWindow();
 			var _this = this;
@@ -429,7 +429,7 @@
 				if(callback && typeof(callback) == "function") callback();
 			};
 		},
-		// Functions to controll cropping functionality (drag & resize cropping box)
+		// Functions to control cropping functionality (drag & resize cropping box)
 		_bindSelectionDrag: function() {
 			var _this = this;
 			var eventbox = this._cropping.cropframe;
