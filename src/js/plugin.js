@@ -405,6 +405,14 @@
 		crop_close: function () {
 			this._cropping.cropbox.removeClass("active");
 		},
+		// Lin: Discard base image and re-active picedit_action_btns
+		discard_image: function() {
+			//Clear canvas
+			this._ctx.clearRect(0, 0, canvas.width, canvas.height);
+			this._image = false;
+			//Re-active buttons for new upload
+			$(".picedit_action_btns").addClass("active");
+		},
 		// Create and update image from datasrc
 		_create_image_with_datasrc: function(datasrc, callback, file, dataurl) {
 			var _this = this;
