@@ -21,6 +21,12 @@
 <p>You have downloaded a zip file that contains your profile photos with different stickers. 
 <br/>
 Please check your Download folder and share your awesome profile images on social media! </p>
+
+<a href="javascript:history.go(-1)">return 
+  to previos page</a> 
+
 </cfoutput>
+<!---Return to previous page, but cannot set delay--->
+<!---<cflocation URL="#cgi.http_referer#" addtoken="no">  --->
 </body>
 </html>

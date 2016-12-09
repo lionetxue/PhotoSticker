@@ -13,6 +13,16 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 </head>
 <body>
+<!--- Insert the new record ---> 
+<cfif IsDefined("Form.email")>
+    <cfquery name="AddEmail" datasource="#request.dsn#">
+    INSERT INTO PHOTOSTICKER (email, submit_dt)
+    VALUES (
+        <cfqueryparam cfsqltype="cf_sql_varchar" value="#Form.email#">,
+        #createodbcdatetime(now())#
+        ) 
+    </cfquery> 
+</cfif>
 <div id="thebox" class="picedit_box">
 	<!-- Picedit popup form -->
 <!--	<div class="messagepop pop">
@@ -79,10 +89,14 @@
 		<span class="picedit_control sticker picedit_sticker" title="Sticker" ><img  id="sticker_3" src="img/sticker_3.png" width="100%"/></span>
 		<span class="picedit_control sticker picedit_sticker" title="Sticker" ><img  id="sticker_4" src="img/sticker_4.png" width="100%"/></span>
 		<span class="picedit_control sticker hidden_sticker" id="hidden_sticker" title="Hidden Sticker" ><img  id="sticker_5" src="img/sticker_5.png" width="100%"/></span>
-		<form method="post" id="email_form" action="addEmail.cfm" onsubmit="document.location.href='index.html'">
-			<input type=hidden name="redirect" value="http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/">
+		<form method="post" id="email_form" action="index.cfm" onSubmit="index.cfm">
+        <cfif IsDefined("Form.email")>
+            <h2>Thank you for downloading CUprofile.zip</h2> 
+            <p>Please check your Download folder and share your awesome profile images on social media! </p>
+		<cfelse>
 			<p><label for="email">Enter your email address to unlock the fifth sticker!</label><input style="padding: 5px;" type="text" size="30" name="email" id="email" placeholder="me@example.com"/>
 				<input class="submitBtn" type="submit" value="&#xf09c Unlock and Download Zip" id="message_submit"/></p>
+        </cfif>
 			<p></p>
 			<p style="font-size:0.75em;">Your email address is safe with us.  Do you want to know more?  <a style="color:#b31b1b;" href="#">Read our privacy policy</a></p>
 		</form>
