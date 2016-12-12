@@ -8,13 +8,13 @@
  *  Author: Lin Xue
  *  License: MIT
  */
-// Popup Email Form
+/*// Popup Email Form
 function deselect(e) {
     $('.pop').slideFadeToggle(function() {
         e.removeClass('selected');
         $("#result").text('');
     });
-}
+}*/
 function validateEmail(email) {
     var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return re.test(email);
@@ -35,11 +35,9 @@ $(function() {
     // Document is ready
     // Start the plugin
     $('#thebox').picEdit();
-
     // prevent click event on hidden_sticker at first
-    document.getElementById('hidden_sticker').style.pointerEvents = 'none';
-
-    //popup form to collect user email
+    // document.getElementById('hidden_sticker').style.pointerEvents = 'none';
+/*    //popup form to collect user email
     $('#downloadZip').on('click', function() {
         if($(this).hasClass('selected')) {
             deselect($(this));
@@ -54,7 +52,7 @@ $(function() {
         deselect($('#downloadZip'));
         $("#result").text('');
         return false;
-    });
+    });*/
 
     // Blob
     var blobLink = document.getElementById('message_submit');
@@ -73,11 +71,11 @@ $(function() {
             else if (validateEmail(email)) {
                 //Clear error msg
                 $("#result").text('');
-                //change the hidden sticker's css class to regular sticker  //re-bind click event to hidden sticker
+                /*//change the hidden sticker's css class to regular sticker  //re-bind click event to hidden sticker
                 $("#hidden_sticker").removeClass("hidden_sticker").addClass("picedit_sticker");
                 $("#sticker_lock").hide();
                 // To re-enable click event
-                document.getElementById('hidden_sticker').style.pointerEvents = 'auto';
+                document.getElementById('hidden_sticker').style.pointerEvents = 'auto';*/
                 //prepare zipfile
                 var zip = new JSZip();
                 //Remove existing sticker if any
@@ -110,7 +108,6 @@ $(function() {
                     zip.file("profile_"+ i +".png", imageData, {base64: true});
                     canvas1.remove(sticker);
                 }
-
                 zip.generateAsync({type:"blob"}).then(function (blob) {
                     saveAs(blob, "CUprofile.zip");
                 }, function (err) {

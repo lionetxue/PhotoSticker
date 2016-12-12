@@ -88,8 +88,12 @@
 		<span class="picedit_control sticker picedit_sticker" title="Sticker" ><img  id="sticker_2" src="img/sticker_2.png" width="100%" /></span>
 		<span class="picedit_control sticker picedit_sticker" title="Sticker" ><img  id="sticker_3" src="img/sticker_3.png" width="100%"/></span>
 		<span class="picedit_control sticker picedit_sticker" title="Sticker" ><img  id="sticker_4" src="img/sticker_4.png" width="100%"/></span>
+    <cfif IsDefined("Form.email")>
+        <span class="picedit_control sticker picedit_sticker" id="hidden_sticker" title="Hidden Sticker" ><img  id="sticker_5" src="img/sticker_5.png" width="100%"/></span>
+    <cfelse>
 		<span class="picedit_control sticker hidden_sticker" id="hidden_sticker" title="Hidden Sticker" ><img  id="sticker_5" src="img/sticker_5.png" width="100%"/></span>
-		<form method="post" id="email_form" action="index.cfm" onSubmit="index.cfm">
+    </cfif>
+		<form method="post" id="email_form" action="index.cfm">
         <cfif IsDefined("Form.email")>
             <h2>Thank you for downloading CUprofile.zip</h2> 
             <p>Please check your Download folder and share your awesome profile images on social media! </p>
@@ -101,7 +105,10 @@
 			<p style="font-size:0.75em;">Your email address is safe with us.  Do you want to know more?  <a style="color:#b31b1b;" href="#">Read our privacy policy</a></p>
 		</form>
 		<h4 id="result" style="margin:0;"></h4>
+        <cfif IsDefined("Form.email")>
+        <cfelse>
 		<i id="sticker_lock" style="position: absolute; bottom:220px; right:40px; opacity: 0.5;" class="fa fa-lock fa-2x"></i>
+        </cfif>
 	</div>
 	<!--Picedit message-->
 	<div class="picedit_message">

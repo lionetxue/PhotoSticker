@@ -565,6 +565,7 @@ a, a:visited, a:hover, a:active {
 .hidden_sticker{
     cursor: default;
     opacity: 0.3;
+    pointer-events: none;  /*Make hidden_sticker not clickable*/
 }
 .picedit_sticker:hover {
     box-shadow: 5px 5px 2px #757575;
