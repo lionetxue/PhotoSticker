@@ -84,31 +84,30 @@
 			<h2 style="margin:8px; text-align: left;">Choose a sticker!</h2>
 		</div>
 <!--		<p style="margin:8px;">Click on a sticker to place it on your profile picture.</p>-->
-		<span class="picedit_control sticker picedit_sticker" title="Sticker" ><img  id="sticker_1" src="img/sticker_1.png" width="100%"/></span>
-		<span class="picedit_control sticker picedit_sticker" title="Sticker" ><img  id="sticker_2" src="img/sticker_2.png" width="100%" /></span>
-		<span class="picedit_control sticker picedit_sticker" title="Sticker" ><img  id="sticker_3" src="img/sticker_3.png" width="100%"/></span>
-		<span class="picedit_control sticker picedit_sticker" title="Sticker" ><img  id="sticker_4" src="img/sticker_4.png" width="100%"/></span>
-    <cfif IsDefined("Form.email") and isValid("email", #Form.email#)>
+    <span class="picedit_control sticker picedit_sticker" title="Sticker" ><img  id="sticker_1" src="img/I-Voted-CBear.png" width="100%"/></span>
+    <span class="picedit_control sticker picedit_sticker" title="Sticker" ><img  id="sticker_2" src="img/I-Voted-CUseal.png" width="100%" /></span>
+    <span class="picedit_control sticker picedit_sticker" title="Sticker" ><img  id="sticker_3" src="img/I-Voted-FullBear.png" width="100%"/></span>
+<!---    <cfif IsDefined("Form.email") and isValid("email", #Form.email#)>
         <span class="picedit_control sticker picedit_sticker" id="hidden_sticker" title="Hidden Sticker" ><img  id="sticker_5" src="img/sticker_5.png" width="100%"/></span>
     <cfelse>
 		<span class="picedit_control sticker hidden_sticker" id="hidden_sticker" title="Hidden Sticker" ><img  id="sticker_5" src="img/sticker_5.png" width="100%"/></span>
-    </cfif>
+    </cfif>--->
 		<form method="post" id="email_form" action="index.cfm">
-        <cfif IsDefined("Form.email") and isValid("email", #Form.email#)>
+<!---        <cfif IsDefined("Form.email") and isValid("email", #Form.email#)>
             <h2>Thank you for downloading CUprofile.zip</h2> 
             <p>Please check your Download folder and share your awesome profile images on social media! </p>
 		<cfelse>
 			<p><label for="email">Enter your email address to unlock the fifth sticker!</label><input style="padding: 5px;" type="text" size="30" name="email" id="email" placeholder="me@example.com"/>
 				<input class="submitBtn" type="submit" value="&#xf09c Unlock and Download Zip" id="message_submit"/></p>
-        </cfif>
+        </cfif>--->
 			<p></p>
 			<p style="font-size:0.75em;">Your email address is safe with us.  Do you want to know more?  <a style="color:#b31b1b;" href="#">Read our privacy policy</a></p>
 		</form>
 		<h4 id="result" style="margin:0;"></h4>
-        <cfif IsDefined("Form.email") and isValid("email", #Form.email#)>
+<!---        <cfif IsDefined("Form.email") and isValid("email", #Form.email#)>
         <cfelse>
 		<i id="sticker_lock" style="position: absolute; bottom:220px; right:40px; opacity: 0.5;" class="fa fa-lock fa-2x"></i>
-        </cfif>
+        </cfif>--->
 	</div>
 	<!--Picedit message-->
 	<div class="picedit_message">
@@ -149,8 +148,8 @@
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/FileSaver.min.js"></script>
-<script type="text/javascript" src="js/jszip.min.js"></script>
+<!---<script type="text/javascript" src="js/FileSaver.min.js"></script>--->
+<!---<script type="text/javascript" src="js/jszip.min.js"></script>--->
 <script type="application/javascript" src="js/fabric.js"></script>
 <script type="text/javascript" src="js/plugin.min.js"></script>
 <script type="text/javascript" src="js/main.min.js"></script>

@@ -83,6 +83,8 @@
 			    this._canvas. preserveObjectStacking = true;
 				// Create and set the 2d context for the canvas
 				this._ctx = this._canvas.getContext("2d");
+			//setOverlayImage makes sure sticker adds as overlay, no change or move the sticker
+			this._canvas.setOverlayImage("http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/img/I-Voted-frame.png");
 				// Reference to video elemment holder element
 				this._videobox = $(this.element).find(".picedit_video");
 			    //Lin: keep a global reference to the opened stream
