@@ -101,7 +101,7 @@ $(function() {
     // prevent click event on hidden_sticker at first
     // document.getElementById('hidden_sticker').style.pointerEvents = 'none';
     // Blob
-    var blobLink = document.getElementById('message_submit');
+   /* var blobLink = document.getElementById('message_submit');
     if (JSZip.support.blob) {
         bindEvent(blobLink, 'click', downloadWithBlob);
     } else {	
@@ -125,7 +125,7 @@ $(function() {
         }
         return false;
     });
-
+*/
 
 });
 //Lin: form
