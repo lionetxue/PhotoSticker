@@ -414,8 +414,12 @@
 		},
 		// Lin: Discard base image and re-active picedit_action_btns
 		discard_image: function() {
-			//Clear canvas
-			this._ctx.clearRect(0, 0, canvas.width, canvas.height);
+			//Clear canvas (base image)
+			// this._ctx.clearRect(0, 0, canvas.width, canvas.height);
+			//Clear entire canvas (including base image, overlay and sticker)
+			this._canvas.clear();
+			//Add overlay back
+			this._canvas.setOverlayImage("http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/img/I-Voted-frame.png");
 			this._image = false;
 			//Re-active buttons for new upload
 			$(".picedit_action_btns").addClass("active");
