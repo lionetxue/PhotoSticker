@@ -84,7 +84,7 @@
 				// Create and set the 2d context for the canvas
 				this._ctx = this._canvas.getContext("2d");
 			//setOverlayImage makes sure sticker adds as overlay, no change or move the sticker
-			this._canvas.setOverlayImage("http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/img/I-Voted-frame.png");
+			this._canvas.setOverlayImage("img/I-Voted-frame.png");
 				// Reference to video elemment holder element
 				this._videobox = $(this.element).find(".picedit_video");
 			    //Lin: keep a global reference to the opened stream
@@ -419,10 +419,31 @@
 			//Clear entire canvas (including base image, overlay and sticker)
 			this._canvas.clear();
 			//Add overlay back
-			this._canvas.setOverlayImage("http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/img/I-Voted-frame.png");
+			this._canvas.setOverlayImage("img/I-Voted-frame.png");
 			this._image = false;
 			//Re-active buttons for new upload
 			$(".picedit_action_btns").addClass("active");
+		},
+     	download_image: function(){
+			var canvas = document.getElementById("canvas");
+			if (canvas.msToBlob) { //for IE
+                var blob = canvas.msToBlob();
+                window.navigator.msSaveBlob(blob, "Cornell_Profile.png");
+            } else {
+				var element = document.createElement('a');
+				  element.setAttribute('href', canvas.toDataURL("image/png"));
+				  element.setAttribute('download', "Cornell_Profile.png");
+				
+				  element.style.display = 'none';
+				  document.body.appendChild(element);
+				
+				  element.click();
+				
+				  document.body.removeChild(element);
+/*				canvas.toBlob(function(blob) {
+					saveAs(blob, "Cornell_Profile.png");
+				});		*/
+			}
 		},
 		// Create and update image from datasrc
 		_create_image_with_datasrc: function(datasrc, callback, file, dataurl) {
