@@ -28,8 +28,8 @@
             imageUpdated: function(img){},	// Image updated callback function
             formSubmitted: function(res){},	// After form was submitted callback function
             redirectUrl: false,				// Page url for redirect on form submit
-            maxWidth: 400,					// Max width parameter
-            maxHeight: 400,				// Max height parameter
+            maxWidth: 300,					// Max width parameter
+            maxHeight: 285,				// Max height parameter
             aspectRatio: true,				// Preserve aspect ratio
             defaultImage: false             // Default image to be used with the plugin
         };
