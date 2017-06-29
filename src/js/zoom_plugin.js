@@ -254,7 +254,6 @@
             });
             //Variables and functions for Fabric.js zoom on mousewheel event
             var this_canvas = this._canvas;
-            var MAX_ZOOM_IN = 5;
             var MAX_ZOOM_OUT = 1;
             this_canvas.renderAll();
             var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" ;
@@ -266,7 +265,7 @@
                     //canvas.setZoom(canvas.getZoom() * 1.1 );
                     this_canvas.zoomToPoint(new fabric.Point(this_canvas.width / 2, this_canvas.height / 2), this_canvas.getZoom() * 1.1);
                 }
-                else {
+                else if (this_canvas.getZoom()> MAX_ZOOM_OUT){
                     //canvas.setZoom(canvas.getZoom() / 1.1 );
                     this_canvas.zoomToPoint(new fabric.Point(this_canvas.width / 2, this_canvas.height / 2), this_canvas.getZoom() / 1.1);
                 }
