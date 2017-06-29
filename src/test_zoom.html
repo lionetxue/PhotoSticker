@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!--meta tags for facebook share	-->
+    <meta property="og:image" content="http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/img/Photo_App_share.png" />
+    <meta property="og:description" content = "Want to create a unique profile picture with Cornell University icon stickers? Click on the link below to try our web application." />
+    <meta property="og:url" content="http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/" />
+    <meta property="og:title" content="Create your Cornell Profile" />
+    <title>Cornell Profile Generator</title>
+
+    <link rel="stylesheet" type="text/css" href="css/test_collage_picedit.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+</head>
+<body>
+<h1>Upload images for banner collage</h1>
+<div id="_1" class="picedit_box">
+    <!-- Picedit canvas element -->
+    <div class="picedit_canvas_box">
+        <div id="canvas-container" class="picedit_canvas">
+            <canvas id="canvas_1" width="300px" height="285px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+        </div>
+        <div class="picedit_drag_resize">
+            <div class="picedit_drag_resize_canvas"></div>
+            <div class="picedit_drag_resize_box">
+                <div class="picedit_drag_resize_box_corner_wrap">
+                    <div class="picedit_drag_resize_box_corner"></div>
+                </div>
+                <div class="picedit_drag_resize_box_elements">
+                    <span class="picedit_control  ico-picedit-checkmark" data-action="crop_image"></span>
+                    <span class="picedit_control  ico-picedit-close" data-action="crop_close"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Picedit message-->
+    <div class="picedit_message">
+        <span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span>
+        <div></div>
+    </div>
+    <!-- Picedit navigation -->
+    <div class="picedit_nav_box">
+        <!--<div class="picedit_pos_elements"></div>-->
+        <ul class="picedit_nav_elements">
+            <!-- Picedit button element begin -->
+            <li class="picedit_element"> <span class="picedit_control" data-action="load_image"><i class="fa fa-picture-o fa-lg"></i><b> Upload</b></span></li>
+            <!-- Picedit button element end -->
+            <!-- Picedit button element begin -->
+            <li class="picedit_element"> <span class="picedit_control" title="Rotate" data-action="rotate_cw"><i class="fa fa-repeat fa-lg"></i><b> Rotate</b></span></li>
+            <!-- Picedit button element end -->
+            <!-- Picedit button element begin -->
+            <li class="picedit_element"><span class="picedit_control" title="Crop" data-action="crop_open"><i class="fa fa-crop fa-lg"></i><b> Crop</b></span> </li>
+            <!-- Picedit button element end -->
+            <!-- Picedit button element begin -->
+            <li class="picedit_element"><span class="picedit_control" title="Discard" data-action="discard_image"><i class="fa fa-trash fa-lg"></i><b>Discard</b></span></li>
+            <!-- Picedit button element end -->
+            <!-- Picedit button element begin -->
+            <!--			<li class="picedit_element downloadZip"><span id="downloadZip" class="picedit_control picedit_action" title="Download ZipFile"><i class="fa fa-file-archive-o fa-lg"></i><b>ZipFile</b></span> </li>-->
+            <!-- Picedit button element end -->
+        </ul>
+    </div>
+</div>
+<div id="_2" class="picedit_box">
+    <!-- Picedit canvas element -->
+    <div class="picedit_canvas_box">
+        <div id="canvas-container_2" class="picedit_canvas">
+            <canvas id="canvas_2" width="300px" height="285px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+        </div>
+        <div class="picedit_drag_resize">
+            <div class="picedit_drag_resize_canvas"></div>
+            <div class="picedit_drag_resize_box">
+                <div class="picedit_drag_resize_box_corner_wrap">
+                    <div class="picedit_drag_resize_box_corner"></div>
+                </div>
+                <div class="picedit_drag_resize_box_elements">
+                    <span class="picedit_control  ico-picedit-checkmark" data-action="crop_image"></span>
+                    <span class="picedit_control  ico-picedit-close" data-action="crop_close"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Picedit message-->
+    <div class="picedit_message">
+        <span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span>
+        <div></div>
+    </div>
+    <!-- Picedit navigation -->
+    <div class="picedit_nav_box">
+        <!--<div class="picedit_pos_elements"></div>-->
+        <ul class="picedit_nav_elements">
+            <!-- Picedit button element begin -->
+            <li class="picedit_element"> <span class="picedit_control" data-action="load_image"><i class="fa fa-picture-o fa-lg"></i><b> Upload</b></span></li>
+            <!-- Picedit button element end -->
+            <!-- Picedit button element begin -->
+            <li class="picedit_element"> <span class="picedit_control" title="Rotate" data-action="rotate_cw"><i class="fa fa-repeat fa-lg"></i><b> Rotate</b></span></li>
+            <!-- Picedit button element end -->
+            <!-- Picedit button element begin -->
+            <li class="picedit_element"><span class="picedit_control" title="Crop" data-action="crop_open"><i class="fa fa-crop fa-lg"></i><b> Crop</b></span> </li>
+            <!-- Picedit button element end -->
+            <!-- Picedit button element begin -->
+            <li class="picedit_element"><span class="picedit_control" title="Discard" data-action="discard_image"><i class="fa fa-trash fa-lg"></i><b>Discard</b></span></li>
+            <!-- Picedit button element end -->
+        </ul>
+    </div>
+</div>
+<br/>
+<div style="margin: 10px 0;"><button type="button" class="btn" id="previewBtn">Preview</button></div>
+<br/>
+<!--Preview Canvas-->
+<div id="_preview" class="picedit_box_preview" style="display: none;">
+    <!-- Picedit canvas element -->
+    <div class="picedit_canvas_box">
+        <div id="canvas-container_preview" class="picedit_canvas">
+            <canvas id="canvas_preview" width="600px" height="285px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+        </div>
+        <div class="picedit_drag_resize">
+            <div class="picedit_drag_resize_canvas"></div>
+            <div class="picedit_drag_resize_box">
+                <div class="picedit_drag_resize_box_corner_wrap">
+                    <div class="picedit_drag_resize_box_corner"></div>
+                </div>
+                <div class="picedit_drag_resize_box_elements">
+                    <span class="picedit_control  ico-picedit-checkmark" data-action="crop_image"></span>
+                    <span class="picedit_control  ico-picedit-close" data-action="crop_close"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Picedit message-->
+    <div class="picedit_message">
+        <span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span>
+        <div></div>
+    </div>
+    <!-- Picedit navigation -->
+    <div class="picedit_nav_box">
+        <!--<div class="picedit_pos_elements"></div>-->
+        <ul class="picedit_nav_elements">
+            <!-- Picedit button element begin -->
+            <li class="picedit_element"><a id="downloadImg" class="picedit_control picedit_action downloadImg" title="Download" onclick="$('#downloadImg').attr('href', canvas_preview.toDataURL());" download="Cornell_Banner.png" href="#" target="_blank"><i class="fa fa-download fa-lg"></i><b> Download</b></a> </li>
+            <!-- Picedit button element end -->
+        </ul>
+    </div>
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--<script type="text/javascript" src="js/FileSaver.min.js"></script>
+<script type="text/javascript" src="js/jszip.min.js"></script>-->
+<script type="application/javascript" src="js/fabric.min.js"></script>
+<script type="text/javascript" src="js/zoom_plugin.js"></script>
+<script type="text/javascript" src="js/test_main.js"></script>
+<script>
+    $( document ).ready(function(){
+        var canvas1=document.getElementById('canvas_1');
+        var canvas2=document.getElementById('canvas_2');
+        // merge 2 canvases (canvas1-canvas4) onto a single canvas
+        var canvas=document.getElementById('canvas_preview');
+        var context=canvas.getContext('2d');
+        $( "#previewBtn" ).click(function() {
+            $('#_preview').show();
+            context.drawImage(canvas1,0,0);
+            context.drawImage(canvas2,300,0);
+        });
+    });
+</script>
+</body>
+</html>
