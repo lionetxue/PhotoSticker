@@ -255,9 +255,7 @@
             //Variables and functions for Fabric.js zoom on mousewheel event
             var this_canvas = this._canvas;
             var MAX_ZOOM_OUT = 1;
-            this_canvas.renderAll();
-            var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" ;
-            document.addEventListener(mousewheelevt, function(e){
+            $(this_canvas.wrapperEl).on('mousewheel', function(e) {
                 // cross-browser wheel delta
                 var e = window.event || e; // old IE support
                 var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
@@ -269,9 +267,11 @@
                     //canvas.setZoom(canvas.getZoom() / 1.1 );
                     this_canvas.zoomToPoint(new fabric.Point(this_canvas.width / 2, this_canvas.height / 2), this_canvas.getZoom() / 1.1);
                 }
-            }, false);
+                this_canvas.renderAll();
+                return false;
+            });
 
-        },
+        }, // end of init()
         // Check Browser Capabilities (determine if the picedit should run, or leave the default file-input field)
         check_browser_capabilities: function () {
             if(!!window.CanvasRenderingContext2D == false) return false; //check canvas support
