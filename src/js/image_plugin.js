@@ -120,15 +120,12 @@
                 var file = files[0];
                 if(!_this._filename) {
                     _this._filename = file.name;
-                    console.log(file.name);
                 }
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    console.log("reader load");
                     _this._create_image_with_datasrc(e.target.result, false, file);
                 };
                 if (file) {
-                    console.log("file");
                     reader.readAsDataURL(file);
                 }
             }
@@ -148,6 +145,8 @@
             // Bind onchange event to the fileinput to pre-process the image selected
             $(this._fileinput).on("change", function() {
                 build_img_from_file(this.files);
+                // Set the value of the input to null on each onclick event. This will reset the input's value and trigger the onchange event even if the same path is selected.
+                this.value = null;
             });
             // If Firefox (doesn't support clipboard object), create DIV to catch pasted image
             if (!window.Clipboard) { // Firefox
