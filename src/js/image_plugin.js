@@ -11,7 +11,7 @@
 
 // the semi-colon before function invocation is a safety net against concatenated
 // scripts and/or other plugins which may not be closed properly.
-;(function ( $, window, document, undefined ) {
+;(function ( $, window, document, undefined) {
     "use strict";
     // undefined is used here as the undefined global variable in ECMAScript 3 is
     // mutable (ie. it can be changed by someone else). undefined isn't really being
@@ -28,8 +28,8 @@
             imageUpdated: function(img){},	// Image updated callback function
             formSubmitted: function(res){},	// After form was submitted callback function
             redirectUrl: false,				// Page url for redirect on form submit
-            maxWidth: 300,					// Max width parameter
-            maxHeight: 285,				// Max height parameter
+            maxWidth: 600,					// Max width parameter
+            maxHeight: 430,				// Max height parameter
             aspectRatio: true,				// Preserve aspect ratio
             defaultImage: false             // Default image to be used with the plugin
         };
@@ -128,6 +128,8 @@
                 if (file) {
                     reader.readAsDataURL(file);
                 }
+                $('#upload_btn').hide();
+                $('.picedit_options').css('visibility', 'visible');
             }
             // Bind file drag-n-drop behavior
             $(this.element).find(".picedit_canvas_box").on("drop", function(event) {
@@ -551,7 +553,7 @@
         // Hide all opened navigation and active buttons (clear plugin's box elements)
         _hideAllNav: function (message) {
             if(message && message == 1) {
-                this.set_messagebox("Open an image or use your camera to make a photo!");
+                this.set_messagebox("Please upload an image first!");
             }
             $(this.element).find(".picedit_nav_box").removeClass("active").find(".picedit_element").removeClass("active");
         },
@@ -673,9 +675,9 @@
                 else if($(this).hasClass("picedit_action")) {
                     $(this).parent(".picedit_element").toggleClass("active").siblings(".picedit_element").removeClass("active");
                     if($(this).parent(".picedit_element").hasClass("active"))
-                        $(this).closest(".picedit_nav_box").addClass("active");
+                        $(this).closest(".picedit_options").addClass("active");
                     else
-                        $(this).closest(".picedit_nav_box").removeClass("active");
+                        $(this).closest(".picedit_options").removeClass("active");
                 }
             });
         },
