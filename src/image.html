@@ -15,18 +15,17 @@
 <body>
 <h1>Email assets builder</h1>
 <h3>Crop an image</h3>
-<div class="wrap">
+<div id="_1" class="picedit_box">
     <!-- Size options -->
     <div class="picedit_options">
-        <button class="btn option picedit_control" data-action="crop_open"><i class="fa fa-crop fa-lg"></i>Slim hero banner<br><span class="size">600 x 175</span></button>
-        <button class="btn option picedit_control" >Tall hero banner<br><span class="size">600 x 285</span></button>
-        <button class="btn option picedit_control">Type 4 banner<br><span class="size">600 x 430</span></button>
-        <button class="btn option picedit_control">Type 5 banner<br><span class="size">270 x 170</span></button>
-        <button class="btn option picedit_control">Square<br><span class="size">140 x 140</span></button>
+        <button class="btn option picedit_control" data-action="crop_open_1">Slim hero banner<br><span class="size">600 x 175</span></button>
+        <button class="btn option picedit_control" data-action="crop_open_2">Tall hero banner<br><span class="size">600 x 285</span></button>
+        <button class="btn option picedit_control" data-action="crop_open_3">Type 4 banner<br><span class="size">600 x 430</span></button>
+        <button class="btn option picedit_control" data-action="crop_open_4">Type 5 banner<br><span class="size">270 x 170</span></button>
+        <button class="btn option picedit_control" data-action="crop_open_5">Square<br><span class="size">140 x 140</span></button>
     </div>
-    <div id="_1" class="picedit_box">
-        <!-- Picedit canvas element -->
-        <div class="picedit_canvas_box">
+     <!-- Picedit canvas element -->
+     <div class="picedit_canvas_box">
             <!-- Picedit button element begin -->
             <div id="upload_btn" class="picedit_element"> <span class="picedit_control" data-action="load_image"><i class="fa fa-picture-o fa-lg"></i><br><b> Upload an image file<br>or drag and drop</b></span></div>
             <!-- Picedit button element end -->
@@ -36,40 +35,39 @@
             <div class="picedit_drag_resize">
                 <div class="picedit_drag_resize_canvas"></div>
                 <div class="picedit_drag_resize_box">
-                    <div class="picedit_drag_resize_box_corner_wrap">
-                        <div class="picedit_drag_resize_box_corner"></div>
-                    </div>
+                    <!--<div class="picedit_drag_resize_box_corner_wrap">-->
+                        <!--<div class="picedit_drag_resize_box_corner"></div>-->
+                    <!--</div>-->
                     <div class="picedit_drag_resize_box_elements">
-                        <span class="picedit_control  ico-picedit-checkmark" data-action="crop_image"></span>
-                        <span class="picedit_control  ico-picedit-close" data-action="crop_close"></span>
+                        <span class="picedit_control  fa fa-check" data-action="crop_image"></span>
+                        <span class="picedit_control  fa fa-times" data-action="crop_close"></span>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--Picedit message-->
-        <div class="picedit_message">
-            <span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span>
-            <div></div>
-        </div>
-        <!-- Picedit navigation -->
-        <div class="picedit_nav_box">
-            <!--<div class="picedit_pos_elements"></div>-->
-            <ul class="picedit_nav_elements">
-                <!-- Picedit button element begin -->
-                <!--<li class="picedit_element"> <span class="picedit_control" title="Rotate" data-action="rotate_cw"><i class="fa fa-repeat fa-lg"></i><b> Rotate</b></span></li>-->
-                <!-- Picedit button element end -->
-                <!-- Picedit button element begin -->
-                <!--<li class="picedit_element"><span class="picedit_control" title="Crop" data-action="crop_open"><i class="fa fa-crop fa-lg"></i><b> Crop</b></span> </li>-->
-                <!-- Picedit button element end -->
-                <!-- Picedit button element begin -->
-                <!--<li class="picedit_element"><span class="picedit_control" title="Discard" data-action="discard_image"><i class="fa fa-trash fa-lg"></i><b>Discard</b></span></li>-->
-                <!-- Picedit button element end -->
-                <!-- Picedit button element begin -->
-                <!--			<li class="picedit_element downloadZip"><span id="downloadZip" class="picedit_control picedit_action" title="Download ZipFile"><i class="fa fa-file-archive-o fa-lg"></i><b>ZipFile</b></span> </li>-->
-                <!-- Picedit button element end -->
-            </ul>
-        </div>
-    </div>
+      </div>
+        <!--&lt;!&ndash;Picedit message&ndash;&gt;-->
+        <!--<div class="picedit_message">-->
+            <!--<span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span>-->
+            <!--<div></div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; Picedit navigation &ndash;&gt;-->
+        <!--<div class="picedit_nav_box">-->
+            <!--&lt;!&ndash;<div class="picedit_pos_elements"></div>&ndash;&gt;-->
+            <!--<ul class="picedit_nav_elements">-->
+                <!--&lt;!&ndash; Picedit button element begin &ndash;&gt;-->
+                <!--&lt;!&ndash;<li class="picedit_element"> <span class="picedit_control" title="Rotate" data-action="rotate_cw"><i class="fa fa-repeat fa-lg"></i><b> Rotate</b></span></li>&ndash;&gt;-->
+                <!--&lt;!&ndash; Picedit button element end &ndash;&gt;-->
+                <!--&lt;!&ndash; Picedit button element begin &ndash;&gt;-->
+                <!--&lt;!&ndash;<li class="picedit_element"><span class="picedit_control" title="Crop" data-action="crop_open"><i class="fa fa-crop fa-lg"></i><b> Crop</b></span> </li>&ndash;&gt;-->
+                <!--&lt;!&ndash; Picedit button element end &ndash;&gt;-->
+                <!--&lt;!&ndash; Picedit button element begin &ndash;&gt;-->
+                <!--&lt;!&ndash;<li class="picedit_element"><span class="picedit_control" title="Discard" data-action="discard_image"><i class="fa fa-trash fa-lg"></i><b>Discard</b></span></li>&ndash;&gt;-->
+                <!--&lt;!&ndash; Picedit button element end &ndash;&gt;-->
+                <!--&lt;!&ndash; Picedit button element begin &ndash;&gt;-->
+                <!--&lt;!&ndash;			<li class="picedit_element downloadZip"><span id="downloadZip" class="picedit_control picedit_action" title="Download ZipFile"><i class="fa fa-file-archive-o fa-lg"></i><b>ZipFile</b></span> </li>&ndash;&gt;-->
+                <!--&lt;!&ndash; Picedit button element end &ndash;&gt;-->
+            <!--</ul>-->
+        <!--</div>-->
 </div>
 <br/>
 <div style="margin: 10px 0;"><button type="button" class="btn" id="previewBtn">Preview</button></div>
@@ -77,27 +75,10 @@
 <!--Preview Canvas-->
 <div id="_preview" class="picedit_box_preview" style="display: none;">
     <!-- Picedit canvas element -->
-    <div class="picedit_canvas_box">
-        <div id="canvas-container_preview" class="picedit_canvas">
-            <canvas id="canvas_preview" width="300px" height="285px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+    <div>
+        <div id="canvas-container_preview" class="canvas_container">
+            <canvas id="canvas_preview"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
         </div>
-        <div class="picedit_drag_resize">
-            <div class="picedit_drag_resize_canvas"></div>
-            <div class="picedit_drag_resize_box">
-                <div class="picedit_drag_resize_box_corner_wrap">
-                    <div class="picedit_drag_resize_box_corner"></div>
-                </div>
-                <div class="picedit_drag_resize_box_elements">
-                    <span class="picedit_control  ico-picedit-checkmark" data-action="crop_image"></span>
-                    <span class="picedit_control  ico-picedit-close" data-action="crop_close"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Picedit message-->
-    <div class="picedit_message">
-        <span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span>
-        <div></div>
     </div>
     <!-- Picedit navigation -->
     <div class="picedit_nav_box">

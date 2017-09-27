@@ -356,7 +356,7 @@
             this._hideAllNav();
         },
         // Open video element and start capturing live video from camera to later make a photo
-        camera_open: function() {
+/*        camera_open: function() {
             var getUserMedia;
             var browserUserMedia = navigator.webkitGetUserMedia	||	// WebKit
                 navigator.mozGetUserMedia	||	// Mozilla FireFox
@@ -407,7 +407,7 @@
                 //Lin: close the web camera
                 _this._videostream.getVideoTracks()[0].stop();
             });
-        },
+        },*/
         // Crop the image
         crop_image: function(e) {
             //prevent mousedown events to shift the drag_resize_box
@@ -418,15 +418,17 @@
             var sx =  crop.left - baseimage.left / _this._scale;
             var sy = crop.top - baseimage.top / _this._scale;
             // If the size of image is smaller than 400 x 400
-            if (_this._scale > 1) {
-                sx =  (crop.left - baseimage.left ) / _this._scale;
-                sy = (crop.top - baseimage.top ) / _this._scale;
-            }
+            // if (_this._scale > 1) {
+            //     sx =  (crop.left - baseimage.left ) / _this._scale;
+            //     sy = (crop.top - baseimage.top ) / _this._scale;
+            // }
             this.set_loading(1).delay(200).promise().done(function() {
                 var canvas = document.createElement('canvas');
                 var ctx = canvas.getContext("2d");
                 canvas.width = crop.width;
                 canvas.height = crop.height;
+                console.log("canvas width: " + crop.width);
+                console.log("canvas height: " + crop.height);
                 ctx.drawImage(_this._image, sx, sy, crop.width, crop.height, 0, 0, crop.width, crop.height);
                 _this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
                     _this.hide_messagebox();
@@ -436,6 +438,62 @@
         },
         crop_open: function () {
             if(!this._image) return this._hideAllNav(1);
+            this._cropping.cropbox.addClass("active");
+            this._hideAllNav();
+        },
+        crop_open_1: function () {
+            if(!this._image) return this._hideAllNav(1);
+            $('.picedit_drag_resize').css('width', '600px');
+            $('.picedit_drag_resize').css('height', '175px');
+            $('.picedit_drag_resize_box').css('width', '600px');
+            $('.picedit_drag_resize_box').css('height', '175px');
+
+            $('#canvas_preview').width('600px');
+            $('#canvas_preview').height('175px');
+            this._cropping.cropbox.addClass("active");
+            this._hideAllNav();
+        },
+        crop_open_2: function () {
+            if(!this._image) return this._hideAllNav(1);
+            $('.picedit_drag_resize').css('width', '600px');
+            $('.picedit_drag_resize').css('height', '285px');
+            $('.picedit_drag_resize_box').css('width', '600px');
+            $('.picedit_drag_resize_box').css('height', '285px');
+            $('#canvas_preview').width('600px');
+            $('#canvas_preview').height('285px');
+            this._cropping.cropbox.addClass("active");
+            this._hideAllNav();
+        },
+        crop_open_3: function () {
+            if(!this._image) return this._hideAllNav(1);
+            $('.picedit_drag_resize').css('width', '600px');
+            $('.picedit_drag_resize').css('height', '430px');
+            $('.picedit_drag_resize_box').css('width', '600px');
+            $('.picedit_drag_resize_box').css('height', '430px');
+            $('#canvas_preview').width('600px');
+            $('#canvas_preview').height('430px');
+            this._cropping.cropbox.addClass("active");
+            this._hideAllNav();
+        },
+        crop_open_4: function () {
+            if(!this._image) return this._hideAllNav(1);
+            $('.picedit_drag_resize').css('width', '540px');
+            $('.picedit_drag_resize').css('height', '340px');
+            $('.picedit_drag_resize_box').css('width', '540px');
+            $('.picedit_drag_resize_box').css('height', '340px');
+            $('#canvas_preview').width('270px');
+            $('#canvas_preview').height('170px');
+            this._cropping.cropbox.addClass("active");
+            this._hideAllNav();
+        },
+        crop_open_5: function () {
+            if(!this._image) return this._hideAllNav(1);
+            $('.picedit_drag_resize').css('width', '420px');
+            $('.picedit_drag_resize').css('height', '420px');
+            $('.picedit_drag_resize_box').css('width', '420px');
+            $('.picedit_drag_resize_box').css('height', '420px');
+            $('#canvas_preview').width('140px');
+            $('#canvas_preview').height('140px');
             this._cropping.cropbox.addClass("active");
             this._hideAllNav();
         },
@@ -539,8 +597,8 @@
             var evtpos = (e.clientX) ? e : e.originalEvent.touches[0];
             cropframe.style.width = (this._cropping.w + evtpos.clientX - this._cropping.x) + 'px';
             //Lin:  keep the aspect ratio = 1
-            cropframe.style.height = (this._cropping.w + evtpos.clientX - this._cropping.x) + 'px';
-            // cropframe.style.height = (this._cropping.h + evtpos.clientY - this._cropping.y) + 'px';
+            //cropframe.style.height = (this._cropping.w + evtpos.clientX - this._cropping.x) + 'px';
+            cropframe.style.height = (this._cropping.h + evtpos.clientY - this._cropping.y) + 'px';
         },
         _selection_drag_movement: function(e) {
             var cropframe = this._cropping.cropframe[0];
