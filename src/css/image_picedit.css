@@ -382,11 +382,14 @@ p{
     z-index: 20;
 }
 .picedit_drag_resize_box {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 30;
-    border: 1px dashed #eee;
+    border: 2px dashed #eee;
 }
 .picedit_drag_resize_box_corner_wrap {
     position: absolute;
@@ -409,6 +412,9 @@ p{
     bottom: 0;
     left: 0;
     z-index: 40;
+}
+.picedit_drag_resize_box_elements > span {
+    text-shadow: 0 3px hsla(0, 0%, 0%, 0.8);
 }
 .picedit_colors span {
     width: 1.2em;

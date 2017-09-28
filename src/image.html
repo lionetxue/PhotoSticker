@@ -69,9 +69,6 @@
             <!--</ul>-->
         <!--</div>-->
 </div>
-<br/>
-<div style="margin: 10px 0;"><button type="button" class="btn" id="previewBtn">Preview</button></div>
-<br/>
 <!--Preview Canvas-->
 <div id="_preview" class="picedit_box_preview" style="display: none;">
     <!-- Picedit canvas element -->
@@ -98,17 +95,5 @@
 <!--<script type="application/javascript" src="js/fabric_zoom.js"></script>-->
 <script type="text/javascript" src="js/image_plugin.js"></script>
 <script type="text/javascript" src="js/image_main.js"></script>
-<script>
-    $( document ).ready(function(){
-        var canvas1=document.getElementById('canvas_1');
-        // merge 2 canvases (canvas1-canvas4) onto a single canvas
-        var canvas=document.getElementById('canvas_preview');
-        var context=canvas.getContext('2d');
-        $( "#previewBtn" ).click(function() {
-            $('#_preview').show();
-            context.drawImage(canvas1,0,0);
-        });
-    });
-</script>
 </body>
 </html>

@@ -423,16 +423,17 @@
             //     sy = (crop.top - baseimage.top ) / _this._scale;
             // }
             this.set_loading(1).delay(200).promise().done(function() {
-                var canvas = document.createElement('canvas');
-                var ctx = canvas.getContext("2d");
-                canvas.width = crop.width;
-                canvas.height = crop.height;
-                console.log("canvas width: " + crop.width);
-                console.log("canvas height: " + crop.height);
-                ctx.drawImage(_this._image, sx, sy, crop.width, crop.height, 0, 0, crop.width, crop.height);
-                _this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
-                    _this.hide_messagebox();
-                });
+                // var canvas = document.createElement('canvas');
+                // var ctx = canvas.getContext("2d");
+                var canvas = document.getElementById('canvas_preview');
+                var ctx = canvas.getContext('2d');
+                // canvas.width = crop.width;
+                // canvas.height = crop.height;
+                ctx.drawImage(_this._image, sx, sy, crop.width, crop.height, 0, 0, canvas.width, canvas.height);
+                $('.picedit_box_preview').show();
+                // _this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
+                //     _this.hide_messagebox();
+                // });
             });
             this.crop_close();
         },
@@ -447,9 +448,10 @@
             $('.picedit_drag_resize').css('height', '175px');
             $('.picedit_drag_resize_box').css('width', '600px');
             $('.picedit_drag_resize_box').css('height', '175px');
-
-            $('#canvas_preview').width('600px');
-            $('#canvas_preview').height('175px');
+            var canvas = document.getElementById('canvas_preview');
+            var ctx = canvas.getContext('2d');
+            ctx.canvas.width = 600;
+            ctx.canvas.height = 175;
             this._cropping.cropbox.addClass("active");
             this._hideAllNav();
         },
@@ -459,8 +461,10 @@
             $('.picedit_drag_resize').css('height', '285px');
             $('.picedit_drag_resize_box').css('width', '600px');
             $('.picedit_drag_resize_box').css('height', '285px');
-            $('#canvas_preview').width('600px');
-            $('#canvas_preview').height('285px');
+            var canvas = document.getElementById('canvas_preview');
+            var ctx = canvas.getContext('2d');
+            ctx.canvas.width = 600;
+            ctx.canvas.height = 285;
             this._cropping.cropbox.addClass("active");
             this._hideAllNav();
         },
@@ -470,8 +474,10 @@
             $('.picedit_drag_resize').css('height', '430px');
             $('.picedit_drag_resize_box').css('width', '600px');
             $('.picedit_drag_resize_box').css('height', '430px');
-            $('#canvas_preview').width('600px');
-            $('#canvas_preview').height('430px');
+            var canvas = document.getElementById('canvas_preview');
+            var ctx = canvas.getContext('2d');
+            ctx.canvas.width = 600;
+            ctx.canvas.height = 430;
             this._cropping.cropbox.addClass("active");
             this._hideAllNav();
         },
@@ -481,8 +487,10 @@
             $('.picedit_drag_resize').css('height', '340px');
             $('.picedit_drag_resize_box').css('width', '540px');
             $('.picedit_drag_resize_box').css('height', '340px');
-            $('#canvas_preview').width('270px');
-            $('#canvas_preview').height('170px');
+            var canvas=document.getElementById('canvas_preview');
+            var ctx = canvas.getContext('2d');
+            ctx.canvas.width = 270;
+            ctx.canvas.height = 170;
             this._cropping.cropbox.addClass("active");
             this._hideAllNav();
         },
@@ -492,8 +500,10 @@
             $('.picedit_drag_resize').css('height', '420px');
             $('.picedit_drag_resize_box').css('width', '420px');
             $('.picedit_drag_resize_box').css('height', '420px');
-            $('#canvas_preview').width('140px');
-            $('#canvas_preview').height('140px');
+            var canvas=document.getElementById('canvas_preview');
+            var ctx = canvas.getContext('2d');
+            ctx.canvas.width = 140;
+            ctx.canvas.height = 140;
             this._cropping.cropbox.addClass("active");
             this._hideAllNav();
         },
@@ -626,7 +636,7 @@
             //clear previous image first
             //_this._canvas.clear();
             fabric.Image.fromURL(this._image.src , function(oImg) {
-                oImg.scale(scale);
+                if(scale < 1)  oImg.scale(scale);
                 // lock aspect ratio
                 oImg.lockUniScaling = true;
                 oImg.hasControls = false;
