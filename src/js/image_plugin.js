@@ -52,6 +52,8 @@
         this._image = false;
         // Lin: reference to the scale factor
         this._scale = false;
+        // Lin: reference to the aspect ratio of crop frame
+        this._fixratio = false;
         // Lin: Reference to the sticker object
         this._sticker = null;
         // Reference to the filename of the loaded image
@@ -453,6 +455,7 @@
             if(!this._image) return this._hideAllNav(1);
             $('.picedit_drag_resize_box').css('width', '600px');
             $('.picedit_drag_resize_box').css('height', '175px');
+            this._fixratio = 175/600;
             var canvas = document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
             ctx.canvas.width = 600;
@@ -464,6 +467,7 @@
             if(!this._image) return this._hideAllNav(1);
             $('.picedit_drag_resize_box').css('width', '600px');
             $('.picedit_drag_resize_box').css('height', '285px');
+            this._fixratio = 285/600;
             var canvas = document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
             ctx.canvas.width = 600;
@@ -475,6 +479,7 @@
             if(!this._image) return this._hideAllNav(1);
             $('.picedit_drag_resize_box').css('width', '600px');
             $('.picedit_drag_resize_box').css('height', '430px');
+            this._fixratio = 430/600;
             var canvas = document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
             ctx.canvas.width = 600;
@@ -486,6 +491,7 @@
             if(!this._image) return this._hideAllNav(1);
             $('.picedit_drag_resize_box').css('width', '540px');
             $('.picedit_drag_resize_box').css('height', '340px');
+            this._fixratio = 170/270;
             var canvas=document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
             ctx.canvas.width = 270;
@@ -497,6 +503,7 @@
             if(!this._image) return this._hideAllNav(1);
             $('.picedit_drag_resize_box').css('width', '420px');
             $('.picedit_drag_resize_box').css('height', '420px');
+            this._fixratio = 1;
             var canvas=document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
             ctx.canvas.width = 140;
@@ -603,9 +610,12 @@
             var cropframe = this._cropping.cropframe[0];
             var evtpos = (e.clientX) ? e : e.originalEvent.touches[0];
             cropframe.style.width = (this._cropping.w + evtpos.clientX - this._cropping.x) + 'px';
+            //cropframe.style.height = (this._cropping.h + evtpos.clientY - this._cropping.y) + 'px';
             //Lin:  keep the aspect ratio = 1
             //cropframe.style.height = (this._cropping.w + evtpos.clientX - this._cropping.x) + 'px';
-            cropframe.style.height = (this._cropping.h + evtpos.clientY - this._cropping.y) + 'px';
+            //Lin:  keep the aspect ratio of cropframe
+            cropframe.style.height = (this._cropping.w + evtpos.clientX - this._cropping.x) * this._fixratio + 'px';
+
         },
         _selection_drag_movement: function(e) {
             var cropframe = this._cropping.cropframe[0];
