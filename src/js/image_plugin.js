@@ -419,10 +419,10 @@
             var sx =  crop.left - baseimage.left / _this._scale;
             var sy = crop.top - baseimage.top / _this._scale;
             // If the size of image is smaller than 400 x 400
-            // if (_this._scale > 1) {
-            //     sx =  (crop.left - baseimage.left ) / _this._scale;
-            //     sy = (crop.top - baseimage.top ) / _this._scale;
-            // }
+            /*if (_this._scale > 1) {
+                crop.width = crop.width * _this._scale;
+                crop.height = crop.width *_this._scale;
+            }*/
             this.set_loading(1).delay(200).promise().done(function() {
                 // var canvas = document.createElement('canvas');
                 // var ctx = canvas.getContext("2d");
@@ -430,6 +430,11 @@
                 var ctx = canvas.getContext('2d');
                 // canvas.width = crop.width;
                 // canvas.height = crop.height;
+                console.log("sx: "+ sx);
+                console.log("crop.width: "+ crop.width);
+                console.log("crop.height: "+ crop.height);
+                console.log("canvas.width: " + canvas.width);
+                console.log("canvas.height: " + canvas.height);
                 ctx.drawImage(_this._image, sx, sy, crop.width, crop.height, 0, 0, canvas.width, canvas.height);
                 $('.picedit_box_preview').show();
                 _this.hide_messagebox();
@@ -446,8 +451,6 @@
         },
         crop_open_1: function () {
             if(!this._image) return this._hideAllNav(1);
-            $('.picedit_drag_resize').css('width', '600px');
-            $('.picedit_drag_resize').css('height', '175px');
             $('.picedit_drag_resize_box').css('width', '600px');
             $('.picedit_drag_resize_box').css('height', '175px');
             var canvas = document.getElementById('canvas_preview');
@@ -459,8 +462,6 @@
         },
         crop_open_2: function () {
             if(!this._image) return this._hideAllNav(1);
-            $('.picedit_drag_resize').css('width', '600px');
-            $('.picedit_drag_resize').css('height', '285px');
             $('.picedit_drag_resize_box').css('width', '600px');
             $('.picedit_drag_resize_box').css('height', '285px');
             var canvas = document.getElementById('canvas_preview');
@@ -472,8 +473,6 @@
         },
         crop_open_3: function () {
             if(!this._image) return this._hideAllNav(1);
-            $('.picedit_drag_resize').css('width', '600px');
-            $('.picedit_drag_resize').css('height', '430px');
             $('.picedit_drag_resize_box').css('width', '600px');
             $('.picedit_drag_resize_box').css('height', '430px');
             var canvas = document.getElementById('canvas_preview');
@@ -485,8 +484,6 @@
         },
         crop_open_4: function () {
             if(!this._image) return this._hideAllNav(1);
-            $('.picedit_drag_resize').css('width', '540px');
-            $('.picedit_drag_resize').css('height', '340px');
             $('.picedit_drag_resize_box').css('width', '540px');
             $('.picedit_drag_resize_box').css('height', '340px');
             var canvas=document.getElementById('canvas_preview');
@@ -498,8 +495,6 @@
         },
         crop_open_5: function () {
             if(!this._image) return this._hideAllNav(1);
-            $('.picedit_drag_resize').css('width', '420px');
-            $('.picedit_drag_resize').css('height', '420px');
             $('.picedit_drag_resize_box').css('width', '420px');
             $('.picedit_drag_resize_box').css('height', '420px');
             var canvas=document.getElementById('canvas_preview');
@@ -667,8 +662,10 @@
                 "top": (cropframe.offsetTop > 0) ? cropframe.offsetTop : 0.1,
                 "left": (cropframe.offsetLeft > 0) ? cropframe.offsetLeft : 0.1
             };
-            if((crop.width + crop.left) > view.width) crop.width = view.width - crop.left;
-            if((crop.height + crop.top) > view.height) crop.height = view.height - crop.top;
+            console.log("crop.top: "+ crop.top);
+            console.log("crop.left: "+ crop.left);
+            // if((crop.width + crop.left) > view.width) crop.width = view.width - crop.left;
+            // if((crop.height + crop.top) > view.height) crop.height = view.height - crop.top;
             //calculate width and height for the full image size
             var width_percent = crop.width / view.width;
             var height_percent = crop.height / view.height;
@@ -681,6 +678,15 @@
             var left_percent = crop.left / view.width;
             area.top = parseInt(real.height * top_percent, 10);
             area.left = parseInt(real.width * left_percent, 10);
+            // scale the crop window if image width was smaller than 600 and stretched to fit the canvas.
+            if (this._scale > 1) {
+                area.width = area.width / this._scale;
+                area.height = area.height / this._scale;
+                area.top = area.top / this._scale;
+                area.left = area.left / this._scale;
+            }
+            console.log("area.top: "+ area.top);
+            console.log("area.left: "+ area.left);
             return area;
         },
         // Helper function to perform canvas rotation
