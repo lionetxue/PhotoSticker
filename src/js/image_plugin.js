@@ -91,9 +91,9 @@
             //setOverlayImage makes sure sticker adds as overlay, no change or move the sticker
             // this._canvas.setOverlayImage("img/I-Voted-frame.png");
             // Reference to video elemment holder element
-            this._videobox = $(this.element).find(".picedit_video");
+            // this._videobox = $(this.element).find(".picedit_video");
             //Lin: keep a global reference to the opened stream
-            this._videostream;
+            // this._videostream;
             // Save the reference to the messaging box
             this._messagebox = $(this.element).find(".picedit_message");
             this._messagetimeout = false;
@@ -129,7 +129,7 @@
                     reader.readAsDataURL(file);
                 }
                 $('#upload_btn').hide();
-                $('.picedit_options').css('visibility', 'visible');
+                $('.picedit_nav_box').css('visibility', 'visible');
             }
             // Bind file drag-n-drop behavior
             $(this.element).find(".picedit_canvas_box").on("drop", function(event) {
@@ -211,7 +211,7 @@
             // Load default image if one is set
             if(this.options.defaultImage) _this.set_default_image(this.options.defaultImage);
             //Lin: bind onclick event to sticker buttons
-            $(this.element).find('.sticker').click(function(e) {
+/*            $(this.element).find('.sticker').click(function(e) {
                 if(!_this._image) return _this._hideAllNav(1);
                 var imgElement = document.getElementById(e.target.id);
                 //// Lin: check to see if a sticker exists.  Only allow one sticker at a time.
@@ -234,7 +234,7 @@
                 //setOverlayImage makes sure sticker adds as overlay, no change or move the sticker
                 // _this._canvas.setOverlayImage(imgInstance);
                 _this._canvas.insertAt(_this._sticker,1, false);
-            });
+            });*/
             //Limit the movement of object within canvas
             this._canvas.on('object:moving', function (e) {
                 var obj = e.target;
@@ -271,7 +271,6 @@
                 this_canvas.renderAll();
                 return false;
             });
-
         }, // end of init()
         // Check Browser Capabilities (determine if the picedit should run, or leave the default file-input field)
         check_browser_capabilities: function () {
@@ -287,6 +286,7 @@
         hide_messagebox: function () {
             var msgbox = this._messagebox;
             msgbox.removeClass("active no_close_button");
+            msgbox.hide();
             setTimeout(function() {msgbox.children("div").html("")}, 200);
         },
         // Open a loading spinner message box or working... message box
@@ -307,6 +307,7 @@
                 var _this = this;
                 this._messagetimeout = setTimeout(function(){ _this.hide_messagebox(); }, autohide);
             }
+            this._messagebox.show();
             return this._messagebox.addClass(classes).children("div").html(text);
         },
         // Toggle button and update variables
@@ -431,6 +432,7 @@
                 // canvas.height = crop.height;
                 ctx.drawImage(_this._image, sx, sy, crop.width, crop.height, 0, 0, canvas.width, canvas.height);
                 $('.picedit_box_preview').show();
+                _this.hide_messagebox();
                 // _this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
                 //     _this.hide_messagebox();
                 // });
@@ -636,7 +638,10 @@
             //clear previous image first
             //_this._canvas.clear();
             fabric.Image.fromURL(this._image.src , function(oImg) {
-                if(scale < 1)  oImg.scale(scale);
+                if (scale > 1 ) {
+                    _this.set_messagebox("The width of your image is less than 600px! It may yield low resolution photo");
+                }
+                oImg.scale(scale);
                 // lock aspect ratio
                 oImg.lockUniScaling = true;
                 oImg.hasControls = false;
@@ -743,9 +748,9 @@
                 else if($(this).hasClass("picedit_action")) {
                     $(this).parent(".picedit_element").toggleClass("active").siblings(".picedit_element").removeClass("active");
                     if($(this).parent(".picedit_element").hasClass("active"))
-                        $(this).closest(".picedit_options").addClass("active");
+                        $(this).closest(".picedit_nav_box").addClass("active");
                     else
-                        $(this).closest(".picedit_options").removeClass("active");
+                        $(this).closest(".picedit_nav_box").removeClass("active");
                 }
             });
         },

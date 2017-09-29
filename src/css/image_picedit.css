@@ -29,19 +29,6 @@ p{
     font-family: "Myriad Pro", Arial, Helvetica, sans-serif;
     font-size: 1rem;
 }
-.picedit_options{
-    display: inline-block;
-    width: 300px;
-    visibility: hidden;
-}
-.option{
-    width: 270px;
-    margin: 5px;
-    font-size: 1rem;
-}
-.size{
-    font-size: 0.8rem;
-}
 /*.picedit_canvas_box:hover .picedit_action_btns, .picedit_action_btns.active {*/
 /*z-index: 8;*/
 /*opacity: 0.6;*/
@@ -89,9 +76,23 @@ p{
     /*-o-transition: opacity 200ms ease-out;*/
     /*transition: opacity 200ms ease-out;*/
 /*}*/
-/*.picedit_nav_box:hover, .picedit_nav_box.active {*/
-    /*opacity: 0.8;*/
-/*}*/
+.picedit_nav_box{
+    display: inline-block;
+    width: 300px;
+    visibility: hidden;
+    z-index: 15;
+}
+.option{
+    width: 270px;
+    margin: 5px;
+    font-size: 1rem;
+}
+.size{
+    font-size: 0.8rem;
+}
+.picedit_nav_box:hover, .picedit_nav_box.active {
+    opacity: 0.8;
+}
 .picedit_control {
     padding: 0.25em;
     cursor: pointer;
@@ -325,9 +326,11 @@ p{
     margin: 0;
 }
 .picedit_message {
+    display: none;
     position: absolute;
     padding: 1.4em 2.5em 1em 1em;
     bottom: -100px;
+    left: 300px;
     border: 1px solid #eee;
     margin-bottom: 3%;
     margin-left: 2%;
