@@ -455,6 +455,7 @@
             if(!this._image) return this._hideAllNav(1);
             $('.picedit_drag_resize_box').css('width', '600px');
             $('.picedit_drag_resize_box').css('height', '175px');
+            $('.picedit_drag_resize_box_corner_wrap').hide();
             this._fixratio = 175/600;
             var canvas = document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
@@ -467,6 +468,7 @@
             if(!this._image) return this._hideAllNav(1);
             $('.picedit_drag_resize_box').css('width', '600px');
             $('.picedit_drag_resize_box').css('height', '285px');
+            $('.picedit_drag_resize_box_corner_wrap').hide();
             this._fixratio = 285/600;
             var canvas = document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
@@ -479,6 +481,7 @@
             if(!this._image) return this._hideAllNav(1);
             $('.picedit_drag_resize_box').css('width', '600px');
             $('.picedit_drag_resize_box').css('height', '430px');
+            $('.picedit_drag_resize_box_corner_wrap').hide();
             this._fixratio = 430/600;
             var canvas = document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
@@ -491,6 +494,7 @@
             if(!this._image) return this._hideAllNav(1);
             $('.picedit_drag_resize_box').css('width', '540px');
             $('.picedit_drag_resize_box').css('height', '340px');
+            $('.picedit_drag_resize_box_corner_wrap').show();
             this._fixratio = 170/270;
             var canvas=document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
@@ -503,6 +507,7 @@
             if(!this._image) return this._hideAllNav(1);
             $('.picedit_drag_resize_box').css('width', '420px');
             $('.picedit_drag_resize_box').css('height', '420px');
+            $('.picedit_drag_resize_box_corner_wrap').show();
             this._fixratio = 1;
             var canvas=document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
@@ -620,9 +625,37 @@
         _selection_drag_movement: function(e) {
             var cropframe = this._cropping.cropframe[0];
             var evtpos = (e.pageX) ? e : e.originalEvent.touches[0];
+            var frametop = evtpos.pageY - parseInt(cropframe.clientHeight / 2, 10);
+            var frameleft = evtpos.pageX - parseInt(cropframe.clientWidth / 2, 10);
+            // Lin: get the position of canvas box relative to document
+            var box = $('.picedit_canvas_box')[0].getBoundingClientRect();
+            var body = document.body;
+            var docEl = document.documentElement;
+            var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+            var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+            var clientTop = docEl.clientTop || body.clientTop || 0;
+            var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+            var boxtop = box.top + scrollTop - clientTop;
+            var boxleft = box.left + scrollLeft - clientLeft;
+            // The maximum position of crop frame top so that the buttom edge do not exceed canvas box bottom
+            var maxtop =  boxtop + $('.picedit_canvas_box').height() - cropframe.clientHeight - 4; // border is 2, clientHeight is the inner height
+            // Restrict framebox to be inside canvas box container vertically
+            if (frametop < boxtop) {
+                frametop = boxtop;
+            } else if (frametop > maxtop ) {
+                frametop = maxtop;
+            }
+            // The maximum position of crop frame top so that the buttom edge do not exceed canvas box bottom
+            var maxleft =  boxleft + $('.picedit_canvas_box').width() - cropframe.clientWidth - 4; // border is 2, clientWidth is the inner width
+            // Restrict framebox to be inside canvas box container horizontally
+            if (frameleft < boxleft) {
+                frameleft = boxleft;
+            } else if (frameleft > maxleft ) {
+                frameleft = maxleft;
+            }
             this._cropping.cropframe.offset({
-                top: evtpos.pageY - parseInt(cropframe.clientHeight / 2, 10),
-                left: evtpos.pageX - parseInt(cropframe.clientWidth / 2, 10)
+                top: frametop,
+                left: frameleft
             });
         },
         // Hide all opened navigation and active buttons (clear plugin's box elements)

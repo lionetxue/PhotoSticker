@@ -377,6 +377,7 @@ p{
     overflow: hidden;
     display: none;
     color: #eee;
+    position: relative;
 }
 .picedit_drag_resize.active {
     display: block;
