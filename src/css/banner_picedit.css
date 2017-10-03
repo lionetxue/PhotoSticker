@@ -17,15 +17,20 @@ p{
 }
 
 .picedit_box {
-    display: flex;
+    display: inline-block;
     position: relative;
+    left: 0;
     font-size: 1rem;
+    overflow: hidden;
 }
 .picedit_box_preview {
     display: inline-block;
     position: relative;
     left: 0;
     font-size: 1rem;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
 }
 /*.picedit_canvas_box:hover .picedit_action_btns, .picedit_action_btns.active {*/
 /*z-index: 8;*/
@@ -35,64 +40,11 @@ p{
     z-index: 8;
     opacity: 0.6;
 }
-.picedit_canvas_box{
-    display: inline-block;
-    background: #f0eee4;
-    width: 600px;
-    height: 430px;
-    box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,1);
-    text-align: center;
-    position: relative;
-    /*Lin: hide image outside of canvas area*/
-    /*overflow: hidden;*/
-}
-.picedit_canvas_box.dragging {
-    -webkit-box-shadow: inset 0px 0px 6px 0px #555555;
-    box-shadow: inset 0px 0px 6px 0px #555555;
-}
-.picedit_canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /*Lin: prevent stickers to show*/
-    /*display: none;*/
-    z-index: 5;
-}
-/*.picedit_nav_box {*/
-    /*position: absolute;*/
-    /*left: 0px;*/
-    /*top: 430px;*/
-    /*width: 600px;*/
-    /*z-index: 15;*/
-
-
-    /*-webkit-transition: opacity 200ms ease-out;*/
-    /*-moz-transition: opacity 200ms ease-out;*/
-    /*-ms-transition: opacity 200ms ease-out;*/
-    /*-o-transition: opacity 200ms ease-out;*/
-    /*transition: opacity 200ms ease-out;*/
-/*}*/
-.picedit_nav_box{
-     display: inline-block;
-     width: 300px;
-     visibility: hidden;
-     z-index: 15;
- }
-.option{
-    width: 270px;
-    margin: 5px;
-    font-size: 1rem;
-}
-.size{
-    font-size: 0.8rem;
-}
 .picedit_nav_box:hover, .picedit_nav_box.active {
     opacity: 0.8;
 }
 .picedit_control {
-    padding: 0.25em;
+    padding: 0 0.25em;
     cursor: pointer;
     display: inline-block;
     opacity: 1;
@@ -103,34 +55,11 @@ p{
     -o-transition: all 200ms ease-in-out;
     transition: all 200ms ease-in-out;
 }
-.picedit_element > .picedit_control {
-    width: 60px;
-    background: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
-    border-radius: .3rem;
-    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.18), 0 2px 5px 0 rgba(0,0,0,.15);
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.18), 0 2px 5px 0 rgba(0,0,0,.15);
-}
 .picedit_control:hover, .picedit_element.active > .picedit_control, .picedit_control.active {
     /*opacity: 1;*/
     opacity: 0.5;
     text-shadow: 0px 0.3px 0px rgba(255, 255, 255, 0.8), 0 0 0 rgba(107, 107, 107, 0.62), 0px 0.3px 0px #FFF;
     /*color: transparent;*/
-}
-#upload_btn {
-    width: 50%;
-    height: 50%;
-    position: relative;
-    top: 20%;
-    font-size: 1.5rem;
-}
-#upload_btn > .picedit_control{
-    width: 100%;
-    height: 100%;
-}
-#upload_btn > .picedit_control > i{
-    padding-top: 2rem;
 }
 .picedit_gray_gradient {
     background: -moz-linear-gradient(top,  rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 100%);
@@ -153,17 +82,8 @@ p{
 .picedit_element {
     display: inline-block;
     cursor: pointer;
-    padding: 0.1em;
+    /*padding: 0.1em;*/
     /*margin: 0.2em;*/
-}
-/*Lin: in Nav, make a look like span*/
-/*a, a:visited, a:hover, a:active {
-    text-decoration: none;
-    color: inherit;
-}*/
-.downloadImg {
-    text-decoration: none;
-    color: #222;
 }
 
 .picedit_element > .picedit_control {
@@ -175,16 +95,16 @@ p{
     text-align: center;
     position:  relative;
     z-index: 40;
+    /*Lin*/
+    /*background-color: white;*/
+    /*border: 2px solid;*/
+    /*border-radius: 10px;*/
 }
 /*Lin: make text smaller than icon*/
-.picedit_element > .picedit_control > i{
-    display: block;
-    padding-top: 0.2em;
-}
 .picedit_element > .picedit_control > b{
     font-size: 0.5em;
     display: block;
-    padding-top: 0.2em;
+    padding-top: 0.5em;
 }
 .picedit_element > .picedit_control.ico-picedit-arrow-maximise {
 }
@@ -229,52 +149,30 @@ p{
     -ms-transform: scaleY(1);
     transform: scaleY(1);
 }
-/*.picedit_control_menu_container {
-}
-.picedit_tooltip {}
-.picedit_tooltip.picedit_elm_1:after, .picedit_tooltip.picedit_elm_1:before {
-    left: 70%;
-}
-.picedit_tooltip.picedit_elm_2:after, .picedit_tooltip.picedit_elm_2:before {
-    left: 96%;
-}
-.picedit_tooltip.picedit_elm_3:after, .picedit_tooltip.picedit_elm_3:before {
-    left: 12%;
-}*/
-.picedit_tooltip {
-    position: relative;
-    background: #ffffff;
-    border: 1px solid #949494;
-    padding: 9px 4px 7px;
-    -webkit-box-shadow: 0em 0em 0.2em 0.1em rgba(95, 95, 95, 0.55);
-    box-shadow: 0em 0em 0.2em 0.1em rgba(95, 95, 95, 0.55);
-    white-space: nowrap;
-}
-.picedit_tooltip:after, .picedit_tooltip:before {
-    bottom: 100%;
-    left: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-}
 
-.picedit_tooltip:after {
-    border-color: rgba(255, 255, 255, 0);
-    border-bottom-color: #ffffff;
-    border-width: 8px;
-    margin-left: -8px;
+.picedit_canvas_box {
+    width: 100%;
+    display: block;
+    background: #f0eee4;
+    box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,1);
+    text-align: center;
+    position: relative;
+    /*Lin: hide image outside of canvas area*/
+    overflow:hidden;
 }
-.picedit_tooltip:before {
-    border-color: rgba(204, 204, 204, 0);
-    border-bottom-color: #cccccc;
-    border-width: 9px;
-    margin-left: -9px;
+.picedit_canvas_box.dragging {
+    -webkit-box-shadow: inset 0px 0px 6px 0px #555555;
+    box-shadow: inset 0px 0px 6px 0px #555555;
 }
-.picedit_input {
-    width: 3em;
+.picedit_canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /*Lin: prevent stickers to show*/
+    /*display: none;*/
+    z-index: 5;
 }
 .picedit_action_btns .center {
     text-align: center;
@@ -324,11 +222,9 @@ p{
     margin: 0;
 }
 .picedit_message {
-    display: none;
     position: absolute;
     padding: 1.4em 2.5em 1em 1em;
     bottom: -100px;
-    left: 300px;
     border: 1px solid #eee;
     margin-bottom: 3%;
     margin-left: 2%;
@@ -375,7 +271,6 @@ p{
     overflow: hidden;
     display: none;
     color: #eee;
-    position: relative;
 }
 .picedit_drag_resize.active {
     display: block;
@@ -384,14 +279,16 @@ p{
     z-index: 20;
 }
 .picedit_drag_resize_box {
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 10%;
+    left: 10%;
+    width: 200px;
+    height: 200px;
     z-index: 30;
-    border: 2px dashed #eee;
+    border: 1px dashed #eee;
+    background-image: url("../img/profile-guide.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .picedit_drag_resize_box_corner_wrap {
     position: absolute;
@@ -519,84 +416,30 @@ p{
     z-index: 10;
 }
 
-/*Lin: sticker image hover effects*/
-/*.picedit_sticker, .hidden_sticker{
-    height: 80px;
-    width: 80px;
-    padding: 0.3em;
-    margin-right:5px;
-    background-color: white;
-    border-radius: 10px;
-    background-size: contain;
-}
-.hidden_sticker{
-    cursor: default;
-    opacity: 0.3;
-    pointer-events: none;  !*Make hidden_sticker not clickable*!
-}
-.picedit_sticker:hover {
-    box-shadow: 5px 5px 2px #757575;
-}*/
-/*.picedit_sticker img {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    -webkit-transition: .3s ease-in-out;
-    transition: .3s ease-in-out;
-}
-.picedit_sticker:hover img {
-    -webkit-transform: scale(1.3);
-    transform: scale(1.3);
-}*/
 /* Lin: Preview button */
-.btn {
-    display: inline-block;
-    padding: 0.5em 1.0em;
-    color: #222;
-    background: #EEE;
-    border: none;
-    border-radius: 7px;
-    background-image: linear-gradient( to bottom, hsla(0, 0%, 0%, 0), hsla(0, 0%, 0%, 0.2) );
-    font-family: sans-serif;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
+/*.btn {*/
+    /*background: #3498db;*/
+    /*background-image: -webkit-linear-gradient(top, #3498db, #2980b9);*/
+    /*background-image: -moz-linear-gradient(top, #3498db, #2980b9);*/
+    /*background-image: -ms-linear-gradient(top, #3498db, #2980b9);*/
+    /*background-image: -o-linear-gradient(top, #3498db, #2980b9);*/
+    /*background-image: linear-gradient(to bottom, #3498db, #2980b9);*/
+    /*-webkit-border-radius: 0;*/
+    /*-moz-border-radius: 0;*/
+    /*border-radius: 0px;*/
+    /*font-family: Arial;*/
+    /*color: #ffffff;*/
+    /*font-size: 20px;*/
+    /*padding: 10px 20px 10px 20px;*/
+    /*text-decoration: none;*/
+/*}*/
 
-.btn:hover {
-    background-color: #8CF;
-    text-shadow: 0 1px hsla(0, 0%, 100%, 0.5);
-    color: #222;
-}
-.btn.is-checked {
-    color: white;
-    background-color: #28F;
-    text-shadow: 0 -1px hsla(0, 0%, 0%, 0.8);
-}
-
-.btn:active {
-    color: white;
-    background-color: #28F;
-    box-shadow: inset 0 1px 10px hsla(0, 0%, 0%, 0.8);
-}
-#previewBtn {
-    color: white;
-    background-color: #28F;
-}
-/*
-.submitBtn{
-    background-color: #b31b1b;
-    color: #FFFFFF;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-family: FontAwesome;
-    border-radius: 5px;
-    border-bottom: 3px solid #721212;
-transition(all 100ms ease-in-out);
-}
-.submitBtn:hover {
-    background-color: #8F1616;
-}
-.submitBtn:active{
-    transform: translate(0px,2px);
-    -webkit-transform: translate(0px,2px);
-    border-bottom: 1px solid #721212;
-}*/
+/*.btn:hover {*/
+    /*background: #3cb0fd;*/
+    /*background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);*/
+    /*background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);*/
+    /*background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);*/
+    /*background-image: -o-linear-gradient(top, #3cb0fd, #3498db);*/
+    /*background-image: linear-gradient(to bottom, #3cb0fd, #3498db);*/
+    /*text-decoration: none;*/
+/*}*/

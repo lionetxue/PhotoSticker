@@ -29,7 +29,7 @@
             formSubmitted: function(res){},	// After form was submitted callback function
             redirectUrl: false,				// Page url for redirect on form submit
             maxWidth: 300,					// Max width parameter
-            maxHeight: 285,				// Max height parameter
+            maxHeight: 300,				// Max height parameter
             aspectRatio: true,				// Preserve aspect ratio
             defaultImage: false             // Default image to be used with the plugin
         };
@@ -422,14 +422,22 @@
                 sy = (crop.top - baseimage.top ) / _this._scale;
             }
             this.set_loading(1).delay(200).promise().done(function() {
-                var canvas = document.createElement('canvas');
+                /*var canvas = document.createElement('canvas');
                 var ctx = canvas.getContext("2d");
                 canvas.width = crop.width;
                 canvas.height = crop.height;
                 ctx.drawImage(_this._image, sx, sy, crop.width, crop.height, 0, 0, crop.width, crop.height);
                 _this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
                     _this.hide_messagebox();
-                });
+                });*/
+                console.log(_this.canvasID);
+                var id = 'canvas_preview'+ _this.element.id;
+                console.log(id);
+                var canvas = document.getElementById(id);
+                var ctx = canvas.getContext('2d');
+                ctx.drawImage(_this._image, sx, sy, crop.width, crop.height, 0, 0, canvas.width, canvas.height);
+                $('.close').click();
+                _this.hide_messagebox();
             });
             this.crop_close();
         },
@@ -469,9 +477,6 @@
                 element.click();
 
                 document.body.removeChild(element);
-                /*				canvas.toBlob(function(blob) {
-                 saveAs(blob, "Cornell_Profile.png");
-                 });		*/
             }
         },
         // Create and update image from datasrc

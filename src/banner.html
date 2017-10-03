@@ -8,12 +8,35 @@
     <meta property="og:url" content="http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/" />
     <meta property="og:title" content="Create your Cornell Profile" />
     <title>Cornell Profile Generator</title>
-
-    <link rel="stylesheet" type="text/css" href="css/test_collage_picedit.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/banner_picedit.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 </head>
 <body>
-<h1>Upload images for banner collage</h1>
+<style>
+    .picedit_box{
+        width: 300px;
+        height: 350px;
+    }
+    .picedit_nav_box {
+        position: absolute;
+        top: 300;
+        left: 0px;
+        width: 300px;
+        z-index: 15;
+
+
+        -webkit-transition: opacity 200ms ease-out;
+        -moz-transition: opacity 200ms ease-out;
+        -ms-transition: opacity 200ms ease-out;
+        -o-transition: opacity 200ms ease-out;
+        transition: opacity 200ms ease-out;
+    }
+    .picedit_canvas_box{
+        height: 285px;
+    }
+</style>
+<h1>Compose a banner</h1>
 <div id="_1" class="picedit_box">
     <!-- Picedit canvas element -->
     <div class="picedit_canvas_box">
@@ -147,8 +170,8 @@
 <script type="text/javascript" src="js/jszip.min.js"></script>-->
 <script type="application/javascript" src="js/fabric.min.js"></script>
 <!--<script type="application/javascript" src="js/fabric_zoom.js"></script>-->
-<script type="text/javascript" src="js/zoom_plugin.js"></script>
-<script type="text/javascript" src="js/test_main.js"></script>
+<script type="text/javascript" src="js/banner_plugin.js"></script>
+<script type="text/javascript" src="js/banner_main.js"></script>
 <script>
     $( document ).ready(function(){
         var canvas1=document.getElementById('canvas_1');

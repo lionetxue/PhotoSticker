@@ -1,0 +1,335 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!--meta tags for facebook share	-->
+    <meta property="og:image" content="http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/img/Photo_App_share.png" />
+    <meta property="og:description" content = "Want to create a unique profile picture with Cornell University icon stickers? Click on the link below to try our web application." />
+    <meta property="og:url" content="http://alumni-test.alumni.cornell.edu/zzz/photo-sticker/" />
+    <meta property="og:title" content="Create your Cornell Profile" />
+    <title>Cornell Profile Generator</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css" rel="stylesheet">
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" type="text/css" href="css/banner_picedit.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+</head>
+<body>
+<style>
+    .picedit_box{
+        width: 300px;
+        height: 375px;
+    }
+    .picedit_nav_box {
+        position: absolute;
+        top: 300px;
+        left: 0px;
+        width: 300px;
+        z-index: 15;
+    }
+    .picedit_canvas_box{
+        height: 300px;
+    }
+    .uploadBtn{
+        position:absolute;
+        top: 30px;
+        left: 0;
+        z-index: 0;
+    }
+    .previewcanvas{
+        z-index:100;
+    }
+</style>
+<h1>Compose a banner</h1>
+<!-- Button trigger modal 1-->
+<div id="_preview_1" class="picedit_box_preview">
+    <!-- Picedit canvas element -->
+    <div class="picedit_canvas_box" style="height:200px;">
+        <div class="picedit_canvas">
+            <canvas id="canvas_preview_1" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+            <button type="button" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_1">
+                <i class="fa fa-picture-o fa-lg"></i><br>
+                Select file to upload<br>
+                JPG, PNG, or GIF
+            </button>
+        </div>
+    </div>
+</div>
+<!-- Button trigger modal 2-->
+<div id="_preview_2" class="picedit_box_preview">
+    <!-- Picedit canvas element -->
+    <div class="picedit_canvas_box" style="height:200px;">
+        <div class="picedit_canvas">
+            <canvas id="canvas_preview_2" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+            <button type="button" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_2">
+                <i class="fa fa-picture-o fa-lg"></i><br>
+                Select file to upload<br>
+                JPG, PNG, or GIF
+            </button>
+        </div>
+    </div>
+</div>
+<!-- Button trigger modal 3-->
+<div id="_preview_3" class="picedit_box_preview">
+    <!-- Picedit canvas element -->
+    <div class="picedit_canvas_box" style="height:200px;">
+        <div class="picedit_canvas">
+            <canvas id="canvas_preview_3" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+            <button type="button" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_3">
+                <i class="fa fa-picture-o fa-lg"></i><br>
+                Select file to upload<br>
+                JPG, PNG, or GIF
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 1-->
+<div class="modal fade" id="modal_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                <div id="_1" class="picedit_box card">
+                <!-- Picedit canvas element -->
+                <div class="picedit_canvas_box">
+                    <div class="picedit_canvas">
+                        <canvas id="canvas_1" width="300px" height="300px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+                    </div>
+                    <div class="picedit_drag_resize">
+                        <div class="picedit_drag_resize_canvas"></div>
+                        <div class="picedit_drag_resize_box">
+                            <div class="picedit_drag_resize_box_corner_wrap">
+                                <div class="picedit_drag_resize_box_corner"></div>
+                            </div>
+                            <div class="picedit_drag_resize_box_elements">
+                                <span class="picedit_control  fa fa-check" data-action="crop_image"></span>
+                                <span class="picedit_control  fa fa-close" data-action="crop_close"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Picedit message-->
+                <div class="picedit_message">
+                    <span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span>
+                    <div></div>
+                </div>
+                <!-- Picedit navigation -->
+                <div class="picedit_nav_box">
+                    <!--<div class="picedit_pos_elements"></div>-->
+                    <ul class="picedit_nav_elements">
+                        <!-- Picedit button element begin -->
+                        <li class="picedit_element"> <span class="picedit_control" data-action="load_image"><i class="fa fa-picture-o fa-lg"></i><b> Upload</b></span></li>
+                        <!-- Picedit button element end -->
+                        <!-- Picedit button element begin -->
+                        <li class="picedit_element"> <span class="picedit_control" title="Rotate" data-action="rotate_cw"><i class="fa fa-repeat fa-lg"></i><b> Rotate</b></span></li>
+                        <!-- Picedit button element end -->
+                        <!-- Picedit button element begin -->
+                        <li class="picedit_element"><span class="picedit_control" title="Crop" data-action="crop_open"><i class="fa fa-crop fa-lg"></i><b> Crop</b></span> </li>
+                        <!-- Picedit button element end -->
+                        <!-- Picedit button element begin -->
+                        <li class="picedit_element"><span class="picedit_control" title="Discard" data-action="discard_image"><i class="fa fa-trash fa-lg"></i><b>Discard</b></span></li>
+                        <!-- Picedit button element end -->
+                        <!-- Picedit button element begin -->
+                        <!--			<li class="picedit_element downloadZip"><span id="downloadZip" class="picedit_control picedit_action" title="Download ZipFile"><i class="fa fa-file-archive-o fa-lg"></i><b>ZipFile</b></span> </li>-->
+                        <!-- Picedit button element end -->
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Modal 1 end-->
+<!-- Modal 2-->
+<div class="modal fade" id="modal_2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                <div id="_2" class="picedit_box card">
+                    <!-- Picedit canvas element -->
+                    <div class="picedit_canvas_box">
+                        <div id="canvas-container_2" class="picedit_canvas">
+                            <canvas id="canvas_2" width="300px" height="300px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+                        </div>
+                        <div class="picedit_drag_resize">
+                            <div class="picedit_drag_resize_canvas"></div>
+                            <div class="picedit_drag_resize_box">
+                                <div class="picedit_drag_resize_box_corner_wrap">
+                                    <div class="picedit_drag_resize_box_corner"></div>
+                                </div>
+                                <div class="picedit_drag_resize_box_elements">
+                                    <span class="picedit_control  fa fa-check" data-action="crop_image"></span>
+                                    <span class="picedit_control  fa fa-close" data-action="crop_close"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Picedit message-->
+                    <div class="picedit_message">
+                        <span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span>
+                        <div></div>
+                    </div>
+                    <!-- Picedit navigation -->
+                    <div class="picedit_nav_box">
+                        <!--<div class="picedit_pos_elements"></div>-->
+                        <ul class="picedit_nav_elements">
+                            <!-- Picedit button element begin -->
+                            <li class="picedit_element"> <span class="picedit_control" data-action="load_image"><i class="fa fa-picture-o fa-lg"></i><b> Upload</b></span></li>
+                            <!-- Picedit button element end -->
+                            <!-- Picedit button element begin -->
+                            <li class="picedit_element"> <span class="picedit_control" title="Rotate" data-action="rotate_cw"><i class="fa fa-repeat fa-lg"></i><b> Rotate</b></span></li>
+                            <!-- Picedit button element end -->
+                            <!-- Picedit button element begin -->
+                            <li class="picedit_element"><span class="picedit_control" title="Crop" data-action="crop_open"><i class="fa fa-crop fa-lg"></i><b> Crop</b></span> </li>
+                            <!-- Picedit button element end -->
+                            <!-- Picedit button element begin -->
+                            <li class="picedit_element"><span class="picedit_control" title="Discard" data-action="discard_image"><i class="fa fa-trash fa-lg"></i><b>Discard</b></span></li>
+                            <!-- Picedit button element end -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Modal 2 end-->
+<!-- Modal 3-->
+<div class="modal fade" id="modal_3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                <div id="_3" class="picedit_box card">
+                    <!-- Picedit canvas element -->
+                    <div class="picedit_canvas_box">
+                        <div id="canvas-container_3" class="picedit_canvas">
+                            <canvas id="canvas_3" width="300px" height="300px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+                        </div>
+                        <div class="picedit_drag_resize">
+                            <div class="picedit_drag_resize_canvas"></div>
+                            <div class="picedit_drag_resize_box">
+                                <div class="picedit_drag_resize_box_corner_wrap">
+                                    <div class="picedit_drag_resize_box_corner"></div>
+                                </div>
+                                <div class="picedit_drag_resize_box_elements">
+                                    <span class="picedit_control  fa fa-check" data-action="crop_image"></span>
+                                    <span class="picedit_control  fa fa-close" data-action="crop_close"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Picedit message-->
+                    <div class="picedit_message">
+                        <span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span>
+                        <div></div>
+                    </div>
+                    <!-- Picedit navigation -->
+                    <div class="picedit_nav_box">
+                        <!--<div class="picedit_pos_elements"></div>-->
+                        <ul class="picedit_nav_elements">
+                            <!-- Picedit button element begin -->
+                            <li class="picedit_element"> <span class="picedit_control" data-action="load_image"><i class="fa fa-picture-o fa-lg"></i><b> Upload</b></span></li>
+                            <!-- Picedit button element end -->
+                            <!-- Picedit button element begin -->
+                            <li class="picedit_element"> <span class="picedit_control" title="Rotate" data-action="rotate_cw"><i class="fa fa-repeat fa-lg"></i><b> Rotate</b></span></li>
+                            <!-- Picedit button element end -->
+                            <!-- Picedit button element begin -->
+                            <li class="picedit_element"><span class="picedit_control" title="Crop" data-action="crop_open"><i class="fa fa-crop fa-lg"></i><b> Crop</b></span> </li>
+                            <!-- Picedit button element end -->
+                            <!-- Picedit button element begin -->
+                            <li class="picedit_element"><span class="picedit_control" title="Discard" data-action="discard_image"><i class="fa fa-trash fa-lg"></i><b>Discard</b></span></li>
+                            <!-- Picedit button element end -->
+                            <!-- Picedit button element begin -->
+                            <!--			<li class="picedit_element downloadZip"><span id="downloadZip" class="picedit_control picedit_action" title="Download ZipFile"><i class="fa fa-file-archive-o fa-lg"></i><b>ZipFile</b></span> </li>-->
+                            <!-- Picedit button element end -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Modal 3 end-->
+<div id="drop-target">
+</div>
+<br/>
+<div style="margin: 10px 0;"><button type="button" class="btn btn-primary" id="previewBtn">Preview</button></div>
+<br/>
+<!--Preview Canvas-->
+<div id="_preview" class="picedit_box_preview" style="display: none;">
+    <!-- Picedit canvas element -->
+    <div class="picedit_canvas_box">
+        <div id="canvas-container_preview" class="picedit_canvas">
+            <canvas id="canvas_preview" width="900px" height="300px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+        </div>
+    </div>
+    <!--Picedit message-->
+    <div class="picedit_message">
+        <span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span>
+        <div></div>
+    </div>
+    <!-- Picedit navigation -->
+    <div class="picedit_nav_box">
+        <!--<div class="picedit_pos_elements"></div>-->
+        <ul class="picedit_nav_elements">
+            <!-- Picedit button element begin -->
+            <li class="picedit_element"><a id="downloadImg" class="picedit_control picedit_action downloadImg" title="Download" onclick="$('#downloadImg').attr('href', canvas_preview.toDataURL());" download="Cornell_Banner.png" href="#" target="_blank"><i class="fa fa-download fa-lg"></i><b> Download</b></a> </li>
+            <!-- Picedit button element end -->
+        </ul>
+    </div>
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js" crossorigin="anonymous"></script>
+<!--<script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js' crossorigin="anonymous"></script>-->
+<script type="application/javascript" src="js/fabric.min.js"></script>
+<script type="text/javascript" src="js/banner_plugin.js"></script>
+<script type="text/javascript" src="js/banner_main.js"></script>
+<script>
+    // main()
+    $( document ).ready(function(){
+        var canvas1=document.getElementById('canvas_1');
+        var canvas2=document.getElementById('canvas_2');
+        var canvas3=document.getElementById('canvas_3');
+        // merge 2 canvases (canvas1-canvas4) onto a single canvas
+        var canvas=document.getElementById('canvas_preview');
+        var context=canvas.getContext('2d');
+        $( "#previewBtn" ).click(function() {
+            $('#_preview').show();
+            context.drawImage(canvas1,0,0);
+            context.drawImage(canvas2,200,0);
+            context.drawImage(canvas3,400,0);
+        });
+    });
+</script>
+</body>
+</html>
