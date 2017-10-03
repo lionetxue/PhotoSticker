@@ -430,15 +430,10 @@
                 // var ctx = canvas.getContext("2d");
                 var canvas = document.getElementById('canvas_preview');
                 var ctx = canvas.getContext('2d');
-                // canvas.width = crop.width;
-                // canvas.height = crop.height;
-                console.log("sx: "+ sx);
-                console.log("crop.width: "+ crop.width);
-                console.log("crop.height: "+ crop.height);
-                console.log("canvas.width: " + canvas.width);
-                console.log("canvas.height: " + canvas.height);
                 ctx.drawImage(_this._image, sx, sy, crop.width, crop.height, 0, 0, canvas.width, canvas.height);
                 $('.picedit_box_preview').show();
+                $('.picedit_box').hide();
+                $('#options').hide();
                 _this.hide_messagebox();
                 // _this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
                 //     _this.hide_messagebox();
