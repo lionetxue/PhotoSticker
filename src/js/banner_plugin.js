@@ -429,12 +429,16 @@
                     _this.hide_messagebox();
                 });*/
                 var id = 'canvas_preview'+ _this.element.id;
-                console.log(id);
                 var canvas = document.getElementById(id);
                 var ctx = canvas.getContext('2d');
                 ctx.drawImage(_this._image, sx, sy, crop.width, crop.height, 0, 0, canvas.width, canvas.height);
+                // console.log("sx " + sx);
+                // console.log("sy " + sy);
+                // console.log("crop with " + crop.width);
+                // console.log("crop height " + crop.height);
+                // console.log("canvas.width " + canvas.width);
+                // console.log("canvas.height " + canvas.height);
                  var btnID = "btn" + _this.element.id;
-                 console.log(btnID);
                 $('#' + btnID ).hide();
                 $('.close').click(); // close modal
                 _this.hide_messagebox();
@@ -547,11 +551,49 @@
             // cropframe.style.height = (this._cropping.h + evtpos.clientY - this._cropping.y) + 'px';
         },
         _selection_drag_movement: function(e) {
-            var cropframe = this._cropping.cropframe[0];
+            /*var cropframe = this._cropping.cropframe[0];
             var evtpos = (e.pageX) ? e : e.originalEvent.touches[0];
             this._cropping.cropframe.offset({
                 top: evtpos.pageY - parseInt(cropframe.clientHeight / 2, 10),
                 left: evtpos.pageX - parseInt(cropframe.clientWidth / 2, 10)
+            });*/
+            var cropframe = this._cropping.cropframe[0];
+            var evtpos = (e.pageX) ? e : e.originalEvent.touches[0];
+            var frametop = evtpos.pageY - parseInt(cropframe.clientHeight / 2, 10);
+            var frameleft = evtpos.pageX - parseInt(cropframe.clientWidth / 2, 10);
+            // Lin: get the position of canvas box relative to document
+            var box = $('#'+ this.canvasID)[0].getBoundingClientRect();
+            var body = document.body;
+            var docEl = document.documentElement;
+            var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+            var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+            var clientTop = docEl.clientTop || body.clientTop || 0;
+            var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+            var boxtop = box.top + scrollTop - clientTop;
+            var boxleft = box.left + scrollLeft - clientLeft;
+            var boxtop = box.top;
+            var boxleft = box.left;
+            // The maximum position of crop frame top so that the buttom edge do not exceed canvas box bottom
+            // var maxtop =  boxtop + $('.picedit_canvas_box').height() - cropframe.clientHeight -2; // border is 1, clientHeight is the inner height
+            var maxtop = boxtop + 100;
+            // Restrict framebox to be inside canvas box container vertically
+            if (frametop < boxtop) {
+                frametop = boxtop;
+            } else if (frametop > maxtop ) {
+                frametop = maxtop;
+            }
+            // The maximum position of crop frame top so that the buttom edge do not exceed canvas box bottom
+            //var maxleft =  boxleft + $('.picedit_canvas_box').width() - cropframe.clientWidth -2; // border is 1, clientWidth is the inner width
+            var maxleft = boxleft + 100;
+            // Restrict framebox to be inside canvas box container horizontally
+            if (frameleft < boxleft) {
+                frameleft = boxleft;
+            } else if (frameleft > maxleft ) {
+                frameleft = maxleft;
+            }
+            this._cropping.cropframe.offset({
+                top: frametop,
+                left: frameleft
             });
         },
         // Hide all opened navigation and active buttons (clear plugin's box elements)
@@ -572,6 +614,9 @@
             //clear previous image first
             //_this._canvas.clear();
             fabric.Image.fromURL(this._image.src , function(oImg) {
+                if (scale > 1 ) {
+                    _this.set_messagebox("Your image is too small to crop!");
+                }
                 oImg.scale(scale);
                 // lock aspect ratio
                 oImg.lockUniScaling = true;
@@ -593,13 +638,13 @@
                 "height": this._image.height
             };
             var crop = {						//crop area sizes and position
-                "width": cropframe.clientWidth,
-                "height": cropframe.clientHeight,
+                "width": cropframe.clientWidth + 2, //add the border width
+                "height": cropframe.clientHeight + 2, //add the border width
                 "top": (cropframe.offsetTop > 0) ? cropframe.offsetTop : 0.1,
                 "left": (cropframe.offsetLeft > 0) ? cropframe.offsetLeft : 0.1
             };
-            if((crop.width + crop.left) > view.width) crop.width = view.width - crop.left;
-            if((crop.height + crop.top) > view.height) crop.height = view.height - crop.top;
+            // if((crop.width + crop.left) > view.width) crop.width = view.width - crop.left;
+            // if((crop.height + crop.top) > view.height) crop.height = view.height - crop.top;
             //calculate width and height for the full image size
             var width_percent = crop.width / view.width;
             var height_percent = crop.height / view.height;
@@ -610,6 +655,10 @@
             //calculate actual top and left crop position
             var top_percent = crop.top / view.height;
             var left_percent = crop.left / view.width;
+            if (this._scale > 1) {
+                top_percent = top_percent * this._scale;
+                left_percent = left_percent * this._scale;
+            }
             area.top = parseInt(real.height * top_percent, 10);
             area.left = parseInt(real.width * left_percent, 10);
             return area;
@@ -638,8 +687,8 @@
                 "width": img.width,
                 "height": img.height
             };
-            if(this.options.maxWidth != 'auto' && img.width > this.options.maxWidth) viewport.width = this.options.maxWidth;
-            if(this.options.maxHeight != 'auto' && img.height > this.options.maxHeight) viewport.height = this.options.maxHeight;
+            // if(this.options.maxWidth != 'auto' && img.width > this.options.maxWidth) viewport.width = this.options.maxWidth;
+            // if(this.options.maxHeight != 'auto' && img.height > this.options.maxHeight) viewport.height = this.options.maxHeight;
             //calculate appropriate viewport size and resize the canvas
             if(this.options.aspectRatio) {
                 var resizeWidth = img.width;
@@ -647,13 +696,16 @@
                 var aspect = resizeWidth / resizeHeight;
                 //Lin: check for landscape or portrait
                 if (resizeWidth > resizeHeight) {
+                    if(this.options.maxHeight != 'auto' && img.height < this.options.maxHeight) viewport.width = this.options.maxWidth * img.width / img.height;
+                    if(this.options.maxHeight != 'auto') viewport.height = this.options.maxHeight;
                     if (resizeHeight > viewport.height) {
-                        aspect = resizeWidth / resizeHeight;
                         viewport.height = parseInt(viewport.height, 10);
                         viewport.width = parseInt(viewport.height * aspect, 10);
                     }
                 }
                 else {
+                    if(this.options.maxWidth!= 'auto' && img.width < this.options.maxWidth) viewport.height = this.options.maxHeight * img.height / img.width;
+                    if(this.options.maxWidth != 'auto') viewport.width = this.options.maxWidth;
                     if (resizeWidth > viewport.width) {
                         viewport.width = parseInt(viewport.width, 10);
                         viewport.height = parseInt(viewport.width / aspect, 10);
