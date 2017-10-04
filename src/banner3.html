@@ -24,31 +24,30 @@
     .picedit_nav_box {
         position: absolute;
         top: 300px;
-        left: 0px;
+        left: 0;
         width: 300px;
         z-index: 15;
     }
     .picedit_canvas_box{
         height: 300px;
     }
+    .picedit_preview_canvas_box {
+        height: 200px;
+    }
     .uploadBtn{
         position:absolute;
         top: 30px;
         left: 0;
-        z-index: 0;
-    }
-    .previewcanvas{
-        z-index:100;
     }
 </style>
 <h1>Compose a banner</h1>
 <!-- Button trigger modal 1-->
 <div id="_preview_1" class="picedit_box_preview">
     <!-- Picedit canvas element -->
-    <div class="picedit_canvas_box" style="height:200px;">
+    <div class="picedit_preview_canvas_box" >
         <div class="picedit_canvas">
             <canvas id="canvas_preview_1" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
-            <button type="button" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_1">
+            <button type="button" id="btn_1" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_1">
                 <i class="fa fa-picture-o fa-lg"></i><br>
                 Select file to upload<br>
                 JPG, PNG, or GIF
@@ -59,10 +58,10 @@
 <!-- Button trigger modal 2-->
 <div id="_preview_2" class="picedit_box_preview">
     <!-- Picedit canvas element -->
-    <div class="picedit_canvas_box" style="height:200px;">
+    <div class="picedit_preview_canvas_box">
         <div class="picedit_canvas">
             <canvas id="canvas_preview_2" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
-            <button type="button" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_2">
+            <button type="button" id="btn_2" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_2">
                 <i class="fa fa-picture-o fa-lg"></i><br>
                 Select file to upload<br>
                 JPG, PNG, or GIF
@@ -73,10 +72,10 @@
 <!-- Button trigger modal 3-->
 <div id="_preview_3" class="picedit_box_preview">
     <!-- Picedit canvas element -->
-    <div class="picedit_canvas_box" style="height:200px;">
+    <div class="picedit_preview_canvas_box">
         <div class="picedit_canvas">
             <canvas id="canvas_preview_3" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
-            <button type="button" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_3">
+            <button type="button" id="btn_3" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_3">
                 <i class="fa fa-picture-o fa-lg"></i><br>
                 Select file to upload<br>
                 JPG, PNG, or GIF
@@ -283,26 +282,23 @@
 <div style="margin: 10px 0;"><button type="button" class="btn btn-primary" id="previewBtn">Preview</button></div>
 <br/>
 <!--Preview Canvas-->
-<div id="_preview" class="picedit_box_preview" style="display: none;">
+<div id="_preview"  style="display: none;">
     <!-- Picedit canvas element -->
-    <div class="picedit_canvas_box">
-        <div id="canvas-container_preview" class="picedit_canvas">
-            <canvas id="canvas_preview" width="900px" height="300px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+
+        <div>
+            <canvas id="canvas_preview" width="600px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
         </div>
-    </div>
+
     <!--Picedit message-->
     <div class="picedit_message">
         <span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span>
         <div></div>
     </div>
     <!-- Picedit navigation -->
-    <div class="picedit_nav_box">
-        <!--<div class="picedit_pos_elements"></div>-->
-        <ul class="picedit_nav_elements">
+    <div >
             <!-- Picedit button element begin -->
             <li class="picedit_element"><a id="downloadImg" class="picedit_control picedit_action downloadImg" title="Download" onclick="$('#downloadImg').attr('href', canvas_preview.toDataURL());" download="Cornell_Banner.png" href="#" target="_blank"><i class="fa fa-download fa-lg"></i><b> Download</b></a> </li>
             <!-- Picedit button element end -->
-        </ul>
     </div>
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" crossorigin="anonymous"></script>
@@ -317,17 +313,17 @@
 <script>
     // main()
     $( document ).ready(function(){
-        var canvas1=document.getElementById('canvas_1');
-        var canvas2=document.getElementById('canvas_2');
-        var canvas3=document.getElementById('canvas_3');
+        var canvas1=document.getElementById('canvas_preview_1');
+        var canvas2=document.getElementById('canvas_preview_2');
+        var canvas3=document.getElementById('canvas_preview_3');
         // merge 2 canvases (canvas1-canvas4) onto a single canvas
         var canvas=document.getElementById('canvas_preview');
         var context=canvas.getContext('2d');
         $( "#previewBtn" ).click(function() {
-            $('#_preview').show();
             context.drawImage(canvas1,0,0);
             context.drawImage(canvas2,200,0);
             context.drawImage(canvas3,400,0);
+            $('#_preview').show();
         });
     });
 </script>

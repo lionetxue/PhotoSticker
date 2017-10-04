@@ -120,15 +120,13 @@
                 var file = files[0];
                 if(!_this._filename) {
                     _this._filename = file.name;
-                    console.log(file.name);
+                    //console.log(file.name);
                 }
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    console.log("reader load");
                     _this._create_image_with_datasrc(e.target.result, false, file);
                 };
                 if (file) {
-                    console.log("file");
                     reader.readAsDataURL(file);
                 }
             }
@@ -430,13 +428,15 @@
                 _this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
                     _this.hide_messagebox();
                 });*/
-                console.log(_this.canvasID);
                 var id = 'canvas_preview'+ _this.element.id;
                 console.log(id);
                 var canvas = document.getElementById(id);
                 var ctx = canvas.getContext('2d');
                 ctx.drawImage(_this._image, sx, sy, crop.width, crop.height, 0, 0, canvas.width, canvas.height);
-                $('.close').click();
+                 var btnID = "btn" + _this.element.id;
+                 console.log(btnID);
+                $('#' + btnID ).hide();
+                $('.close').click(); // close modal
                 _this.hide_messagebox();
             });
             this.crop_close();
@@ -557,7 +557,7 @@
         // Hide all opened navigation and active buttons (clear plugin's box elements)
         _hideAllNav: function (message) {
             if(message && message == 1) {
-                this.set_messagebox("Open an image or use your camera to make a photo!");
+                this.set_messagebox("Upload an image first!");
             }
             $(this.element).find(".picedit_nav_box").removeClass("active").find(".picedit_element").removeClass("active");
         },
