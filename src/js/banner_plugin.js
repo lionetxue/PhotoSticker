@@ -28,8 +28,8 @@
             imageUpdated: function(img){},	// Image updated callback function
             formSubmitted: function(res){},	// After form was submitted callback function
             redirectUrl: false,				// Page url for redirect on form submit
-            maxWidth: 300,					// Max width parameter
-            maxHeight: 300,				// Max height parameter
+            maxWidth: 600,					// Max width parameter
+            maxHeight: 600,				// Max height parameter
             aspectRatio: true,				// Preserve aspect ratio
             defaultImage: false             // Default image to be used with the plugin
         };
@@ -575,7 +575,7 @@
             var boxleft = box.left;
             // The maximum position of crop frame top so that the buttom edge do not exceed canvas box bottom
             // var maxtop =  boxtop + $('.picedit_canvas_box').height() - cropframe.clientHeight -2; // border is 1, clientHeight is the inner height
-            var maxtop = boxtop + 100;
+            var maxtop = boxtop + this.maxWidth - cropframe.clientHeight -2;
             // Restrict framebox to be inside canvas box container vertically
             if (frametop < boxtop) {
                 frametop = boxtop;
@@ -584,7 +584,7 @@
             }
             // The maximum position of crop frame top so that the buttom edge do not exceed canvas box bottom
             //var maxleft =  boxleft + $('.picedit_canvas_box').width() - cropframe.clientWidth -2; // border is 1, clientWidth is the inner width
-            var maxleft = boxleft + 100;
+            var maxleft = boxleft + this.maxWidth - cropframe.clientWidth -2;
             // Restrict framebox to be inside canvas box container horizontally
             if (frameleft < boxleft) {
                 frameleft = boxleft;
@@ -614,8 +614,8 @@
             //clear previous image first
             //_this._canvas.clear();
             fabric.Image.fromURL(this._image.src , function(oImg) {
-                if (scale > 1 ) {
-                    _this.set_messagebox("Your image is too small to crop!");
+                if (scale > 2 ) {
+                    _this.set_messagebox("Your image may be too small to crop!");
                 }
                 oImg.scale(scale);
                 // lock aspect ratio
