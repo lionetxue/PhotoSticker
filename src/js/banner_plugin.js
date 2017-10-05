@@ -76,7 +76,7 @@
                 this._fileinput = $(this.element);
             else {
                 // Create a reference to the file input box
-                $(this.element).after('<input type="file" style="display:none" accept="image/*">');
+                $(this.element).after('<input type="file" style="display:none;" accept="image/*">');
                 this._fileinput = $(this.element).next("input");
             }
             // Get reference to the main canvas element

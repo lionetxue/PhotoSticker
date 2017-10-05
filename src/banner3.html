@@ -36,8 +36,9 @@
     }
     .uploadBtn{
         position:absolute;
-        top: 30px;
+        top: 40px;
         left: 0;
+        height: 100px;
     }
 </style>
 <h1>Compose a banner</h1>
@@ -48,9 +49,7 @@
         <div class="picedit_canvas">
             <canvas id="canvas_preview_1" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
             <button type="button" id="btn_1" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_1">
-                <i class="fa fa-picture-o fa-lg"></i><br>
-                Select file to upload<br>
-                JPG, PNG, or GIF
+                Crop first image.
             </button>
         </div>
     </div>
@@ -62,9 +61,7 @@
         <div class="picedit_canvas">
             <canvas id="canvas_preview_2" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
             <button type="button" id="btn_2" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_2">
-                <i class="fa fa-picture-o fa-lg"></i><br>
-                Select file to upload<br>
-                JPG, PNG, or GIF
+                Crop second image.
             </button>
         </div>
     </div>
@@ -76,9 +73,7 @@
         <div class="picedit_canvas">
             <canvas id="canvas_preview_3" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
             <button type="button" id="btn_3" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_3">
-                <i class="fa fa-picture-o fa-lg"></i><br>
-                Select file to upload<br>
-                JPG, PNG, or GIF
+                Crop third image.
             </button>
         </div>
     </div>
@@ -126,7 +121,7 @@
                     <!--<div class="picedit_pos_elements"></div>-->
                     <ul class="picedit_nav_elements">
                         <!-- Picedit button element begin -->
-                        <li class="picedit_element"> <span class="picedit_control" data-action="load_image"><i class="fa fa-picture-o fa-lg"></i><b> Upload</b></span></li>
+                        <li class="picedit_element"> <span class="picedit_control" id="upload_1" data-action="load_image"><i class="fa fa-picture-o fa-lg"></i><b> Upload</b></span></li>
                         <!-- Picedit button element end -->
                         <!-- Picedit button element begin -->
                         <li class="picedit_element"> <span class="picedit_control" title="Rotate" data-action="rotate_cw"><i class="fa fa-repeat fa-lg"></i><b> Rotate</b></span></li>
@@ -289,11 +284,6 @@
             <canvas id="canvas_preview" width="600px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
         </div>
 
-    <!--Picedit message-->
-    <div class="picedit_message">
-        <span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span>
-        <div></div>
-    </div>
     <!-- Picedit navigation -->
     <div >
             <!-- Picedit button element begin -->
@@ -309,14 +299,25 @@
 <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js' crossorigin="anonymous"></script>-->
 <script type="application/javascript" src="js/fabric.min.js"></script>
 <script type="text/javascript" src="js/banner_plugin.js"></script>
-<script type="text/javascript" src="js/banner_main.js"></script>
+<!--<script type="text/javascript" src="js/banner_main.js"></script>-->
 <script>
     // main()
     $( document ).ready(function(){
+        $('.picedit_box').picEdit( );
+        //var box_1 = $('#_1').picEdit( );
+/*        $('#modal_1').on('shown.bs.modal', function(){
+            console.log("modal_1");
+            setTimeout(function () {
+                $("#upload_1").trigger('click');
+                console.log($('#_1').data('plugin_picEdit')._fileinput[0]);
+                var pluginHandle = $('#_1').data('plugin_picEdit');
+            }, 10);
+        });*/
+
         var canvas1=document.getElementById('canvas_preview_1');
         var canvas2=document.getElementById('canvas_preview_2');
         var canvas3=document.getElementById('canvas_preview_3');
-        // merge 2 canvases (canvas1-canvas4) onto a single canvas
+        // merge canvases (canvas1-canvas3) onto a single canvas
         var canvas=document.getElementById('canvas_preview');
         var context=canvas.getContext('2d');
         $( "#previewBtn" ).click(function() {
@@ -326,6 +327,19 @@
             $('#_preview').show();
         });
     });
+    /*jQuery.fn.simulateClick = function() {
+        return this.each(function() {
+            if('createEvent' in document) {
+                var doc = this.ownerDocument,
+                    evt = doc.createEvent('MouseEvents');
+                evt.initEvent('click', true, true, doc.defaultView, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+                this.dispatchEvent(evt);
+            } else {
+                this.click(); // IE Boss!
+            }
+        });
+    }*/
+
 </script>
 </body>
 </html>
