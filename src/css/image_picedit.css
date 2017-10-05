@@ -39,7 +39,7 @@ p{
     display: inline-block;
     background: #f0eee4;
     width: 600px;
-    height: 430px;
+    height: 600px;
     box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,1);
     text-align: center;
     position: relative;
@@ -391,7 +391,7 @@ p{
     top: 0;
     left: 0;
     z-index: 30;
-    border: 2px dashed #eee;
+    border: 2px dashed #89CCE2;
 }
 .picedit_drag_resize_box_corner_wrap {
     position: absolute;
