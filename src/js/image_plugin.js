@@ -87,7 +87,7 @@
             // so that we can call it outside of the plugin
             document.getElementById(this.canvasID).fabric = this._canvas;
             //stop the bringtofront on selected objects
-            this._canvas. preserveObjectStacking = true;
+            this._canvas.preserveObjectStacking = true;
             // Create and set the 2d context for the canvas
             this._ctx = this._canvas.getContext("2d");
             //setOverlayImage makes sure sticker adds as overlay, no change or move the sticker
@@ -133,7 +133,8 @@
                     reader.readAsDataURL(file);
                 }
                 $('#upload_btn').hide();
-                $('.picedit_nav_box').css('visibility', 'visible');
+                $('.cropOptions').css('visibility', 'visible');
+                $('.picedit_nav_box').show();
             }
             // Bind file drag-n-drop behavior
             $(this.element).find(".picedit_canvas_box").on("drop", function(event) {
@@ -445,13 +446,23 @@
         },
         crop_open_1: function () {
             if(!this._image) return this._hideAllNav(1);
-            $('.picedit_drag_resize_box').width(600);
-            $('.picedit_drag_resize_box').height(175);
             // Lin : preserve a reference to the size of final cropframe
+            this._fixratio = 175/600;
             this._cropping.oriwidth = 600;
             this._cropping.oriheight = 175;
+            if(this._image.width < 600) {
+                this._cropping.width = this._image.width * 0.8;
+                this._cropping.height = this._cropping.width * this._fixratio;
+                $('.picedit_drag_resize_box').width(this._cropping.width);
+                $('.picedit_drag_resize_box').height(this._cropping.height);
+            }
+            else {
+                $('.picedit_drag_resize_box').width(600);
+                $('.picedit_drag_resize_box').height(175);
+                this._cropping.width = 600;
+                this._cropping.height = 175;
+            }
             //$('.picedit_drag_resize_box_corner_wrap').hide();
-            this._fixratio = 175/600;
             var canvas = document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
             ctx.canvas.width = 600;
@@ -461,12 +472,21 @@
         },
         crop_open_2: function () {
             if(!this._image) return this._hideAllNav(1);
-            $('.picedit_drag_resize_box').width(600);
-            $('.picedit_drag_resize_box').height(285);
+            this._fixratio = 285/600;
             this._cropping.oriwidth = 600;
             this._cropping.oriheight = 285;
-            //$('.picedit_drag_resize_box_corner_wrap').hide();
-            this._fixratio = 285/600;
+            if(this._image.width < 600) {
+                this._cropping.width = this._image.width * 0.8;
+                this._cropping.height = this._cropping.width * this._fixratio;
+                $('.picedit_drag_resize_box').width(this._cropping.width);
+                $('.picedit_drag_resize_box').height(this._cropping.height);
+            }
+            else {
+                $('.picedit_drag_resize_box').width(600);
+                $('.picedit_drag_resize_box').height(285);
+                this._cropping.width = 600;
+                this._cropping.height = 285;
+            }
             var canvas = document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
             ctx.canvas.width = 600;
@@ -476,12 +496,21 @@
         },
         crop_open_3: function () {
             if(!this._image) return this._hideAllNav(1);
-            $('.picedit_drag_resize_box').width(600);
-            $('.picedit_drag_resize_box').height(430);
+            this._fixratio = 430/600;
             this._cropping.oriwidth = 600;
             this._cropping.oriheight = 430;
-            //$('.picedit_drag_resize_box_corner_wrap').hide();
-            this._fixratio = 430/600;
+            if(this._image.width < 600) {
+                this._cropping.width = this._image.width * 0.8;
+                this._cropping.height = this._cropping.width * this._fixratio;
+                $('.picedit_drag_resize_box').width(this._cropping.width);
+                $('.picedit_drag_resize_box').height(this._cropping.height);
+            }
+            else {
+                $('.picedit_drag_resize_box').width(600);
+                $('.picedit_drag_resize_box').height(430);
+                this._cropping.width = 600;
+                this._cropping.height = 430;
+            }
             var canvas = document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
             ctx.canvas.width = 600;
@@ -491,12 +520,21 @@
         },
         crop_open_4: function () {
             if(!this._image) return this._hideAllNav(1);
-            $('.picedit_drag_resize_box').width(270);
-            $('.picedit_drag_resize_box').height(170);
+            this._fixratio = 170/270;
             this._cropping.oriwidth = 270;
             this._cropping.oriheight = 170;
-            //$('.picedit_drag_resize_box_corner_wrap').show();
-            this._fixratio = 170/270;
+            if(this._image.width < 270) {
+                this._cropping.width = this._image.width * 0.8;
+                this._cropping.height = this._cropping.width * this._fixratio;
+                $('.picedit_drag_resize_box').width(this._cropping.width);
+                $('.picedit_drag_resize_box').height(this._cropping.height);
+            }
+            else {
+                $('.picedit_drag_resize_box').width(270);
+                $('.picedit_drag_resize_box').height(170);
+                this._cropping.width = 270;
+                this._cropping.height = 170;
+            }
             var canvas=document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
             ctx.canvas.width = 270;
@@ -506,12 +544,21 @@
         },
         crop_open_5: function () {
             if(!this._image) return this._hideAllNav(1);
-            $('.picedit_drag_resize_box').width(140);
-            $('.picedit_drag_resize_box').height(140);
+            this._fixratio = 1;
             this._cropping.oriwidth = 140;
             this._cropping.oriheight = 140;
-            //$('.picedit_drag_resize_box_corner_wrap').show();
-            this._fixratio = 1;
+            if(this._image.width < 140) {
+                this._cropping.width = this._image.width;
+                this._cropping.height = this._cropping.width * this._fixratio;
+                $('.picedit_drag_resize_box').width(this._cropping.width);
+                $('.picedit_drag_resize_box').height(this._cropping.height);
+            }
+            else {
+                $('.picedit_drag_resize_box').width(140);
+                $('.picedit_drag_resize_box').height(140);
+                this._cropping.width = 140;
+                this._cropping.height = 140;
+            }
             var canvas=document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
             ctx.canvas.width = 140;
@@ -533,6 +580,10 @@
             this._image = false;
             //Re-active buttons for new upload
             $(".picedit_action_btns").addClass("active");
+            $('#upload_btn').show();
+            $('.picedit_nav_box').hide();
+            $('.picedit_canvas_box').css("width", "600px");
+            $('.picedit_canvas_box').css("height", "600px");
         },
         download_image: function(){
             var canvas = document.getElementById(canvasID);
@@ -612,21 +663,18 @@
                 _this._variables.prev_pos = false;
                 eventbox.off("mousemove touchmove");
                 resizer.off("mousemove touchmove");
+                if (_this._cropping.width < _this._cropping.oriwidth) {
+                    _this.set_messagebox("Your crop frame is less than 600px wide.  It will yield low quality photo.");
+                }
             });
         },
         _selection_resize_movement: function(e) {
             var cropframe = this._cropping.cropframe[0];
             var evtpos = (e.clientX) ? e : e.originalEvent.touches[0];
-            var newcropwidth = this._cropping.w + evtpos.clientX - this._cropping.x;
-            // Lin:  Make sure user cannot crop smaller than the min size.
-            if (this._cropping.oriwidth < newcropwidth) {
-                cropframe.style.width = newcropwidth + 'px';
-                //this._cropping.width = newcropwidth;
-                //Lin:  keep the aspect ratio of cropframe
-                cropframe.style.height = (this._cropping.w + evtpos.clientX - this._cropping.x) * this._fixratio + 'px';
-                //this._cropping.height = (this._cropping.w + evtpos.clientX - this._cropping.x) * this._fixratio;
-                console.log(this._cropping.width);
-            }
+            this._cropping.width = this._cropping.w + evtpos.clientX - this._cropping.x;
+            this._cropping.height = this._cropping.width * this._fixratio;
+            cropframe.style.width  = this._cropping.width + 'px';
+            cropframe.style.height = this._cropping.height + 'px';
         },
         _selection_drag_movement: function(e) {
             var cropframe = this._cropping.cropframe[0];
@@ -682,9 +730,9 @@
             //clear previous image first
             //_this._canvas.clear();
             fabric.Image.fromURL(this._image.src , function(oImg) {
-                if (_this._image.width < 600 ) {
+                /*if (_this._image.width < 600 ) {
                     _this.set_messagebox("The width of your image is less than 600px! It may yield low resolution photo.");
-                }
+                }*/
                 if(_this._scale < 1){ oImg.scale(scale);}
                 // lock aspect ratio
                 oImg.lockUniScaling = true;
@@ -694,14 +742,17 @@
                 oImg.lockMovementY = true;
                 /*if (scaleX < scaleY) { oImg.lockMovementY = true;}
                 else {  oImg.lockMovementX = true;}*/
-                _this._canvas.insertAt(oImg, 0, true).deactivateAll().renderAll();
+                _this._canvas.insertAt(oImg, 0, true).renderAll();
             });
             // Lin: RESIZE CANVAS CONTAINER and viewport
             var viewwidth = _this._canvas.width;
             var viewheight = _this._canvas.height;
             // landscape photos
             if( scaleX < scaleY) {
-                if(scaleX < 1) { viewheight = _this._canvas.width * _this._scale;}
+                if(scaleX < 1) {
+                    viewheight = _this._canvas.width * (this._image.height / this._image.width);
+                    _this._canvas.height = viewheight;
+                }
                 else {
                     viewwidth = _this._image.width;
                     viewheight = _this._image.height;
@@ -709,7 +760,10 @@
             }
             // portrait photos
             else {
-                if (scaleY  < 1) { viewwidth = _this._canvas.height * _this._scale;}
+                if (scaleY  < 1) {
+                    viewwidth = _this._canvas.height * (this._image.width / this._image.height);
+                    _this._canvas.width = viewwidth;
+                }
                 else {
                     viewwidth = _this._image.width;
                     viewheight = _this._image.height;
@@ -719,6 +773,8 @@
             $(this.element).find(".picedit_canvas_box").css("height", viewheight);
             this._viewport.width = viewwidth;
             this._viewport.height = viewheight;
+            _this._canvas.width = viewwidth;
+            _this._canvas.height = viewheight;
             $(this.element).find(".picedit_canvas").css("display", "block");
         },
         // Helper function to translate crop window size to the actual crop size
@@ -735,10 +791,6 @@
                 "top": (cropframe.offsetTop > 0) ? cropframe.offsetTop : 0.1,
                 "left": (cropframe.offsetLeft > 0) ? cropframe.offsetLeft : 0.1
             };
-            console.log("crop.top: "+ crop.top);
-            console.log("crop.left: "+ crop.left);
-            console.log("crop.width: "+ crop.width);
-            console.log("crop.height: "+ crop.height);
             // if((crop.width + crop.left) > view.width) crop.width = view.width - crop.left;
             // if((crop.height + crop.top) > view.height) crop.height = view.height - crop.top;
             //calculate width and height for the full image size
@@ -753,32 +805,28 @@
             var left_percent = crop.left / view.width;
             area.top = parseInt(real.height * top_percent, 10);
             area.left = parseInt(real.width * left_percent, 10);
-            // scale the crop window if image width was larger than 1000 and shrink to fit the cnavas.
-            /*if (this._scale < 1) {
-                area.width = area.width / this._scale;
-                area.height = area.height / this._scale;
-                area.top = area.top / this._scale;
-                area.left = area.left / this._scale;
-            }*/
-            console.log("area.top: "+ area.top);
-            console.log("area.left: "+ area.left);
-            console.log("area.width: "+ area.width);
-            console.log("area.height: "+ area.height);
             return area;
         },
         // Helper function to perform canvas rotation
         _doRotation: function (degrees){
             ////Lin: rotate around the center of canvas
             var baseimage = this._canvas.item(0);
-            var curAngle = baseimage.getAngle();
+            /*var objects = this._canvas.getObjects();
+            console.log(objects.length);
+            for (var i = 0, len = objects.length; i < len; i++) {
+                console.log(objects[i]);
+            }*/
+            //var curAngle = baseimage.getAngle();
+            var curAngle = baseimage.angle;
             var rotatethispoint = new fabric.Point(this._canvas.width / 2, this._canvas.height / 2); // center of canvas
             // var rads= degrees*Math.PI/180;
             var rads = fabric.util.degreesToRadians(degrees);
             var objectOrigin = new fabric.Point(baseimage.left, baseimage.top);
             var new_loc = fabric.util.rotatePoint(objectOrigin, rotatethispoint, rads);
-            baseimage.setAngle(curAngle + degrees);
+            //baseimage.setAngle(curAngle + degrees);
             baseimage.top = new_loc.y;
             baseimage.left = new_loc.x;
+            baseimage.angle = curAngle + degrees;
             this._canvas.renderAll();
         },
         // Resize the viewport (should be done on every image change)
@@ -817,6 +865,9 @@
             //update interface data (original image width and height)
             this._setVariable("resize_width", img.width);
             this._setVariable("resize_height", img.height);
+            //update picedit_cavnas_box width and height
+            $('.picedit_canvas_box').css ("width", this._viewport.width + 'px');
+            $('.picedit_canvas_box').css ("height", this._viewport.height + 'px');
         },
         // Bind click and action callbacks to all buttons with class: ".picedit_control"
         _bindControlButtons: function() {

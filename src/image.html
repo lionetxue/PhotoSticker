@@ -9,6 +9,8 @@
     <meta property="og:title" content="Create your Cornell Profile" />
     <title>Email assets builder</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/image_picedit.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 </head>
@@ -17,17 +19,17 @@
 <h3>Crop an image</h3>
 <div id="_1" class="picedit_box">
     <!-- Size options -->
-    <div id="options" class="picedit_nav_box">
-        <button class="btn option picedit_control" data-action="crop_open_1">Slim hero banner<br><span class="size">600 x 175</span></button>
-        <button class="btn option picedit_control" data-action="crop_open_2">Tall hero banner<br><span class="size">600 x 285</span></button>
-        <button class="btn option picedit_control" data-action="crop_open_3">Type 4 banner<br><span class="size">600 x 430</span></button>
-        <button class="btn option picedit_control" data-action="crop_open_4">Type 5 banner<br><span class="size">270 x 170</span></button>
-        <button class="btn option picedit_control" data-action="crop_open_5">Square<br><span class="size">140 x 140</span></button>
+    <div class="cropOptions">
+         <button type="button" class="btn btn-primary option picedit_control" data-action="crop_open_1">Slim hero banner<br><span class="size">600 x 175</span></button>
+         <button type="button" class="btn btn-primary option picedit_control" data-action="crop_open_2">Tall hero banner<br><span class="size">600 x 285</span></button>
+         <button type="button" class="btn btn-primary option picedit_control" data-action="crop_open_3">Type 4 banner<br><span class="size">600 x 430</span></button>
+         <button type="button" class="btn btn-primary option picedit_control" data-action="crop_open_4">Type 5 banner<br><span class="size">270 x 170</span></button>
+         <button type="button" class="btn btn-primary option picedit_control" data-action="crop_open_5">Square<br><span class="size">140 x 140</span></button>
     </div>
      <!-- Picedit canvas element -->
      <div class="picedit_canvas_box">
             <!-- Picedit button element begin -->
-            <div id="upload_btn" class="picedit_element"> <span class="picedit_control" data-action="load_image"><i class="fa fa-picture-o fa-lg"></i><br><b> Upload an image file<br>or drag and drop</b></span></div>
+            <div id="upload_btn" class="picedit_element"> <span class="btn btn-outline-primary picedit_control" data-action="load_image"><i class="fa fa-picture-o fa-lg"></i><br><b> Upload an image file<br>or drag and drop</b></span></div>
             <!-- Picedit button element end -->
             <div id="canvas-container" class="picedit_canvas">
                 <canvas id="canvas_1" width="1000px" height="1000px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
@@ -49,25 +51,16 @@
      <div class="picedit_message">
             <span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span>
             <div></div>
-        </div>
-        <!--&lt;!&ndash; Picedit navigation &ndash;&gt;-->
-        <!--<div class="picedit_nav_box">-->
-            <!--&lt;!&ndash;<div class="picedit_pos_elements"></div>&ndash;&gt;-->
-            <!--<ul class="picedit_nav_elements">-->
-                <!--&lt;!&ndash; Picedit button element begin &ndash;&gt;-->
-                <!--&lt;!&ndash;<li class="picedit_element"> <span class="picedit_control" title="Rotate" data-action="rotate_cw"><i class="fa fa-repeat fa-lg"></i><b> Rotate</b></span></li>&ndash;&gt;-->
-                <!--&lt;!&ndash; Picedit button element end &ndash;&gt;-->
-                <!--&lt;!&ndash; Picedit button element begin &ndash;&gt;-->
-                <!--&lt;!&ndash;<li class="picedit_element"><span class="picedit_control" title="Crop" data-action="crop_open"><i class="fa fa-crop fa-lg"></i><b> Crop</b></span> </li>&ndash;&gt;-->
-                <!--&lt;!&ndash; Picedit button element end &ndash;&gt;-->
-                <!--&lt;!&ndash; Picedit button element begin &ndash;&gt;-->
-                <!--&lt;!&ndash;<li class="picedit_element"><span class="picedit_control" title="Discard" data-action="discard_image"><i class="fa fa-trash fa-lg"></i><b>Discard</b></span></li>&ndash;&gt;-->
-                <!--&lt;!&ndash; Picedit button element end &ndash;&gt;-->
-                <!--&lt;!&ndash; Picedit button element begin &ndash;&gt;-->
-                <!--&lt;!&ndash;			<li class="picedit_element downloadZip"><span id="downloadZip" class="picedit_control picedit_action" title="Download ZipFile"><i class="fa fa-file-archive-o fa-lg"></i><b>ZipFile</b></span> </li>&ndash;&gt;-->
-                <!--&lt;!&ndash; Picedit button element end &ndash;&gt;-->
-            <!--</ul>-->
-        <!--</div>-->
+     </div>
+    <!-- Picedit navigation -->
+    <div class="picedit_nav_box" style="display:none;">
+        <!-- Picedit button element begin -->
+        <!--<div class="picedit_element"> <span class="picedit_control" title="Rotate" data-action="rotate_cw"><i class="fa fa-repeat fa-lg"></i><b> Rotate</b></span></div>-->
+        <!-- Picedit button element end -->
+        <!-- Picedit button element begin -->
+        <div class="picedit_element"><span class="picedit_control" title="Discard" data-action="discard_image"><i class="fa fa-trash fa-lg"></i><b>Discard</b></span></div>
+        <!-- Picedit button element end -->
+    </div>
 </div>
 <!--Preview Canvas-->
 <div id="_preview" class="picedit_box_preview" style="display: none;">
@@ -80,20 +73,33 @@
     <!-- Picedit navigation -->
     <div class="picedit_nav_box">
         <!--<div class="picedit_pos_elements"></div>-->
-        <ul class="picedit_nav_elements">
+        <div class="picedit_nav_elements">
             <!-- Picedit button element begin -->
-            <li class="picedit_element"><a id="downloadImg" class="picedit_control picedit_action downloadImg" title="Download" onclick="$('#downloadImg').attr('href', canvas_preview.toDataURL());" download="Cornell_Banner.png" href="#" target="_blank"><i class="fa fa-download fa-lg"></i><b> Download</b></a> </li>
+            <div class="picedit_element"><a id="downloadImg" class="btn btn-primary picedit_control picedit_action" title="Download" onclick="$('#downloadImg').attr('href', canvas_preview.toDataURL());" download="Cornell_Banner.png" href="#" target="_blank"><i class="fa fa-download fa-lg"></i><b> Download</b></a> </div>
             <!-- Picedit button element end -->
-        </ul>
+        </div>
     </div>
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js" crossorigin="anonymous"></script>
 <!--<script type="text/javascript" src="js/FileSaver.min.js"></script>
 <script type="text/javascript" src="js/jszip.min.js"></script>-->
-<script type="application/javascript" src="js/fabric.min.js"></script>
+<script type="application/javascript" src="js/fabric-beta7.min.js"></script>
 <!--<script type="application/javascript" src="js/fabric_zoom.js"></script>-->
 <script type="text/javascript" src="js/image_plugin.js"></script>
-<script type="text/javascript" src="js/image_main.js"></script>
+<!--<script type="text/javascript" src="js/image_main.js"></script>-->
+<script>
+    // main()
+    $(function() {
+        // Document is ready
+        //disable object caching
+        fabric.Object.prototype.objectCaching = false;
+        // Start the plugin
+        $('.picedit_box').picEdit();
+    });
+</script>
 </body>
 </html>

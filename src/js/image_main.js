@@ -15,6 +15,8 @@ $(function() {
     // Document is ready
     // Start the plugin
     $('.picedit_box').picEdit();
+    //disable object caching
+    fabric.Object.prototype.objectCaching = false;
 
 });
 
