@@ -50,8 +50,6 @@
         this._name = pluginName;
         // Reference to the loaded image
         this._image = false;
-        // Lin: reference to the scale factor
-        this._scale = false;
         // Lin: reference to the aspect ratio of crop frame
         this._fixratio = false;
         // Lin: Reference to the sticker object
@@ -339,7 +337,7 @@
             this._fileinput.click();
         },
         // Rotate the image 90 degrees counter-clockwise
-        rotate_ccw: function () {
+        /*rotate_ccw: function () {
             if(!this._image) return this._hideAllNav(1);
             var _this = this;
             //run task and show loading spinner, the task can take some time to run
@@ -351,9 +349,10 @@
             });
             //hide all opened navigation
             this._hideAllNav();
-        },
+        },*/
         // Rotate the image 90 degrees clockwise
         rotate_cw: function () {
+            console.log("rotate_cw called");
             if(!this._image) return this._hideAllNav(1);
             var _this = this;
             //run task and show loading spinner, the task can take some time to run
@@ -424,35 +423,23 @@
             //prevent mousedown events to shift the drag_resize_box
             var crop = this._calculateCropWindow();
             var _this = this;
-            //Lin: fix the shifting problem when base image is moved before cropping
-            /*var baseimage = _this._canvas.item(0);
-            var sx =  crop.left - baseimage.left / _this._scale;
-            var sy = crop.top - baseimage.top / _this._scale;
-            this.set_loading(1).delay(200).promise().done(function() {
-                // var canvas = document.createElement('canvas');
-                // var ctx = canvas.getContext("2d");
-                var canvas = document.getElementById('canvas_preview');
-                var ctx = canvas.getContext('2d');
-                ctx.drawImage(_this._image, sx, sy, crop.width, crop.height, 0, 0, canvas.width, canvas.height);
-                $('.picedit_box_preview').show();
-                $('.picedit_box').hide();
-                $('#options').hide();
-                _this.hide_messagebox();
-                // _this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
-                //     _this.hide_messagebox();
-                // });
-            });*/
             this.set_loading(1).delay(200).promise().done(function() {
                 var canvas = document.getElementById('canvas_preview');
                 var ctx = canvas.getContext("2d");
                 canvas.width = crop.width;
                 canvas.height = crop.height;
-                ctx.drawImage(_this._image, crop.left, crop.top, crop.width, crop.height, 0, 0, crop.width, crop.height);
+                ctx.drawImage(_this._image, crop.left, crop.top, crop.width, crop.height, 0, 0, _this._cropping.width, _this._cropping.height);
                 _this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
                     $('.picedit_box_preview').show();
                     $('.picedit_box').hide();
                     $('.picedit_nav_box').css("visibility", "hidden");
-                    _this.hide_messagebox();
+                    if(_this._cropping.width < _this._cropping.oriwidth) {
+                        alert("Your images is smaller than crop frame.  It yields low quality photo.");
+                        //_this.set_messagebox("Your images is smaller than crop frame.  It yields low quality photo.");
+                     }
+                     else {
+                        _this.hide_messagebox();
+                    }
                 });
             });
             this.crop_close();
@@ -480,7 +467,10 @@
                 this._cropping.width = 600;
                 this._cropping.height = 175;
             }
-            //$('.picedit_drag_resize_box_corner_wrap').hide();
+            var centerleft = (this._canvas.width - this._cropping.width)/2;
+            var centertop = (this._canvas.height - this._cropping.height)/2;
+            $('.picedit_drag_resize_box').css("top", centertop + "px");
+            $('.picedit_drag_resize_box').css("left", centerleft + "px");
             var canvas = document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
             ctx.canvas.width = 600;
@@ -505,6 +495,10 @@
                 this._cropping.width = 600;
                 this._cropping.height = 285;
             }
+            var centerleft = (this._canvas.width - this._cropping.width)/2;
+            var centertop = (this._canvas.height - this._cropping.height)/2;
+            $('.picedit_drag_resize_box').css("top", centertop + "px");
+            $('.picedit_drag_resize_box').css("left", centerleft + "px");
             var canvas = document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
             ctx.canvas.width = 600;
@@ -529,6 +523,10 @@
                 this._cropping.width = 600;
                 this._cropping.height = 430;
             }
+            var centerleft = (this._canvas.width - this._cropping.width)/2;
+            var centertop = (this._canvas.height - this._cropping.height)/2;
+            $('.picedit_drag_resize_box').css("top", centertop + "px");
+            $('.picedit_drag_resize_box').css("left", centerleft + "px");
             var canvas = document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
             ctx.canvas.width = 600;
@@ -553,6 +551,10 @@
                 this._cropping.width = 270;
                 this._cropping.height = 170;
             }
+            var centerleft = (this._canvas.width - this._cropping.width)/2;
+            var centertop = (this._canvas.height - this._cropping.height)/2;
+            $('.picedit_drag_resize_box').css("top", centertop + "px");
+            $('.picedit_drag_resize_box').css("left", centerleft + "px");
             var canvas=document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
             ctx.canvas.width = 270;
@@ -577,6 +579,10 @@
                 this._cropping.width = 140;
                 this._cropping.height = 140;
             }
+            var centerleft = (this._canvas.width - this._cropping.width)/2;
+            var centertop = (this._canvas.height - this._cropping.height)/2;
+            $('.picedit_drag_resize_box').css("top", centertop + "px");
+            $('.picedit_drag_resize_box').css("left", centerleft + "px");
             var canvas=document.getElementById('canvas_preview');
             var ctx = canvas.getContext('2d');
             ctx.canvas.width = 140;
@@ -590,11 +596,7 @@
         // Lin: Discard base image and re-active picedit_action_btns
         discard_image: function() {
             //Clear canvas (base image)
-            // this._ctx.clearRect(0, 0, canvas.width, canvas.height);
-            //Clear entire canvas (including base image, overlay and sticker)
-            this._canvas.clear();
-            //Add overlay back
-            // this._canvas.setOverlayImage("img/I-Voted-frame.png");
+            this._ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
             this._image = false;
             //Re-active buttons for new upload
             $(".picedit_action_btns").addClass("active");
@@ -739,14 +741,11 @@
         },
         // Paint image on canvas
         _paintCanvas: function () {
-            var scaleX = this._canvas.width / this._image.width ;
-            var scaleY = this._canvas.height / this._image.height ;
-            var scale = Math.min(scaleX, scaleY);
-            this._scale = scale;
+            console.log( "_paintCanvas called");
             // Lin: RESIZE CANVAS CONTAINER and viewport
             // landscape photos
-            if( scaleX < scaleY) {
-                if(scaleX < 1) {
+            if( this._image.width > this._image.height) {
+                if(this._image.width > this.options.maxWidth) {
                     this._viewport.width = this.options.maxWidth;
                     this._viewport.height = this._canvas.width * (this._image.height / this._image.width);
                 }
@@ -757,7 +756,7 @@
             }
             // portrait photos
             else {
-                if (scaleY  < 1) {
+                if (this._image.height > this.options.maxHeight) {
                     this._viewport.height = this.options.maxHeight;
                     this._viewport.width = this._canvas.height * (this._image.width / this._image.height);
                 }
@@ -769,6 +768,13 @@
             // Lin: resize canvas.  This step is critical, otherwise you see both images during rotation.
             this._canvas.width = this._viewport.width;
             this._canvas.height = this._viewport.height;
+            // Lin: resize canvas container as well.
+            $(".picedit_canvas_box").css ( "width", this._canvas.width + "px" );
+            $(".picedit_canvas_box").css ( "height", this._canvas.height + "px" );
+            console.log("_paintCanvas canvas.width2: " + this._canvas.width  );
+            console.log("_paintCanvas canvas.height2: " + this._canvas.height  );
+            console.log("_paintCanvas viewport.width " + this._viewport.width  );
+            console.log("_paintCanvas viewport.height " + this._viewport.height );
             this._ctx.drawImage(this._image, 0, 0, this._viewport.width, this._viewport.height);
             $(this.element).find(".picedit_canvas").css("display", "block");
         },
@@ -786,8 +792,8 @@
                 "top": (cropframe.offsetTop > 0) ? cropframe.offsetTop : 0.1,
                 "left": (cropframe.offsetLeft > 0) ? cropframe.offsetLeft : 0.1
             };
-            // if((crop.width + crop.left) > view.width) crop.width = view.width - crop.left;
-            // if((crop.height + crop.top) > view.height) crop.height = view.height - crop.top;
+            if((crop.width + crop.left) > view.width) crop.width = view.width - crop.left;
+            if((crop.height + crop.top) > view.height) crop.height = view.height - crop.top;
             //calculate width and height for the full image size
             var width_percent = crop.width / view.width;
             var height_percent = crop.height / view.height;
@@ -804,6 +810,9 @@
         },
         // Helper function to perform canvas rotation
         _doRotation: function (degrees){
+            console.log("_doRotation called");
+            console.log("_doRotation width1: " + this._image.width);
+            console.log("_doRotation height1: " + this._image.height);
             ////Lin: rotate around the center of canvas
             var rads=degrees*Math.PI/180;
             //if rotation is 90 or 180 degrees try to adjust proportions
@@ -819,9 +828,13 @@
             var ctx = canvas.getContext("2d");
             canvas.width = parseInt(newWidth, 10);
             canvas.height = parseInt(newHeight, 10);
+            console.log("_doRotation new width: " + newWidth);
+            console.log("_doRotation new height: " + newHeight);
+            console.log("_doRotation canvas width: " + canvas.width);
+            console.log("_doRotation canvas height: " + canvas.height);
             // calculate the centerpoint of the canvas
-            var cx=canvas.width/2;
-            var cy=canvas.height/2;
+            var cx = canvas.width/2;
+            var cy = canvas.height/2;
             // draw the rect in the center of the newly sized canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.translate(cx, cy);
@@ -830,9 +843,12 @@
             this._image.src = canvas.toDataURL("image/png");
             this._paintCanvas();
             this.options.imageUpdated(this._image);
+            console.log("_doRotation width2: " + this._image.width);
+            console.log("_doRotation height2: " + this._image.height);
         },
         // Resize the viewport (should be done on every image change)
         _resizeViewport: function () {
+            console.log( "_resizeViewport called");
             //get image reference
             var img = this._image;
             //set correct viewport width
@@ -840,8 +856,12 @@
                 "width": img.width,
                 "height": img.height
             };
-            if(this.options.maxWidth != 'auto' && img.width > this.options.maxWidth) viewport.width = this.options.maxWidth;
+            console.log("resizeViewport: width1: " +  this._viewport.width);
+            console.log("resizeViewport: height1: " +  this._viewport.height);
+            if(this.options.maxWidth != 'auto' && img.width > this.options.maxWidth ) viewport.width = this.options.maxWidth;
             if(this.options.maxHeight != 'auto' && img.height > this.options.maxHeight) viewport.height = this.options.maxHeight;
+            console.log("resizeViewport: width2: " +  this._viewport.width);
+            console.log("resizeViewport: height2: " +  this._viewport.height);
             //calculate appropriate viewport size and resize the canvas
             if(this.options.aspectRatio) {
                 var resizeWidth = img.width;
@@ -856,20 +876,6 @@
                     viewport.height = parseInt(viewport.height, 10);
                     viewport.width = parseInt(viewport.height * aspect, 10);
                 }
-                //Lin: check for landscape or portrait
-                /*if (resizeWidth > resizeHeight) {
-                    if (resizeHeight > viewport.height) {
-                        aspect = resizeWidth / resizeHeight;
-                        viewport.height = parseInt(viewport.height, 10);
-                        viewport.width = parseInt(viewport.height * aspect, 10);
-                    }
-                }
-                else {
-                    if (resizeWidth > viewport.width) {
-                        viewport.width = parseInt(viewport.width, 10);
-                        viewport.height = parseInt(viewport.width / aspect, 10);
-                    }
-                }*/
             }
             //set the viewport size (resize the canvas)
             $(this.element).css({
@@ -881,9 +887,13 @@
             //update interface data (original image width and height)
             this._setVariable("resize_width", img.width);
             this._setVariable("resize_height", img.height);
+            console.log("resizeViewport: width3: " +  this._viewport.width);
+            console.log("resizeViewport: height3: " +  this._viewport.height);
             //update picedit_cavnas_box width and height
-/*            $('.picedit_canvas_box').css ("width", this._viewport.width + 'px');
-            $('.picedit_canvas_box').css ("height", this._viewport.height + 'px');*/
+            $('.picedit_canvas_box').css ("width", this._viewport.width + 'px');
+            $('.picedit_canvas_box').css ("height", this._viewport.height + 'px');
+            this._canvas.width = this._viewport.width;
+            this._canvas.height = this._viewport.height;
         },
         // Bind click and action callbacks to all buttons with class: ".picedit_control"
         _bindControlButtons: function() {

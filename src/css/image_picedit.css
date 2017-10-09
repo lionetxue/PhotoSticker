@@ -20,6 +20,7 @@ p{
     display: flex;
     position: relative;
     font-size: 1rem;
+
 }
 .picedit_box_preview {
     display: inline-block;
@@ -38,13 +39,14 @@ p{
 .picedit_canvas_box{
     display: inline-block;
     /*background: #f0eee4;*/
-    width: 1000px;
-    height: 1000px;
+    width: 600px;
+    height: 600px;
+    left: 300px;
     /*box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,1);*/
     text-align: center;
     position: relative;
     /*Lin: hide image outside of canvas area*/
-    /*overflow: hidden;*/
+    overflow: hidden;
 }
 .picedit_canvas_box.dragging {
     -webkit-box-shadow: inset 0px 0px 6px 0px #555555;
@@ -73,7 +75,9 @@ p{
 }*/
 .picedit_nav_box{
      display: inline-block;
+     position: fixed;
      width: 300px;
+     left: 10px;
      visibility: hidden;
      z-index: 15;
  }
@@ -193,7 +197,10 @@ p{
     transition: bottom 200ms ease-out;
 }
 .picedit_message.active {
-    bottom: 200px;
+    width: 600px;
+    height: 100px;
+    left: 50%;
+    top: 50%;
 }
 .picedit_message > span {
     position: absolute;
