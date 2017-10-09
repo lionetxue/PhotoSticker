@@ -38,8 +38,8 @@ p{
 .picedit_canvas_box{
     display: inline-block;
     /*background: #f0eee4;*/
-    width: 600px;
-    height: 600px;
+    width: 1000px;
+    height: 1000px;
     /*box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,1);*/
     text-align: center;
     position: relative;
@@ -60,7 +60,7 @@ p{
     /*display: none;*/
     z-index: 5;
 }
-.picedit_nav_box {
+/*.picedit_nav_box {
     position: relative;
     z-index: 15;
 
@@ -70,8 +70,8 @@ p{
     -ms-transition: opacity 200ms ease-out;
     -o-transition: opacity 200ms ease-out;
     transition: opacity 200ms ease-out;
-}
-.cropOptions{
+}*/
+.picedit_nav_box{
      display: inline-block;
      width: 300px;
      visibility: hidden;
