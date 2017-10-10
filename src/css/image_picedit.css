@@ -33,10 +33,10 @@ p{
 /*z-index: 8;*/
 /*opacity: 0.6;*/
 /*}*/
-.picedit_action_btns.active {
+/*.picedit_action_btns.active {
     z-index: 8;
     opacity: 0.6;
-}
+}*/
 .picedit_canvas_box{
     display: inline-block;
     /*background: #f0eee4;*/
@@ -82,14 +82,10 @@ p{
      visibility: hidden;
      z-index: 15;
  }
-.btn:focus,.btn:active {
+.btn:focus,.btn:active, button.btn:active,
+button.btn:focus,
+button.btn:target  {
     outline: 3px #89CCE2 solid;
-}
-
-.option{
-    width: 270px;
-    margin: 5px;
-    font-size: 1rem;
 }
 .size{
     font-size: 0.8rem;
@@ -98,7 +94,8 @@ p{
     opacity: 0.8;
 }*/
 .picedit_control {
-    padding: 0.25em;
+    width: 270px;
+    margin: 5px;
     cursor: pointer;
     display: inline-block;
     opacity: 1;
@@ -119,8 +116,7 @@ p{
     height: 50%;
     position: relative;
     top: 20%;
-    margin:auto;
-    font-size: 1.5rem;
+    left: 0;
     background: #fff;
     /*
     background-clip: border-box;
@@ -131,8 +127,9 @@ p{
 }
 
 #upload_btn > .picedit_control > i{
-    padding-top: 3rem;
-    font-size: 1.5em;
+    padding-top: 30%;
+    padding-bottom: 5%;
+    font-size: 2em;
 }
 .picedit_gray_gradient {
     background: -moz-linear-gradient(top,  rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 100%);
@@ -159,19 +156,19 @@ p{
 .picedit_element > .picedit_control {
     display: block;
     height: 100%;
-    font-size: 1.5em;
+    font-size: 1em;
     text-align: center;
     position:  relative;
     z-index: 40;
 }
 /*Lin: make text smaller than icon*/
-.picedit_element > .picedit_control > i{
+/*.picedit_element > .picedit_control > i{
     display: block;
 }
 .picedit_element > .picedit_control > b{
     font-size: 0.5em;
     display: block;
-}
+}*/
 
 .picedit_message {
     display: none;
@@ -271,7 +268,7 @@ p{
 .picedit_drag_resize_box_elements > span {
     text-shadow: 0 3px hsla(0, 0%, 0%, 0.8);
 }
-.picedit_colors span {
+/*.picedit_colors span {
     width: 1.2em;
     height: 1.2em;
     border: 1px solid #757575;
@@ -318,7 +315,8 @@ p{
     padding-top: 0.2em;
     padding-left: 0.2em;
     padding-right: 0.2em;
-}
+}*/
+/*
 .picedit_video {
     position: absolute;
     top: 0;
@@ -350,24 +348,4 @@ p{
     margin: 0 0.4em;
     vertical-align: -webkit-baseline-middle;
 }
-.picedit_sizes span.active {
-    background-color: #111;
-    border: 1px solid #757575;
-}
-.picedit_painter {
-    display: none;
-    position: absolute;
-    z-index: 3;
-    left: 0;
-    cursor: crosshair;
-    top: 0;
-    width: 100%;
-    height: 100%;
-}
-.picedit_painter.active {
-    display: block;
-    z-index: 12;
-}
-.picedit_painter.active + .picedit_canvas {
-    z-index: 10;
-}
+*/
