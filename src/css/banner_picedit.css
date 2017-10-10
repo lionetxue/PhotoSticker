@@ -240,7 +240,7 @@ p{
     margin-right: 2%;
     z-index: 180;
     background-color: #F7F5D4;
-    opacity: 0.8;
+    opacity: 0.9;
     -webkit-border-radius: 4px 4px 4px 4px;
     border-radius: 4px 4px 4px 4px;
     -webkit-box-shadow: 0 0 2px 1px #D8D8D8;
@@ -266,7 +266,7 @@ p{
 }
 .picedit_message > div {
     font-style: italic;
-    color: #888;
+    color: black;
 }
 .picedit_drag_resize, .picedit_drag_resize_canvas {
     width: 100%;

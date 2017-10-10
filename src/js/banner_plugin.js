@@ -110,8 +110,8 @@
                 is_resizing: false,
                 left: 0,
                 top: 0,
-                width: 0,
-                height: 0,
+                width: 400,
+                height: 400,
                 cropbox: $(this.element).find(".picedit_drag_resize"),
                 cropframe: $(this.element).find(".picedit_drag_resize_box")
             };
@@ -414,7 +414,7 @@
             var baseimage = _this._canvas.item(0);
             var sx =  crop.left - baseimage.left / _this._scale;
             var sy = crop.top - baseimage.top / _this._scale;
-            // If the size of image is smaller than 400 x 400
+            // If the size of image is smaller than 600 x 600
             if (_this._scale > 1) {
                 sx =  (crop.left - baseimage.left ) / _this._scale;
                 sy = (crop.top - baseimage.top ) / _this._scale;
@@ -427,7 +427,13 @@
                  var btnID = "btn" + _this.element.id;
                 $('#' + btnID ).hide();
                 $('.close').click(); // close modal
-                _this.hide_messagebox();
+                if(crop.width < 200 ) {
+                    alert("Your images is smaller than crop frame.  It yields low quality photo.");
+                    //_this.set_messagebox("Your images is smaller than crop frame.  It yields low quality photo.");
+                }
+                else {
+                    _this.hide_messagebox();
+                }
             });
             this.crop_close();
         },
@@ -455,11 +461,11 @@
             var canvas = document.getElementById(canvasID);
             if (canvas.msToBlob) { //for IE
                 var blob = canvas.msToBlob();
-                window.navigator.msSaveBlob(blob, "Cornell_Profile.png");
+                window.navigator.msSaveBlob(blob, "Banner_composer.png");
             } else {
                 var element = document.createElement('a');
                 element.setAttribute('href', canvas.toDataURL("image/png"));
-                element.setAttribute('download', "Cornell_Profile.png");
+                element.setAttribute('download', "Banner_composer.png");
 
                 element.style.display = 'none';
                 document.body.appendChild(element);
@@ -527,17 +533,18 @@
                 eventbox.off("mousemove touchmove");
                 resizer.off("mousemove touchmove");
                 if (_this._cropping.width < 200) {
-                    _this.set_messagebox("Your crop frame is less than 200px wide.  It will yield low quality photo.");
+                    _this.set_messagebox("Your crop frame is less than 600px wide.  It will yield low quality photo.");
                 }
             });
         },
         _selection_resize_movement: function(e) {
             var cropframe = this._cropping.cropframe[0];
             var evtpos = (e.clientX) ? e : e.originalEvent.touches[0];
-            cropframe.style.width = (this._cropping.w + evtpos.clientX - this._cropping.x) + 'px';
+            this._cropping.width = this._cropping.w + evtpos.clientX - this._cropping.x;
             //Lin:  keep the aspect ratio = 1
-            cropframe.style.height = (this._cropping.w + evtpos.clientX - this._cropping.x) + 'px';
-            // cropframe.style.height = (this._cropping.h + evtpos.clientY - this._cropping.y) + 'px';
+            this._cropping.height = this._cropping.width;
+            cropframe.style.width  = this._cropping.width + 'px';
+            cropframe.style.height = this._cropping.height + 'px';
         },
         _selection_drag_movement: function(e) {
             /*var cropframe = this._cropping.cropframe[0];
@@ -560,11 +567,9 @@
             var clientLeft = docEl.clientLeft || body.clientLeft || 0;
             var boxtop = box.top + scrollTop - clientTop;
             var boxleft = box.left + scrollLeft - clientLeft;
-            var boxtop = box.top;
-            var boxleft = box.left;
             // The maximum position of crop frame top so that the buttom edge do not exceed canvas box bottom
             // var maxtop =  boxtop + $('.picedit_canvas_box').height() - cropframe.clientHeight -2; // border is 1, clientHeight is the inner height
-            var maxtop = boxtop + this.maxWidth - cropframe.clientHeight -2;
+            var maxtop = boxtop + this.options.maxHeight - cropframe.clientHeight -2;
             // Restrict framebox to be inside canvas box container vertically
             if (frametop < boxtop) {
                 frametop = boxtop;
@@ -573,7 +578,7 @@
             }
             // The maximum position of crop frame top so that the buttom edge do not exceed canvas box bottom
             //var maxleft =  boxleft + $('.picedit_canvas_box').width() - cropframe.clientWidth -2; // border is 1, clientWidth is the inner width
-            var maxleft = boxleft + this.maxWidth - cropframe.clientWidth -2;
+            var maxleft = boxleft + this.options.maxWidth - cropframe.clientWidth -2;
             // Restrict framebox to be inside canvas box container horizontally
             if (frameleft < boxleft) {
                 frameleft = boxleft;
