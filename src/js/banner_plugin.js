@@ -420,24 +420,10 @@
                 sy = (crop.top - baseimage.top ) / _this._scale;
             }
             this.set_loading(1).delay(200).promise().done(function() {
-                /*var canvas = document.createElement('canvas');
-                var ctx = canvas.getContext("2d");
-                canvas.width = crop.width;
-                canvas.height = crop.height;
-                ctx.drawImage(_this._image, sx, sy, crop.width, crop.height, 0, 0, crop.width, crop.height);
-                _this._create_image_with_datasrc(canvas.toDataURL("image/png"), function() {
-                    _this.hide_messagebox();
-                });*/
                 var id = 'canvas_preview'+ _this.element.id;
                 var canvas = document.getElementById(id);
                 var ctx = canvas.getContext('2d');
                 ctx.drawImage(_this._image, sx, sy, crop.width, crop.height, 0, 0, canvas.width, canvas.height);
-                // console.log("sx " + sx);
-                // console.log("sy " + sy);
-                // console.log("crop with " + crop.width);
-                // console.log("crop height " + crop.height);
-                // console.log("canvas.width " + canvas.width);
-                // console.log("canvas.height " + canvas.height);
                  var btnID = "btn" + _this.element.id;
                 $('#' + btnID ).hide();
                 $('.close').click(); // close modal
@@ -540,6 +526,9 @@
                 _this._variables.prev_pos = false;
                 eventbox.off("mousemove touchmove");
                 resizer.off("mousemove touchmove");
+                if (_this._cropping.width < 200) {
+                    _this.set_messagebox("Your crop frame is less than 200px wide.  It will yield low quality photo.");
+                }
             });
         },
         _selection_resize_movement: function(e) {

@@ -9,13 +9,7 @@
  *  License: MIT
  */
 
-// main()
-$(function() {
-    // Document is ready
-    // Start the plugin
-    $('.picedit_box').picEdit( );
 
-});
 //Lin: form
 $.fn.slideFadeToggle = function(easing, callback) {
     return this.animate({ opacity: 'toggle', height: 'toggle' }, 'fast', easing, callback);

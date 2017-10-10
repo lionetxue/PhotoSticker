@@ -352,7 +352,6 @@
         },*/
         // Rotate the image 90 degrees clockwise
         rotate_cw: function () {
-            console.log("rotate_cw called");
             if(!this._image) return this._hideAllNav(1);
             var _this = this;
             //run task and show loading spinner, the task can take some time to run
@@ -741,7 +740,6 @@
         },
         // Paint image on canvas
         _paintCanvas: function () {
-            console.log( "_paintCanvas called");
             // Lin: RESIZE CANVAS CONTAINER and viewport
             // landscape photos
             if( this._image.width > this._image.height) {
@@ -771,10 +769,6 @@
             // Lin: resize canvas container as well.
             $(".picedit_canvas_box").css ( "width", this._canvas.width + "px" );
             $(".picedit_canvas_box").css ( "height", this._canvas.height + "px" );
-            console.log("_paintCanvas canvas.width2: " + this._canvas.width  );
-            console.log("_paintCanvas canvas.height2: " + this._canvas.height  );
-            console.log("_paintCanvas viewport.width " + this._viewport.width  );
-            console.log("_paintCanvas viewport.height " + this._viewport.height );
             this._ctx.drawImage(this._image, 0, 0, this._viewport.width, this._viewport.height);
             $(this.element).find(".picedit_canvas").css("display", "block");
         },
@@ -810,9 +804,6 @@
         },
         // Helper function to perform canvas rotation
         _doRotation: function (degrees){
-            console.log("_doRotation called");
-            console.log("_doRotation width1: " + this._image.width);
-            console.log("_doRotation height1: " + this._image.height);
             ////Lin: rotate around the center of canvas
             var rads=degrees*Math.PI/180;
             //if rotation is 90 or 180 degrees try to adjust proportions
@@ -828,10 +819,6 @@
             var ctx = canvas.getContext("2d");
             canvas.width = parseInt(newWidth, 10);
             canvas.height = parseInt(newHeight, 10);
-            console.log("_doRotation new width: " + newWidth);
-            console.log("_doRotation new height: " + newHeight);
-            console.log("_doRotation canvas width: " + canvas.width);
-            console.log("_doRotation canvas height: " + canvas.height);
             // calculate the centerpoint of the canvas
             var cx = canvas.width/2;
             var cy = canvas.height/2;
@@ -843,12 +830,9 @@
             this._image.src = canvas.toDataURL("image/png");
             this._paintCanvas();
             this.options.imageUpdated(this._image);
-            console.log("_doRotation width2: " + this._image.width);
-            console.log("_doRotation height2: " + this._image.height);
         },
         // Resize the viewport (should be done on every image change)
         _resizeViewport: function () {
-            console.log( "_resizeViewport called");
             //get image reference
             var img = this._image;
             //set correct viewport width
@@ -856,12 +840,8 @@
                 "width": img.width,
                 "height": img.height
             };
-            console.log("resizeViewport: width1: " +  this._viewport.width);
-            console.log("resizeViewport: height1: " +  this._viewport.height);
             if(this.options.maxWidth != 'auto' && img.width > this.options.maxWidth ) viewport.width = this.options.maxWidth;
             if(this.options.maxHeight != 'auto' && img.height > this.options.maxHeight) viewport.height = this.options.maxHeight;
-            console.log("resizeViewport: width2: " +  this._viewport.width);
-            console.log("resizeViewport: height2: " +  this._viewport.height);
             //calculate appropriate viewport size and resize the canvas
             if(this.options.aspectRatio) {
                 var resizeWidth = img.width;
@@ -887,8 +867,6 @@
             //update interface data (original image width and height)
             this._setVariable("resize_width", img.width);
             this._setVariable("resize_height", img.height);
-            console.log("resizeViewport: width3: " +  this._viewport.width);
-            console.log("resizeViewport: height3: " +  this._viewport.height);
             //update picedit_cavnas_box width and height
             $('.picedit_canvas_box').css ("width", this._viewport.width + 'px');
             $('.picedit_canvas_box').css ("height", this._viewport.height + 'px');

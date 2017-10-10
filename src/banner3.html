@@ -18,6 +18,8 @@
 <body>
 <style>
     .picedit_box{
+        display: block;
+        margin: auto;
         width: 600px;
         height: 675px;
     }
@@ -279,7 +281,6 @@
 <!--Preview Canvas-->
 <div id="_preview"  style="display: none;">
     <!-- Picedit canvas element -->
-
         <div>
             <canvas id="canvas_preview" width="600px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
         </div>
@@ -299,20 +300,10 @@
 <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js' crossorigin="anonymous"></script>-->
 <script type="application/javascript" src="js/fabric.min.js"></script>
 <script type="text/javascript" src="js/banner_plugin.js"></script>
-<!--<script type="text/javascript" src="js/banner_main.js"></script>-->
 <script>
     // main()
     $( document ).ready(function(){
         $('.picedit_box').picEdit( );
-        //var box_1 = $('#_1').picEdit( );
-/*        $('#modal_1').on('shown.bs.modal', function(){
-            console.log("modal_1");
-            setTimeout(function () {
-                $("#upload_1").trigger('click');
-                console.log($('#_1').data('plugin_picEdit')._fileinput[0]);
-                var pluginHandle = $('#_1').data('plugin_picEdit');
-            }, 10);
-        });*/
 
         var canvas1=document.getElementById('canvas_preview_1');
         var canvas2=document.getElementById('canvas_preview_2');
@@ -327,18 +318,6 @@
             $('#_preview').show();
         });
     });
-    /*jQuery.fn.simulateClick = function() {
-        return this.each(function() {
-            if('createEvent' in document) {
-                var doc = this.ownerDocument,
-                    evt = doc.createEvent('MouseEvents');
-                evt.initEvent('click', true, true, doc.defaultView, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
-                this.dispatchEvent(evt);
-            } else {
-                this.click(); // IE Boss!
-            }
-        });
-    }*/
 
 </script>
 </body>

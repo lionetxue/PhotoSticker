@@ -166,14 +166,18 @@
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!--<script type="text/javascript" src="js/FileSaver.min.js"></script>
-<script type="text/javascript" src="js/jszip.min.js"></script>-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js" crossorigin="anonymous"></script>
 <script type="application/javascript" src="js/fabric.min.js"></script>
-<!--<script type="application/javascript" src="js/fabric_zoom.js"></script>-->
 <script type="text/javascript" src="js/banner_plugin.js"></script>
-<script type="text/javascript" src="js/banner_main.js"></script>
 <script>
+    // main()
     $( document ).ready(function(){
+        // Document is ready
+        // Start the plugin
+        $('.picedit_box').picEdit( );
+
         var canvas1=document.getElementById('canvas_1');
         var canvas2=document.getElementById('canvas_2');
         // merge 2 canvases (canvas1-canvas4) onto a single canvas
