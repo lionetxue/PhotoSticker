@@ -455,8 +455,8 @@
             this._fixratio = 175/600;
             this._cropping.oriwidth = 600;
             this._cropping.oriheight = 175;
-            if(this._image.width < 600) {
-                this._cropping.width = this._image.width * 0.8;
+            if(this._canvas.width < 600) {
+                this._cropping.width = this._canvas.width * 0.8;
                 this._cropping.height = this._cropping.width * this._fixratio;
                 $('.picedit_drag_resize_box').width(this._cropping.width);
                 $('.picedit_drag_resize_box').height(this._cropping.height);
@@ -483,8 +483,8 @@
             this._fixratio = 285/600;
             this._cropping.oriwidth = 600;
             this._cropping.oriheight = 285;
-            if(this._image.width < 600) {
-                this._cropping.width = this._image.width * 0.8;
+            if(this._canvas.width < 600) {
+                this._cropping.width = this._canvas.width * 0.8;
                 this._cropping.height = this._cropping.width * this._fixratio;
                 $('.picedit_drag_resize_box').width(this._cropping.width);
                 $('.picedit_drag_resize_box').height(this._cropping.height);
@@ -511,8 +511,8 @@
             this._fixratio = 430/600;
             this._cropping.oriwidth = 600;
             this._cropping.oriheight = 430;
-            if(this._image.width < 600) {
-                this._cropping.width = this._image.width * 0.8;
+            if(this._canvas.width < 600) {
+                this._cropping.width = this._canvas.width * 0.8;
                 this._cropping.height = this._cropping.width * this._fixratio;
                 $('.picedit_drag_resize_box').width(this._cropping.width);
                 $('.picedit_drag_resize_box').height(this._cropping.height);
@@ -539,8 +539,8 @@
             this._fixratio = 170/270;
             this._cropping.oriwidth = 270;
             this._cropping.oriheight = 170;
-            if(this._image.width < 270) {
-                this._cropping.width = this._image.width * 0.8;
+            if(this._canvas.width < 270) {
+                this._cropping.width = this._canvas.width * 0.8;
                 this._cropping.height = this._cropping.width * this._fixratio;
                 $('.picedit_drag_resize_box').width(this._cropping.width);
                 $('.picedit_drag_resize_box').height(this._cropping.height);
@@ -567,8 +567,8 @@
             this._fixratio = 1;
             this._cropping.oriwidth = 140;
             this._cropping.oriheight = 140;
-            if(this._image.width < 140) {
-                this._cropping.width = this._image.width;
+            if(this._canvas.width < 140) {
+                this._cropping.width = this._canvas.width;
                 this._cropping.height = this._cropping.width * this._fixratio;
                 $('.picedit_drag_resize_box').width(this._cropping.width);
                 $('.picedit_drag_resize_box').height(this._cropping.height);
@@ -747,7 +747,7 @@
             if( this._image.width > this._image.height) {
                 if(this._image.width > this.options.maxWidth) {
                     this._viewport.width = this.options.maxWidth;
-                    this._viewport.height = this._canvas.width * (this._image.height / this._image.width);
+                    this._viewport.height = this.options.maxWidth * (this._image.height / this._image.width);
                 }
                 else {
                     this._viewport.width = this._image.width;
@@ -758,7 +758,7 @@
             else {
                 if (this._image.height > this.options.maxHeight) {
                     this._viewport.height = this.options.maxHeight;
-                    this._viewport.width = this._canvas.height * (this._image.width / this._image.height);
+                    this._viewport.width = this.options.maxHeight * (this._image.width / this._image.height);
                 }
                 else {
                     this._viewport.width = this._image.width;
