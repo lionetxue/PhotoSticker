@@ -44,7 +44,7 @@ p{
     height: 600px;
     left: 300px;
     /*box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,1);*/
-    text-align: center;
+    /*text-align: center;*/
     position: relative;
     /*Lin: hide image outside of canvas area*/
     overflow: hidden;
@@ -93,8 +93,10 @@ button.btn:target  {
 /*.picedit_nav_box:hover, .picedit_nav_box.active {
     opacity: 0.8;
 }*/
-.picedit_control {
+.picedit_element > .picedit_control{
     width: 270px;
+}
+.picedit_control {
     margin: 5px;
     cursor: pointer;
     display: inline-block;
