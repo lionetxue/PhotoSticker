@@ -447,6 +447,7 @@
         },
         // Lin: Discard base image and re-active picedit_action_btns
         discard_image: function() {
+            if(!this._image) return this._hideAllNav(1);
             //Clear canvas (base image)
             // this._ctx.clearRect(0, 0, canvas.width, canvas.height);
             //Clear entire canvas (including base image, overlay and sticker)

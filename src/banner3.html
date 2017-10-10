@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css" rel="stylesheet">
-    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.css" rel="stylesheet">-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/banner_picedit.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 </head>
@@ -44,43 +44,49 @@
     }
 </style>
 <h1>Compose a banner</h1>
-<!-- Button trigger modal 1-->
-<div id="_preview_1" class="picedit_box_preview">
-    <!-- Picedit canvas element -->
-    <div class="picedit_preview_canvas_box" >
-        <div class="picedit_canvas">
-            <canvas id="canvas_preview_1" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
-            <button type="button" id="btn_1" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_1">
-                Crop first image.
-            </button>
+<div class="row">
+<!-- Start Dragula container-->
+    <div id="drag-elements">
+        <!-- Button trigger modal 1-->
+        <div id="_preview_1" class="picedit_box_preview">
+            <!-- Picedit canvas element -->
+            <div class="picedit_preview_canvas_box" >
+                <div class="picedit_canvas">
+                    <canvas id="canvas_preview_1" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+                    <button type="button" id="btn_1" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_1">
+                        Crop first image.
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-<!-- Button trigger modal 2-->
-<div id="_preview_2" class="picedit_box_preview">
-    <!-- Picedit canvas element -->
-    <div class="picedit_preview_canvas_box">
-        <div class="picedit_canvas">
-            <canvas id="canvas_preview_2" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
-            <button type="button" id="btn_2" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_2">
-                Crop second image.
-            </button>
+        <!-- Button trigger modal 2-->
+        <div id="_preview_2" class="picedit_box_preview">
+            <!-- Picedit canvas element -->
+            <div class="picedit_preview_canvas_box">
+                <div class="picedit_canvas">
+                    <canvas id="canvas_preview_2" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+                    <button type="button" id="btn_2" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_2">
+                        Crop second image.
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-<!-- Button trigger modal 3-->
-<div id="_preview_3" class="picedit_box_preview">
-    <!-- Picedit canvas element -->
-    <div class="picedit_preview_canvas_box">
-        <div class="picedit_canvas">
-            <canvas id="canvas_preview_3" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
-            <button type="button" id="btn_3" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_3">
-                Crop third image.
-            </button>
+        <!-- Button trigger modal 3-->
+        <div id="_preview_3" class="picedit_box_preview">
+            <!-- Picedit canvas element -->
+            <div class="picedit_preview_canvas_box">
+                <div class="picedit_canvas">
+                    <canvas id="canvas_preview_3" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+                    <button type="button" id="btn_3" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_3">
+                        Crop third image.
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-
+    </div> <!-- End of drag-elements-->
+</div> <!--End of row-->
+<!--Use a blank canvas as a reference to check if each preview canvas is blank or not-->
+<canvas id="blank" style='display:none' width="200px" height="200px"></canvas>
 <!-- Modal 1-->
 <div class="modal fade" id="modal_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -276,20 +282,18 @@
 <div id="drop-target">
 </div>
 <br/>
-<div style="margin: 10px 0;"><button type="button" class="btn btn-primary" id="previewBtn">Preview</button></div>
+<div class="row"><button type="button" class="btn btn-primary" id="previewBtn">Preview</button></div>
 <br/>
 <!--Preview Canvas-->
 <div id="_preview"  style="display: none;">
     <!-- Picedit canvas element -->
-        <div>
+    <div>
             <canvas id="canvas_preview" width="600px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
-        </div>
+    </div>
 
     <!-- Picedit navigation -->
     <div >
-            <!-- Picedit button element begin -->
-            <li class="picedit_element"><a id="downloadImg" class="picedit_control picedit_action downloadImg" title="Download" onclick="$('#downloadImg').attr('href', canvas_preview.toDataURL());" download="Cornell_Banner.png" href="#" target="_blank"><i class="fa fa-download fa-lg"></i><b> Download</b></a> </li>
-            <!-- Picedit button element end -->
+            <a id="downloadImg" class="btn btn-primary" title="Download" onclick="$('#downloadImg').attr('href', canvas_preview.toDataURL());" download="Cornell_Banner.png" href="#" target="_blank"><i class="fa fa-download fa-lg"></i><b> Download</b></a>
     </div>
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" crossorigin="anonymous"></script>
@@ -297,25 +301,39 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js" crossorigin="anonymous"></script>
-<!--<script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js' crossorigin="anonymous"></script>-->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js' crossorigin="anonymous"></script>
 <script type="application/javascript" src="js/fabric.min.js"></script>
 <script type="text/javascript" src="js/banner_plugin.js"></script>
 <script>
     // main()
     $( document ).ready(function(){
         $('.picedit_box').picEdit( );
-
-        var canvas1=document.getElementById('canvas_preview_1');
-        var canvas2=document.getElementById('canvas_preview_2');
-        var canvas3=document.getElementById('canvas_preview_3');
-        // merge canvases (canvas1-canvas3) onto a single canvas
-        var canvas=document.getElementById('canvas_preview');
-        var context=canvas.getContext('2d');
+        //Initiate Dragula
+        dragula([document.getElementById("drag-elements")]);
+        // compare each preview canvas to blank canvas
+        var blankcanvas = document.getElementById('blank').toDataURL();
         $( "#previewBtn" ).click(function() {
-            context.drawImage(canvas1,0,0);
-            context.drawImage(canvas2,200,0);
-            context.drawImage(canvas3,400,0);
-            $('#_preview').show();
+            // Get id of first child div inside div drag-elements
+            var firstid = $("#drag-elements> :nth-child(1)").attr("id");
+            var canvas1 = document.getElementById('canvas' + firstid);
+            // Get id of second child div inside div drag-elements
+            var secondid = $('#drag-elements > :nth-child(2)').attr("id");
+            var canvas2 = document.getElementById('canvas' + secondid);
+            // // Get id of third child div inside div drag-elements
+            var thirdid = $('#drag-elements > :nth-child(3)').attr("id");
+            var canvas3 = document.getElementById('canvas' + thirdid);
+            if( canvas1.toDataURL() === blankcanvas || canvas2.toDataURL() === blankcanvas || canvas3.toDataURL() === blankcanvas) {
+                alert("Blank canvas detected!");
+            }
+            else {
+                // merge canvases (canvas1-canvas3) onto a single canvas
+                var canvas = document.getElementById('canvas_preview');
+                var context=canvas.getContext('2d');
+                context.drawImage(canvas1,0,0);
+                context.drawImage(canvas2,200,0);
+                context.drawImage(canvas3,400,0);
+                $('#_preview').show();
+            }
         });
     });
 
