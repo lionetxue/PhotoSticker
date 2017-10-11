@@ -10,11 +10,18 @@
     <title>Email assets builder</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" rel="stylesheet">
-    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css" rel="stylesheet">-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/image_picedit.css" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 </head>
 <body>
+<div class="row">
+    <div style="float: right; margin:10px; padding-right:20px;">
+        <a class="btn btn-outline-primary" href="./index.html">Home</a>
+        <a class="btn btn-outline-primary" href="./image.html">Crop an image</a>
+        <a class="btn btn-outline-primary" href="./banner-composer.html">Compose a banner</a>
+    </div>
+</div>
 <h1>Email assets builder</h1>
 <h3>Crop an image</h3>
 <div style="width:300px;" ></div>
@@ -64,20 +71,12 @@
 <!--Preview Canvas-->
 <div id="_preview" class="picedit_box_preview" style="display: none;">
     <!-- Picedit canvas element -->
-    <div>
+    <div class="row">
         <div id="canvas-container_preview" class="canvas_container">
             <canvas id="canvas_preview"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
         </div>
     </div>
-    <!-- Picedit navigation -->
-    <div style="width: 200px;">
-        <!--<div class="picedit_pos_elements"></div>-->
-        <div class="picedit_nav_elements">
-            <!-- Picedit button element begin -->
-            <div class="picedit_element"><a id="downloadImg" class="btn btn-primary picedit_control picedit_action" title="Download" onclick="$('#downloadImg').attr('href', canvas_preview.toDataURL());" download="Cornell_Banner.png" href="#" target="_blank"><i class="fa fa-download fa-lg"></i><b> Download</b></a> </div>
-            <!-- Picedit button element end -->
-        </div>
-    </div>
+    <a id="downloadImg" class="btn btn-primary picedit_control picedit_action" title="Download" onclick="$('#downloadImg').attr('href', canvas_preview.toDataURL());" download="Cornell_Banner.png" href="#" target="_blank"><i class="fa fa-download fa-lg"></i><b> Download</b></a>
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
