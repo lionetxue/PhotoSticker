@@ -27,6 +27,9 @@ p{
     border-radius: 5px;
     font-size: 5rem;
 }
+.canvasnumclick {
+    cursor: pointer;
+}
 #drag-elements {
     cursor: move;
 }
@@ -42,14 +45,14 @@ p{
     transition: all .5s ease;
 }
 
-#drag-elements > div:active {
+#drag-elements > div:active, .canvasnumclick:active {
     -webkit-animation: wiggle 0.3s 0s infinite ease-in;
     animation: wiggle 0.3s 0s infinite ease-in;
     opacity: .6;
     border: 2px solid #000;
 }
 
-#drag-elements > div:hover {
+#drag-elements > div:hover, .canvasnumclick:hover {
     border: 2px solid gray;
     background-color: #e5e5e5;
 }
@@ -123,8 +126,6 @@ p{
     position: relative;
     left: 0;
     font-size: 1rem;
-    width: 200px;
-    height: 200px;
     overflow: hidden;
 }
 /*.picedit_canvas_box:hover .picedit_action_btns, .picedit_action_btns.active {*/
