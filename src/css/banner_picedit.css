@@ -30,6 +30,27 @@ p{
 .canvasnumclick {
     cursor: pointer;
 }
+.addcanvas{
+    display: table;
+    float: left;
+    border: 2px dotted gray;
+    border-radius: 5px;
+    font-size: 2rem;
+    text-align: center;
+    cursor: pointer;
+}
+.addcanvastext{
+    display: table-cell;
+    vertical-align: middle;
+}
+.uploadBtn{
+    position:absolute;
+    width: 80%;
+    top: 25%;
+    left: 10%;
+    margin: 0 auto;
+    height: 100px;
+}
 #drag-elements {
     cursor: move;
 }
