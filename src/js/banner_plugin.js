@@ -501,6 +501,8 @@
                 _this._paintCanvas();
                 _this.options.imageUpdated(_this._image);
                 _this._mainbuttons.removeClass("active");
+                // automatically open the crop frame
+                _this._cropping.cropbox.addClass("active");
                 if(callback && typeof(callback) == "function") callback();
             };
         },
