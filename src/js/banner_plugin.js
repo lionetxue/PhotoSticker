@@ -2,9 +2,13 @@
  * Created by lx58 on 4/27/2017.
  */
 /*
- *  Project: PhotoSticker plugin based on PicEdit by Andy V. and fabric.js
- *  Description: Allows user to take a selfie or upload a photo with tools to edit the image on the front-end and apply stickers to it
- *               The user can then download the profile, download a Zip file for all stickers and share on social media.
+ *  Project: Banner composer plugin based on PicEdit by Andy V. and fabric.js
+ *  Description: Allows user to upload 2 to 4 photos with tools to edit the image on the front-end and compose a collaged banner image.
+ *               The html of the draggable canvases and the size of the preview canvas are dynamically generated based on user's choice via click event.
+ *               For 2 images, the canvases are 300 x 300 px for a final 600 x 300 px.
+ *               For 3 and 4 images, the canvases are 200 x 200 px for a final 600 x 200 px or 800 x 200 px.
+ *               4 image banner is scaled down to 600 x 150px at the last step when writing into final preview canvas.
+ *               The user can then download the banner image.
  *  Author: Lin Xue
  *  License: MIT
  */
@@ -28,8 +32,8 @@
             imageUpdated: function(img){},	// Image updated callback function
             formSubmitted: function(res){},	// After form was submitted callback function
             redirectUrl: false,				// Page url for redirect on form submit
-            maxWidth: 600,					// Max width parameter
-            maxHeight: 600,				// Max height parameter
+            maxWidth: 400,					// Max width parameter
+            maxHeight: 400,				// Max height parameter
             aspectRatio: true,				// Preserve aspect ratio
             defaultImage: false             // Default image to be used with the plugin
         };
@@ -110,8 +114,8 @@
                 is_resizing: false,
                 left: 0,
                 top: 0,
-                width: 400,
-                height: 400,
+                width: 300,
+                height: 300,
                 cropbox: $(this.element).find(".picedit_drag_resize"),
                 cropframe: $(this.element).find(".picedit_drag_resize_box")
             };
@@ -534,7 +538,7 @@
                 eventbox.off("mousemove touchmove");
                 resizer.off("mousemove touchmove");
                 if (_this._cropping.width < 200) {
-                    _this.set_messagebox("Your crop frame is less than 600px wide.  It will yield low quality photo.");
+                    _this.set_messagebox("Your crop frame is less than 200px wide.  It will yield low quality photo.");
                 }
             });
         },

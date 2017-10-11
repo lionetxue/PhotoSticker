@@ -20,18 +20,18 @@
     .picedit_box{
         display: block;
         margin: auto;
-        width: 600px;
-        height: 675px;
+        width: 400px;
+        height: 475px;
     }
     .picedit_nav_box {
         position: absolute;
-        top: 600px;
+        top: 400px;
         left: 0;
         width: 300px;
         z-index: 15;
     }
     .picedit_canvas_box{
-        height: 600px;
+        height: 400px;
     }
     .picedit_preview_canvas_box {
         height: 200px;
@@ -44,47 +44,73 @@
     }
 </style>
 <h1>Compose a banner</h1>
-<div class="row">
-<!-- Start Dragula container-->
-    <div id="drag-elements">
-        <!-- Button trigger modal 1-->
-        <div id="_preview_1" class="picedit_box_preview">
-            <!-- Picedit canvas element -->
-            <div class="picedit_preview_canvas_box" >
-                <div class="picedit_canvas">
-                    <canvas id="canvas_preview_1" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
-                    <button type="button" id="btn_1" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_1">
-                        Crop first image.
-                    </button>
+<div id="choice" style="text-align: center;">
+    <h2>How many sections do you need?</h2>
+    <p>The final banner will always be 600 px wide.</p>
+    <div class="row" style="width:600px; height:200px; margin:auto;">
+        <div class="canvasnum"><i class="fa fa-user" aria-hidden="true"></i></div>
+        <div id="num2" class="canvasnum">2</div>
+        <div id="num3" class="canvasnum">3</div>
+        <div id="num4" class="canvasnum">4</div>
+    </div>
+</div>
+<div id="choiceresult" style="display: none;">
+    <div class="row">
+        <!-- Start Dragula container-->
+        <div id="drag-elements">
+            <!-- Button trigger modal 1-->
+            <div id="_preview_1" class="picedit_box_preview">
+                <!-- Picedit canvas element -->
+                <div class="picedit_preview_canvas_box" >
+                    <div class="picedit_canvas">
+                        <canvas id="canvas_preview_1" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+                        <button type="button" id="btn_1" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_1">
+                            Crop first image.
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- Button trigger modal 2-->
-        <div id="_preview_2" class="picedit_box_preview">
-            <!-- Picedit canvas element -->
-            <div class="picedit_preview_canvas_box">
-                <div class="picedit_canvas">
-                    <canvas id="canvas_preview_2" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
-                    <button type="button" id="btn_2" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_2">
-                        Crop second image.
-                    </button>
+            <!-- Button trigger modal 2-->
+            <div id="_preview_2" class="picedit_box_preview">
+                <!-- Picedit canvas element -->
+                <div class="picedit_preview_canvas_box">
+                    <div class="picedit_canvas">
+                        <canvas id="canvas_preview_2" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+                        <button type="button" id="btn_2" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_2">
+                            Crop second image.
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- Button trigger modal 3-->
-        <div id="_preview_3" class="picedit_box_preview">
-            <!-- Picedit canvas element -->
-            <div class="picedit_preview_canvas_box">
-                <div class="picedit_canvas">
-                    <canvas id="canvas_preview_3" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
-                    <button type="button" id="btn_3" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_3">
-                        Crop third image.
-                    </button>
+            <!-- Button trigger modal 3-->
+            <div id="_preview_3" class="picedit_box_preview">
+                <!-- Picedit canvas element -->
+                <div class="picedit_preview_canvas_box">
+                    <div class="picedit_canvas">
+                        <canvas id="canvas_preview_3" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+                        <button type="button" id="btn_3" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_3">
+                            Crop third image.
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div> <!-- End of drag-elements-->
-</div> <!--End of row-->
+            <!-- Button trigger modal 4-->
+            <div id="_preview_4" class="picedit_box_preview">
+                <!-- Picedit canvas element -->
+                <div class="picedit_preview_canvas_box">
+                    <div class="picedit_canvas">
+                        <canvas id="canvas_preview_4" class="previewcanvas" width="200px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+                        <button type="button" id="btn_4" class="btn btn-primary btn-lg uploadBtn" data-toggle="modal" data-target="#modal_4">
+                            Crop third image.
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End of drag-elements-->
+    </div> <!--End of row-->
+    <br>
+    <div class="row"><button type="button" class="btn btn-primary" id="previewBtn">Preview</button></div>
+</div>
 <!--Use a blank canvas as a reference to check if each preview canvas is blank or not-->
 <canvas id="blank" style='display:none' width="200px" height="200px"></canvas>
 <!-- Modal 1-->
@@ -104,7 +130,7 @@
                 <!-- Picedit canvas element -->
                 <div class="picedit_canvas_box">
                     <div class="picedit_canvas">
-                        <canvas id="canvas_1" width="600px" height="600px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+                        <canvas id="canvas_1" width="400px" height="400px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
                     </div>
                     <div class="picedit_drag_resize">
                         <div class="picedit_drag_resize_canvas"></div>
@@ -169,7 +195,7 @@
                     <!-- Picedit canvas element -->
                     <div class="picedit_canvas_box">
                         <div id="canvas-container_2" class="picedit_canvas">
-                            <canvas id="canvas_2" width="600px" height="600px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+                            <canvas id="canvas_2" width="400px" height="400px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
                         </div>
                         <div class="picedit_drag_resize">
                             <div class="picedit_drag_resize_canvas"></div>
@@ -231,7 +257,7 @@
                     <!-- Picedit canvas element -->
                     <div class="picedit_canvas_box">
                         <div id="canvas-container_3" class="picedit_canvas">
-                            <canvas id="canvas_3" width="600px" height="600px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+                            <canvas id="canvas_3" width="400px" height="400px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
                         </div>
                         <div class="picedit_drag_resize">
                             <div class="picedit_drag_resize_canvas"></div>
@@ -279,14 +305,73 @@
     </div>
 </div>
 <!-- Modal 3 end-->
-<br/>
-<div class="row"><button type="button" class="btn btn-primary" id="previewBtn">Preview</button></div>
-<br/>
+<!-- Modal 4-->
+<div class="modal fade" id="modal_4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                <div id="_4" class="picedit_box card">
+                    <!-- Picedit canvas element -->
+                    <div class="picedit_canvas_box">
+                        <div id="canvas-container_4" class="picedit_canvas">
+                            <canvas id="canvas_4" width="400px" height="400px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+                        </div>
+                        <div class="picedit_drag_resize">
+                            <div class="picedit_drag_resize_canvas"></div>
+                            <div  class="picedit_drag_resize_box">
+                                <div class="picedit_drag_resize_box_corner_wrap">
+                                    <div class="picedit_drag_resize_box_corner"></div>
+                                </div>
+                                <div class="picedit_drag_resize_box_elements">
+                                    <span class="picedit_control  fa fa-check" style="color: #6EB43F;" data-action="crop_image"></span>
+                                    <span class="picedit_control  fa fa-close" style="color: #EF4035;" data-action="crop_close"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Picedit message-->
+                    <div class="picedit_message">
+                        <span class="picedit_control ico-picedit-close" data-action="hide_messagebox"></span>
+                        <div></div>
+                    </div>
+                    <!-- Picedit navigation -->
+                    <div class="picedit_nav_box">
+                        <!--<div class="picedit_pos_elements"></div>-->
+                        <ul class="picedit_nav_elements">
+                            <!-- Picedit button element begin -->
+                            <li class="picedit_element"> <span class="picedit_control" data-action="load_image"><i class="fa fa-picture-o fa-lg"></i><b> Upload</b></span></li>
+                            <!-- Picedit button element end -->
+                            <!-- Picedit button element begin -->
+                            <li class="picedit_element"> <span class="picedit_control" title="Rotate" data-action="rotate_cw"><i class="fa fa-repeat fa-lg"></i><b> Rotate</b></span></li>
+                            <!-- Picedit button element end -->
+                            <!-- Picedit button element begin -->
+                            <li class="picedit_element"><span class="picedit_control" title="Crop" data-action="crop_open"><i class="fa fa-crop fa-lg"></i><b> Crop</b></span> </li>
+                            <!-- Picedit button element end -->
+                            <!-- Picedit button element begin -->
+                            <li class="picedit_element"><span class="picedit_control" title="Discard" data-action="discard_image"><i class="fa fa-trash fa-lg"></i><b>Discard</b></span></li>
+                            <!-- Picedit button element end -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Modal 4 end-->
 <!--Preview Canvas-->
 <div id="_preview"  style="display: none;">
     <!-- Picedit canvas element -->
     <div>
-            <canvas id="canvas_preview" width="600px" height="200px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
+            <canvas id="canvas_preview" width="600px" height="150px"> This text is displayed if your browser does not support HTML5 Canvas</canvas>
     </div>
 
     <!-- Picedit navigation -->
@@ -302,39 +387,6 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js' crossorigin="anonymous"></script>
 <script type="application/javascript" src="js/fabric.min.js"></script>
 <script type="text/javascript" src="js/banner_plugin.js"></script>
-<script>
-    // main()
-    $( document ).ready(function(){
-        $('.picedit_box').picEdit( );
-        //Initiate Dragula
-        dragula([document.getElementById("drag-elements")]);
-        // compare each preview canvas to blank canvas
-        var blankcanvas = document.getElementById('blank').toDataURL();
-        $( "#previewBtn" ).click(function() {
-            // Get id of first child div inside div drag-elements
-            var firstid = $("#drag-elements> :nth-child(1)").attr("id");
-            var canvas1 = document.getElementById('canvas' + firstid);
-            // Get id of second child div inside div drag-elements
-            var secondid = $('#drag-elements > :nth-child(2)').attr("id");
-            var canvas2 = document.getElementById('canvas' + secondid);
-            // // Get id of third child div inside div drag-elements
-            var thirdid = $('#drag-elements > :nth-child(3)').attr("id");
-            var canvas3 = document.getElementById('canvas' + thirdid);
-            if( canvas1.toDataURL() === blankcanvas || canvas2.toDataURL() === blankcanvas || canvas3.toDataURL() === blankcanvas) {
-                alert("Blank canvas detected!");
-            }
-            else {
-                // merge canvases (canvas1-canvas3) onto a single canvas
-                var canvas = document.getElementById('canvas_preview');
-                var context=canvas.getContext('2d');
-                context.drawImage(canvas1,0,0);
-                context.drawImage(canvas2,200,0);
-                context.drawImage(canvas3,400,0);
-                $('#_preview').show();
-            }
-        });
-    });
-
-</script>
+<script type="application/javascript" src="js/banner_main.js"></script>
 </body>
 </html>

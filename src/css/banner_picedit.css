@@ -4,20 +4,29 @@ body{
     padding-left: 20px;
 }
 h1{
-    font-size: 2rem;
+    font-size: 3rem;
     margin: 2rem 0;
 }
 h2{
-    font-size: 1.5rem;
+    font-size: 2rem;
+    margin: 1.5rem 0;
 }
 h3{
-    font-size: 1.2rem;
-    margin: 1rem 0;
+    font-size: 1.5rem;
+    margin: 1.2rem 0;
 }
 p{
     font-size: 1rem;
 }
-
+.canvasnum{
+    display: inline-block;
+    float: left;
+    width: 150px;
+    height: 150px;
+    border: 2px dotted gray;
+    border-radius: 5px;
+    font-size: 5rem;
+}
 #drag-elements {
     cursor: move;
 }
@@ -377,8 +386,8 @@ p{
     position: absolute;
     top: 10%;
     left: 10%;
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
     z-index: 30;
     border: 1px dashed #89CCE2;
     background-image: url("../img/profile-guide.png");

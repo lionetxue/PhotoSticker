@@ -2,9 +2,13 @@
  * Created by lx58 on 4/27/2017.
  */
 /*
- *  Project: PhotoSticker plugin based on PicEdit by Andy V. and fabric.js
- *  Description: Allows user to take a selfie or upload a photo with tools to edit the image on the front-end and apply stickers to it
- *               The user can then download the profile, download a Zip file for all stickers and share on social media.
+ *  Project: Image crop plugin based on PicEdit by Andy V.
+ *  Description: Allows user to upload a photo with tools to edit the image on the front-end.
+ *               Image is drawn into a 1000 x 1000 canvas and either scale down to fit the longer side to be 1000 or do nothing if the raw image is small.
+ *               Four different size crop frames are provided.
+ *               User can resize the crop frame with fixed aspect ratio, but a warning will display if the crop frame is smaller than the width needed.
+ *               An alert displays if the final image is smaller than width needed.
+ *               The user can then download the cropped image.
  *  Author: Lin Xue
  *  License: MIT
  */
